@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+body {
+	background: rgb(250, 250, 250);
+}
+.back_div {
+	margin-top: 110px;
+	padding: 5px;
+	background: rgba(255, 255, 255, 0.9);
+}
+.title_div {
+	background: rgba(227, 154, 125, 0.2);
+	padding: 15px;
+	height: 47px;
+	margin-bottom: 20px;
+}
+h3 {
+	color: rgb(120, 120, 120);
+}
+.basic_div {
+	padding: 20px;
+}
+.desc_div {
+	margin-bottom: 15px;
+}
+div[class*=content_div] {
+	padding: 40px;
+}
+.longBtn button {
+	width: 30%;
+	margin-top: 30px;
+}
+.srcTitle button {
+	height: 40px;
+}
+
+/* 재료 - 한번에 넣기  */
+.oneClick {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+}
+.disNone {
+	display: none;
+}
+.oneClick_back {
+	background: rgba(150, 150, 150, 0.3);
+	z-index: 100;
+}
+.oneClick_card {
+	margin-top : 150px;
+	z-index: 150;
+}
+.oneClick_btn button {
+	margin: 5px;
+}
+
+/* 순서 */
+#fileArea {
+	display: none;
+}
+
+	
+	
