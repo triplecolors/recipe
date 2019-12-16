@@ -117,10 +117,10 @@ public class InsertRecipe extends HttpServlet {
 		}
 		// 작성한 내용을 service로 보내고 결과 받기
 		int result = rs.insertRecipe(rcp, fList);
-		int current = rs.selectCurrentBno();
+		
 		if(result > 0) {
 			request.setAttribute("justWrite", "true");
-			request.getRequestDispatcher("selectOneRecipe.rcp?bno="+current).forward(request, response);
+			request.getRequestDispatcher("selectOneRecipe.rcp").forward(request, response);
 			System.out.println("성공");
 		}else {
 			request.setAttribute("msg", "게시글 작성 실패!");

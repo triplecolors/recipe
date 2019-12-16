@@ -14,6 +14,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="${ pageContext.request.contextPath }/resources/css/common.css">
+
 <!-- bootstrap js include -->
 <script src="http://code.jquery.com/jquery-3.4.1.min.js"
 	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
