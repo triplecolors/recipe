@@ -85,7 +85,7 @@ public class RecipeDAO {
 			while(rset.next()) {
 				
 				r = new Recipe();
-				r.setRno(rset.getInt("RNO"));
+				r.setBno(rset.getInt("RNO"));
 				r.setBno(bno);
 				r.setUno(rset.getInt("UNO"));
 				r.setUnick(rset.getString("UNICK"));

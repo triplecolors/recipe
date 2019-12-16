@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../../resources/css/style.css">
 <link rel="stylesheet" href="../../resources/css/login.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
 <c:import url="../common/commonUtil.jsp"></c:import>
@@ -24,6 +24,7 @@
 </style>
   </head>
   <body>
+  <c:import url="../common/header.jsp"/>
 <div class="row marginTop">
 <div class="col-xl-4 col-lg-3 col-md-2 col-sm-1"></div>
 <div class="loginArea col-xl-4 col-lg-6 col-md-8 col-sm-10 loginBody">

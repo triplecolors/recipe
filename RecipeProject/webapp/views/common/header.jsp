@@ -45,11 +45,16 @@
 						        <li><a href="">single-blog</a></li>
 						    </ul>
 						</li>
-						<li><a href="${pageContext.request.contextPath }/views/mypage/myPageList.jsp">v마이페이지 <i class="ti-angle-down"></i></a>
+						<c:if test="${!empty member }">
+						<li><a href="${pageContext.request.contextPath }/views/mypage/myPageList.jsp">마이페이지</a>
 						    <ul class="submenu">
 						        <li><a href="${pageContext.request.contextPath }/views/recipe/recipeWrite.jsp">레시피 작성하기</a></li>
 						    </ul>
-						</li>
+						</li></c:if>
+						<c:if test="${empty member }">
+						<a href="${pageContext.request.contextPath }/views/member/login.jsp">마이페이지</a> 
+						</c:if>
+						
 					<c:if test="${ empty member }">
                         <li><a href="${pageContext.request.contextPath }/views/member/login.jsp">로그인</a>
                     </c:if><c:if test="${ !empty member }">

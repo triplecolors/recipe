@@ -35,9 +35,9 @@ public class UpdateView extends HttpServlet {
 		HashMap<String, Object> hmap = new RecipeService().selectOne(bno);
 		
 		String page = "";
-		System.out.println(bno);
+		
 		if(hmap != null) {
-			page = "views/recipe/recipeWrite2.jsp?bno"+bno;
+			page = "views/recipe/recipeUpdate.jsp";
 			request.setAttribute("Recipe", hmap.get("Recipe"));
 			request.setAttribute("fileList", hmap.get("Bfile"));
 		}else {
