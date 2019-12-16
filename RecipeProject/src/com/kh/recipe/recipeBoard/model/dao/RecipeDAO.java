@@ -44,7 +44,7 @@ public class RecipeDAO {
 			commit(con);
 			pstmt = con.prepareStatement("INSERT INTO recipe VALUES(SEQ_RNO.nextval, SEQ_BNO.currval, ?, ?, ?, ?, DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'N')");
 						
-			pstmt.setInt(1, 1);
+			pstmt.setInt(1, rcp.getUno());
 			pstmt.setString(2, rcp.getRtitle());
 			pstmt.setString(3, rcp.getRsource());
 			pstmt.setString(4, rcp.getRprocess());
