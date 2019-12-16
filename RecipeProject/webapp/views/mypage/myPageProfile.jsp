@@ -1,22 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>프로필</title>
 <c:import url="../common/commonUtil.jsp"></c:import>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="../../resources/js/jquery-3.4.1.min.js"></script>
-<link rel="stylesheet" href="../../resources/css/myProfile.css"/>
-<link rel="stylesheet" href="../../resources/css/mypageheader.css" />
-<style>
-body{margin-top:8em;}
-</style>
+<link rel="stylesheet" href="../../resources/css/myProfile.css" />
 </head>
 <body>
 <c:import url="../common/header.jsp"/>
@@ -170,6 +169,7 @@ body{margin-top:8em;}
         	}
         </script>
 
-<c:import url="../common/footer.jsp"/>
+
+	<c:import url="../common/footer.jsp" />
 </body>
 </html>

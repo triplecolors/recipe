@@ -1,16 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>레시피 등록</title>
 <c:import url="../common/commonUtil.jsp"></c:import>
-<link rel="stylesheet" href="../../resources/css/recipeWrite.css">
-<script src="../../resources/js/recipeWrite.js"></script>
+<style>
+body {
+	background: rgb(250, 250, 250);
+}
+
+.back_div {
+	margin-top: 110px;
+	background: white;
+	padding: 10px;
+}
+
+.title_div {
+	background: rgba(227, 154, 125, 0.2);
+	padding: 10px;
+}
+
+.basic_div {
+	padding: 20px;
+}
+
+.desc_div {
+	margin-bottom: 15px;
+}
+</style>
 </head>
 <body>
 	<c:import url="../common/header.jsp"></c:import>
@@ -51,6 +73,7 @@
 </div>
 <!-- ------------------------------form------------------------------------------- -->
 <form action="${ pageContext.request.contextPath }/insert.rcp" method="post" enctype="multipart/form-data">
+<input type="hidden" name="uno" value="${member.uno}" />
 <div class="row">
 <div class="col-lg-2 col-md-1 d-md-block d-none"></div>
 	<div class="back_div col-lg-8 col-md-10 col-sm-12">
@@ -79,337 +102,206 @@
 			  </div>
 			  <input type="text" name="rvideo" class="form-control" id="basic-url" aria-describedby="basic-addon3">
 			</div>
-			
-			
-			<div class="input-group mb-3">
-			  <div class="input-group-prepend" id="category">
-			    <span class="input-group-text" id="basic-addon3">카테고리</span>
-			  </div>
-  			
-  			
-  			</div>
-  			
-			<div class="input-group mb-3">
-			  <div class="input-group-prepend">
-			    <span class="input-group-text" id="basic-addon3">시간</span>
-			  </div>
-  				<select name="rtime" class="custom-select">
-					<option value="0" >시간</option>
-					<option value="5">5분이내</option>
-					<option value="10">10분이내</option>
-					<option value="15">15분이내</option>
-					<option value="20">20분이내</option>
-					<option value="30">30분이내</option>
-					<option value="60">60분이내</option>
-					<option value="90">90분이내</option>
-					<option value="120">2시간이내</option>
-					<option value="999">2시간이상</option>
-  				</select>
-  				
-			  <div class="input-group-prepend">
-			    <span class="input-group-text" id="basic-addon3">난이도</span>
-			  </div>
-  				<select name="rlevel" class="custom-select">
-  					<option value="0" >난이도</option>
-  					<option value="1">타노스</option>
-					<option value="2">초급</option>
-					<option value="3">중급</option>
-					<option value="4">고급</option>
-					<option value="5">신의경지</option>
-  				</select>
-  			
-  			</div>
-  			
-		</div>
-			
-		
-		<div class="col-md-5" align="center" onclick="clickFile(0);">
-			<img src="${ pageContext.request.contextPath}/resources/images/요리대표_레시피등록_준비화면.jpg" id="fVisible0"/>
-		</div>
-	</div>
 
-	
-	
-	
-	<hr />
-	<div class="content_div1">
-		<div class="form-group row" align="center">
-		    <label class="col-4 col-form-label"><strong>재료구분</strong></label>
-		    <label class="col-3 col-form-label"><h4><strong>재료 명</strong></h4></label>
-		    <label class="col-4 col-form-label"><strong>용량</strong></label>
-		</div>
-		
-		<div class="row input-group">
-		  <div class="input-group-prepend col-4 srcTitle">
-		  <button type="button" class="btn btn-outline-warning" onclick="srcTitleRemove(this);">─</button>
-		  <input type="text" class="form-control srcTitle">
-		  </div>
-		  <div class="col-8">
-			  <div class="input-group-prepend srcContent">
-				  <input type="text" class="form-control srcName">
-				  <input type="text" class="form-control">
-				  <button type="button" class="btn btn-outline-warning">─</button>
-			  </div>
-			  <div class="input-group-prepend srcContent">
-				  <input type="text" class="form-control srcName">
-				  <input type="text" class="form-control">
-				  <button type="button" class="btn btn-outline-warning">─</button>
-			  </div>
-			  <div align="center">
-				<button type="button" class="btn btn-outline-dark" onclick="addContent(this);"><strong>╂</strong></button>
-			  </div>
-		  </div>
-		</div>
-		
-		
-		  <div class="srcLBtn longBtn" align="center">
-			<button type="button" class="btn btn-outline-primary" onclick="oneClick();">한번에 넣기</button>
-			<button type="button" class="btn btn-outline-success" onclick="addSrcTitle(this);">추가</button>
-		  </div>
-	</div>
-	
-<hr />
-	<div class="content_div2">
-		<h4><strong>요리 순서</strong></h4>
-		
-		<div class="form-group row">
-		    <label for="inputPassword" class="col-md-2 col-form-label"><h2>Step1</h2>
-			  <button type="button" class="btn btn-outline-warning" onclick="srcTitleRemove(this);">─</button>
-			</label>
-		    <div class="col-7">
-		      <textarea class="form-control" placeholder="작성" rows="5" name="ctntText"></textarea>
-		    </div>
-		    <div class="col-3" align="center" onclick="clickFile(1);">
-				<img src="${ pageContext.request.contextPath}/resources/images/addImg.gif" id="fVisible1"/>
+			<div class="row basic_div">
+				<div class="col-md-7">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon3">레시피 제목</span>
+						</div>
+						<input type="text" class="form-control" id="basic-url"
+							aria-describedby="basic-addon3">
+					</div>
+
+					<div class="input-group desc_div">
+						<div class="input-group-prepend">
+							<span class="input-group-text">레시피 소개</span>
+						</div>
+						<textarea class="form-control" aria-label="With textarea"></textarea>
+					</div>
+
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon3">동영상 링크</span>
+						</div>
+						<input type="text" class="form-control" id="basic-url"
+							aria-describedby="basic-addon3">
+					</div>
+
+
+					<div class="input-group mb-3">
+						<div class="input-group-prepend" id="category">
+							<span class="input-group-text" id="basic-addon3">카테고리</span>
+						</div>
+
+
+					</div>
+
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon3">시간</span>
+						</div>
+						<select class="custom-select">
+							<option name="RTIME" value="">시간</option>
+							<option name="RTIME" value="5">5분이내</option>
+							<option name="RTIME" value="10">10분이내</option>
+							<option name="RTIME" value="15">15분이내</option>
+							<option name="RTIME" value="20">20분이내</option>
+							<option name="RTIME" value="30">30분이내</option>
+							<option name="RTIME" value="60">60분이내</option>
+							<option name="RTIME" value="90">90분이내</option>
+							<option name="RTIME" value="120">2시간이내</option>
+							<option name="RTIME" value="999">2시간이상</option>
+						</select>
+
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon3">난이도</span>
+						</div>
+						<select class="custom-select">
+							<option name="RLEVEL" value="">난이도</option>
+							<option name="RLEVEL" value="1">타노스</option>
+							<option name="RLEVEL" value="2">아마추어</option>
+							<option name="RLEVEL" value="3">중급</option>
+							<option name="RLEVEL" value="4">고급</option>
+							<option name="RLEVEL" value="5">신의경지</option>
+						</select>
+
+					</div>
+
+				</div>
+
+
+				<div id="titleImgArea" class="photo_basic_div col-md-5"
+					align="center">
+					<img
+						src="${ pageContext.request.contextPath}/resources/images/요리대표_레시피등록_준비화면.jpg"
+						id="titleImg" />
+				</div>
 			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		</div>
-		
-		  <div class="longBtn" align="center">
-			<button type="button" class="btn btn-outline-success" onclick="addPict(this);">추가</button>
-		  </div>
+		<div class="col-lg-2 col-md-1 d-md-block d-none"></div>
 	</div>
-<hr />
-	<div class="content_div3">
-		<div class="form-group row">
-			<h4  class="col-md-2"><strong>셰프의 팁</strong></h4>
-		    <div class="col-10">
-		      <textarea type="text" class="form-control" placeholder="작성" rows="5" name="rtip"></textarea>
-		    </div>
-		</div>
-	</div>
-<hr />
-	<div class="content_div4">
-		<h4><strong>사용된 요리도구</strong></h4>
-	    <div>
-	      <input type="text" class="form-control" placeholder="콤마(,)로 구분하여 작성해주세요!" name="rgoods" />
-	    </div>
-	</div>
-<hr />
-	  <div class="longBtn" align="center">
-			<button type="submit" class="btn btn-primary btn-lg">등록하기</button>
-			<button type="button" class="btn btn-secondary btn-lg" onclick="WriteConfirm();">취소하기</button>
-	  </div>
-
-
-
-
-
-	</div>
-<div class="col-lg-2 col-md-1 d-md-block d-none"></div>
-</div>
 	<div id="fileArea">
-       <input type="file" id="flevel0" name="fpath0" onchange="LoadImg(this,0)">
-       <input type="file" id="flevel1" name="fpath1" onchange="LoadImg(this,1)">
-    </div>
-    
-	<input type="text" name="rsource" value="" style="display: none;"/>
-    <input type="text" name="rprocess" value="" style="display: none;"/>
-    <input type="text" id="i" name="i" value="2" style="display : none;"/>
-</form>    
-<!-- ------------------------------form------------------------------------------- -->
-    
-    
-    
+		<input type="file" id="thumbnailImg1" name="thumbnailImg1"
+			onchange="LoadImg(this,1)"> <input type="file"
+			id="thumbnailImg2" name="thumbnailImg2" onchange="LoadImg(this,2)">
+		<input type="file" id="thumbnailImg3" name="thumbnailImg3"
+			onchange="LoadImg(this,3)"> <input type="file"
+			id="thumbnailImg4" name="thumbnailImg4" onchange="LoadImg(this,4)">
+	</div>
 	<c:import url="../common/footer.jsp"></c:import>
 	<script>
-	$('form').on('submit', function(event){
-		var rprocessCheck = false;
-		$('.content_div2').find('textarea').each(function() {
-			if($(this).val().trim().length == 0){
-				rprocessCheck = true;
-			}
-		});
-		if($('input[name=rtitle]').val().trim().length == 0){
-			alert("제목이 없습니다!");
-	    	event.preventDefault();
-		} else if($('input[name=rsource]').val().trim().length == 0){
-			alert("요리 재료가 없습니다!");
-	    	event.preventDefault();
-		} else if($('input[name=rprocess]').val().trim().length == 0){
-			alert("요리 순서가 없습니다!");
-	    	event.preventDefault();
-		} else if(rprocessCheck){
-			alert("요리 순서 중 빈 순서가 있습니다!");
-	    	event.preventDefault();
-		} else if($('#fVisible0').attr('src') == "/recipe/resources/images/요리대표_레시피등록_준비화면.jpg"){
-			alert("대표 사진이 없습니다!");
-	    	event.preventDefault();
-		} else {
-			var result = window.confirm("등록하시겠습니까? \n(요리순서를 글로만 기입해도 되지만, \n요리순서에 사진을 등록하고자 한다면 모든 순서에 추가되어 있어야 \n같은 순서로 인식할 수 있습니다.)");
-		    if(result){
-		    } else {
-		    	event.preventDefault();
-		    }
-		}
-	});
-	
-	// 카테고리 Ajax
-	$(function() {
-		$.ajax({
-			url : "${pageContext.request.contextPath}/selectCate.do",
-			type : "post",
-			success : function(catelist) {
-				console.log(catelist);
-				
-				var $category = $('#category');
-				$category.siblings().remove();
-
-					$.each(catelist, function(idx, list) {
-						var str = "";
-						var nameCate = "";
-						if (idx == 1) {
-							str = "종류별";
-							nameCate = "rkind";
-						} else if (idx == 2) {
-							str = "상황별";
-							nameCate = "rsituation";
-						} else if (idx == 3) {
-							str = "방법별";
-							nameCate = "rway";
-						} else if (idx == 4) {
-							str = "재료별";
-							nameCate = "ringred";
-						} else {
-							console.log(idx+"카테고리에 없는데...?");
-						}
-						
-					    var $select = $('<select>');
-						$select.attr('class','custom-select').attr('name', nameCate);
-						var $option = $('<option>');
-						$option.text(str).val(0);
-						$select.append($option);
-						
-						for(var i in list){
-							var $option = $('<option>');
-							$option.val(i);
-							$option.text(list[i]);
-							$select.append($option);
-						}
-						
-						$category.append($select);
-					});
+		$(function() {
+			$.ajax({
+				url : "${pageContext.request.contextPath}/selectCate.do",
+				type : "post",
+				success : function(catelist) {
+					console.log(catelist);
 					
-			},
-			error : function() {
-				console.log("실패했지만~~~~ \n그대는 실 패 해앴지마아안~\n"
-							+"그저 이렇게 코드를 바라볼 뿐 \n다가갈수 없어");
-			}
+					var $category = $('#category');
+					$category.siblings().remove();
+
+						$.each(catelist, function(idx, list) {
+							var str = "";
+							var nameCate = "";
+							if (idx == 1) {
+								str = "종류별";
+								nameCate = "rkind";
+							} else if (idx == 2) {
+								str = "상황별";
+								nameCate = "rsituation";
+							} else if (idx == 3) {
+								str = "방법별";
+								nameCate = "rway";
+							} else if (idx == 4) {
+								str = "재료별";
+								nameCate = "ringred";
+							} else {
+								console.log(idx+"카테고리에 없는데...?");
+							}
+							
+						    var $select = $('<select>');
+							$select.attr('class','custom-select');
+							var $option = $('<option>');
+							$option.attr('name', nameCate);
+							$option.text(str);
+							$select.append($option);
+							
+							for(var i in list){
+								var $option = $('<option>');
+								$option.attr('name', nameCate);
+								$option.val(i);
+								$option.text(list[i]);
+								$select.append($option);
+							}
+							
+							$category.append($select);
+						});
+						
+				},
+				error : function() {
+					console.log("실패했지만~~~~ \n그대는 실 패 해앴지마아안~\n"
+								+"그저 이렇게 코드를 바라볼 뿐 \n다가갈수 없어");
+				}
+			});
 		});
-	});
-	
-	// 재료 한번에 넣기
-	function oneClick() {
-		$('.oneClick').removeClass('disNone');
-	}
-
-	$('.oneBtn').on('click', function() {
-		$('.oneClick').addClass('disNone');
-		if($(this).text().length == 2) return;
-
-	       var str = $.trim($('#oneClickText').val());
-	       if(str.indexOf('[') > str.indexOf(']') || str.lastIndexOf('[') > str.lastIndexOf(']')
-	       || str.indexOf('[') == -1 || str.indexOf(']') == -1){
-	           alert('형식을 확인해주세요!');
-	           return;
-	       }
-	       for(var i=0; str.indexOf('[') != -1; i++){
-	           var ctg = $.trim(str.substring(str.indexOf('[')+1, str.indexOf(']')));
-	           var div = '<div class="row input-group">'
-	        			 + '<div class="input-group-prepend col-4 srcTitle">'
-		        			 + '<button type="button" class="btn btn-outline-warning" onclick="srcTitleRemove(this);">─</button>'
-		        			 + '<input type="text" class="form-control srcTitle" value="' + ctg + '">'
-	        			 + '</div>'
-	        			 + '<div class="col-8">'
-		        			
-	        			 + '</div>'
-	    			 + '</div>';
-				 
-			$('.srcLBtn').before(div);
-			var $div_col8 = $('.srcLBtn').prev().find('.col-8');
-			
-	           str = str.substring(str.indexOf(']'));
-	           var strArr;
-	           if(str.indexOf('[') == -1){
-	               strArr = str.substring(str.indexOf(']')+1).split(',');
-	           }else{
-	               strArr = str.substring(str.indexOf(']')+1, str.indexOf('[')).split(',');
+		// 사진을 추가하였을 때, 이미지 태그와 연동하여 바로 보이도록
+		// '미리보기'기능 구현하기
+		$(function() {
+			$('#fileArea').hide();
+			// $('#titleImgArea').on('click',function(){});
+			$('#titleImgArea').click(() => {
+				$('#thumbnailImg1').click();
+			});
+			$('#contentImgArea1').click(() => {
+				$('#thumbnailImg2').click();
+			});
+			$('#contentImgArea2').click(() => {
+				$('#thumbnailImg3').click();
+			});
+			$('#contentImgArea3').click(() => {
+				$('#thumbnailImg4').click();
+			});
+		});
+		
+		function LoadImg(value, num) {
+	           if(value.files && value.files[0]) {
+	              var reader = new FileReader();
+	              
+	              reader.onload = function(e){
+	                 switch(num){
+	                 case 1: $('#titleImg').attr('src', e.target.result);
+	                    break;
+	                 case 2: $('#contentImg1').attr('src', e.target.result);
+	                    break;
+	                 case 3: $('#contentImg2').attr('src', e.target.result);
+	                    break;
+	                 case 4: $('#contentImg3').attr('src', e.target.result);
+	                    break;
+	                 }
+	              }
+	              
+	              reader.readAsDataURL(value.files[0]);
 	           }
-	           strArr.forEach(function(item, idx, strArr){
-	               item = $.trim(item)
-	               itemArr = item.split(' ');
-	               if(itemArr.length == 1){
-	                   $div_col8.append('<div class="input-group-prepend srcContent">'
-					        			 + '<input type="text" class="form-control srcName" value="'+itemArr[0]+'">'
-					        			 + '<input type="text" class="form-control">'
-					        			 + '<button type="button" class="btn btn-outline-warning">─</button>'
-					    			 + '</div>');
-	               }else{
-	                   $div_col8.append('<div class="input-group-prepend srcContent">'
-					        			 + '<input type="text" class="form-control srcName" value="'+itemArr[0]+'">'
-					        			 + '<input type="text" class="form-control" value="'+item.substring(item.indexOf(itemArr[1]))+'">'
-					        			 + '<button type="button" class="btn btn-outline-warning">─</button>'
-					    			 + '</div>');
-	               
-	               }
-	               
-	           });
-	           $div_col8.append('<div align="center">'
-	        		+ '<button type="button" class="btn btn-outline-dark" onclick="addContent(this);"><strong>╂</strong></button>'
-	   			+ '</div>');
-	           str = str.substring(str.indexOf('['));
-	       }
-	});
-	
-	
-	// 요리 재료 :rsource 파라메터
-	$('.content_div1').mouseout(function() {
-		$('[name=rsource]').val("");
-		$(this).find('input').each(function() {
-			var src = $(this).val().trim();
-			if($(this).hasClass('srcTitle')){
-				src = "[" + src + "] ";
-			} else if ($(this).hasClass('srcName')) {
-				src = src + " ";
-			} else {
-				src = src + " , ";
-			}
-			$('[name=rsource]').val($('[name=rsource]').val()+src);
-		});
-	});
-	
-	// 요리 순서 :rprocess 파라메터
-	var p = 0;
-	$('.content_div2').mouseout(function() {
-		$('[name=rprocess]').val("");
-		p = 0;
-		$(this).find('textarea').each(function() {
-			var pcs = $(this).val().trim();
-			if (pcs.length > 0) {
-				p++;
-				$('[name=rprocess]').val($('[name=rprocess]').val()+ "[" + p + "] "+ pcs + " ");					
-			}
-		});
-	});
+	        }
 	</script>
 </body>
 </html>

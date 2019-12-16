@@ -7,9 +7,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
+import com.kh.recipe.BoardCommon.model.vo.Bfile;
 import com.kh.recipe.recipeBoard.model.vo.Menu;
+import com.kh.recipe.recipeBoard.model.vo.Recipe;
+
 import static com.kh.recipe.common.JDBCTemplate.*;
 public class MenuDAO {
 	private Properties prop = new Properties();
@@ -22,8 +26,12 @@ public class MenuDAO {
 		}
 	}
 	
-	public ArrayList<Menu> selectSearchList(Connection con, String[] keywordArr) {
-		ArrayList<Menu> list = null;
+	public ArrayList<HashMap<String, Object>> selectSearchList(Connection con, String[] keywordArr) {
+		ArrayList<HashMap<String, Object>> list = null;
+		HashMap<String, Object> hmap = null;
+		Recipe r = null;
+		Bfile f = null;
+		
 		Statement stmt = null;
 		ResultSet rset = null;
 		
@@ -46,7 +54,7 @@ public class MenuDAO {
 			}
 		}
 		
-		sql += plusSql + " ORDER BY RTITLE";
+		sql += plusSql + " ) AND FLEVEL = 0 ORDER BY RTITLE";
 		
 		System.out.println("sql : " + sql);
 		
@@ -58,29 +66,43 @@ public class MenuDAO {
 			
 			list = new ArrayList<>();
 			while(rset.next()) {
+					r = new Recipe();
+					r.setRno(rset.getInt("RNO"));
+					r.setBno(rset.getInt("BNO"));
+					r.setUno(rset.getInt("UNO"));
+					r.setUnick(rset.getString("UNICK"));
+					r.setRtitle(rset.getString("RTITLE"));
+					r.setRsource(rset.getString("RSOURCE"));
+					r.setRprocess(rset.getString("RPROCESS"));
+					r.setRdate(rset.getDate("RDATE"));
+					r.setRgoods(rset.getString("RGOODS"));
+					r.setRcontent(rset.getString("RCONTENT"));
+					r.setRvideo(rset.getString("RVIDEO"));
+					r.setRkind(rset.getInt("RKIND"));
+					r.setRsituation(rset.getInt("RSITUATION"));
+					r.setRway(rset.getInt("RWAY"));
+					r.setRingred(rset.getInt("RINGRED"));
+					r.setRtime(rset.getInt("RTIME"));
+					r.setRlevel(rset.getInt("RLEVEL"));
+					r.setRtip(rset.getString("RTIP"));
+					r.setRstatus(rset.getString("RSTATUS"));
+					
+					f = new Bfile();
+					f.setFno(rset.getInt("FNO"));
+					f.setBno(rset.getInt("BNO"));
+					f.setFname(rset.getString("FNAME"));
+					f.setFpath(rset.getString("FPATH"));
+					f.setFdate(rset.getDate("FDATE"));
+					f.setFlevel(rset.getInt("FLEVEL"));
+					
+									
+				hmap = new HashMap<String, Object>();
 				
-				Menu ms = new Menu();
-			
-				ms.setRno(rset.getInt("RNO"));
-				ms.setBno(rset.getInt("BNO"));
-				ms.setUno(rset.getInt("UNO"));
-				ms.setRtitle(rset.getString("RTITLE"));
-				ms.setRsource(rset.getString("RSOURCE"));
-				ms.setRprocess(rset.getString("RPROCESS"));
-				ms.setRdate(rset.getDate("RDATE"));
-				ms.setRgoods(rset.getString("RGOODS"));
-				ms.setRcontent(rset.getString("rcontent"));
-				ms.setRvideo(rset.getString("RVIDEO"));
-				ms.setRkind(rset.getInt("RKIND"));
-				ms.setRsituation(rset.getInt("RSITUATION"));
-				ms.setRway(rset.getInt("RWAY"));
-				ms.setRingred(rset.getInt("RINGRED"));
-				ms.setRtime(rset.getInt("RTIME"));
-				ms.setRlevel(rset.getInt("RLEVEL"));
-				ms.setRtip(rset.getString("RTIP"));
-				ms.setRstatus(rset.getString("RSTATUS"));
+				hmap.put("Recipe", r);
+				hmap.put("Bfile", f);
 				
-				list.add(ms);
+				list.add(hmap);
+				System.out.println(hmap);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -221,25 +243,6 @@ public class MenuDAO {
 		
 		
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
