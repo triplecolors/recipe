@@ -1,4 +1,4 @@
-package com.kh.recipe.recipeBoard.controller;
+package com.kh.recipe.notice.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,22 +8,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.google.gson.Gson;
-import com.kh.recipe.recipeBoard.model.service.MenuSearchService;
-import com.kh.recipe.recipeBoard.model.vo.Menu;
+import com.kh.recipe.notice.model.service.NoticeBoardService;
+import com.kh.recipe.notice.model.vo.NoticeBoard;
 
 /**
- * Servlet implementation class MenuSearchServlet
+ * Servlet implementation class SelectOneBoardServlet
  */
-@WebServlet("/menuPage.do")
-public class MenuSearchServlet extends HttpServlet {
+@WebServlet("/selectOne.no")
+public class SelectOneBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MenuSearchServlet() {
+    public SelectOneBoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,25 +30,29 @@ public class MenuSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		// TODO Auto-generated method stub
 		
-		String keywords = request.getParameter("menu").trim();
+		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		String[] keywordArr = keywords.split(",");
+		NoticeBoard n = new NoticeBoardService().selectOne(bno);
 		
-		for(String menu : keywordArr) {
+		System.out.println(n);
+	
+		String page="";
+		
+		if(n !=null) {
+			page="views/notice/noticeDetail.jsp";
+			request.setAttribute("notice", n);
 			
-			System.out.println(menu);
-			
+		}else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "게시글 상세보기 에러!!");
 		}
 		
-		// 서비스 가서 메뉴 가져올 예정 (공사 중)
-		ArrayList<Menu> list = new ArrayList<>();
-		list = new MenuSearchService().selectList(keywordArr);
+		request.getRequestDispatcher(page).forward(request, response);
 		
-		// 결과 확인 용, 삭제할 예정
-		response.setContentType("application/json; charset=UTF-8");
-		new Gson().toJson(list, response.getWriter());
+		
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

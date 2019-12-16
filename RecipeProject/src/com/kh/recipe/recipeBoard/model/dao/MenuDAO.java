@@ -30,19 +30,13 @@ public class MenuDAO {
 		String sql = prop.getProperty("selectSearchList");
 		
 		// 미완성 쿼리 마저 완성하기
-		String plusSql = ""; // appender
-		String[] columArr = {"RKIND IN (", "RSITUATION IN (", "RWAY IN (", "RINGRED IN ("};
-		for (int j = 0; j < 4; j++) {
-			plusSql += columArr[j];
-			for(int i = 0 ; i < keywordArr.length; i++) {
-				if(keywordArr.length == 1 || i == keywordArr.length - 1) {
-					plusSql += keywordArr[i] + ")";
-				} else {
-					plusSql += keywordArr[i] + ", ";
-				}
-			}
-			if(j<3) {
-				plusSql += " OR ";
+		String plusSql = " IN ("; // uphender
+		
+		for(int i = 0 ; i < keywordArr.length; i++) {
+			if(keywordArr.length == 1 || i == keywordArr.length - 1) {
+				plusSql += keywordArr[i] + ")";
+			} else {
+				plusSql += keywordArr[i] + ", ";
 			}
 		}
 		
@@ -57,6 +51,7 @@ public class MenuDAO {
 			rset = stmt.executeQuery(sql);
 			
 			list = new ArrayList<>();
+			
 			while(rset.next()) {
 				
 				Menu ms = new Menu();

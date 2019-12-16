@@ -1,29 +1,26 @@
-package com.kh.recipe.recipeBoard.controller;
+package com.kh.jsp.board.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.kh.recipe.recipeBoard.model.service.MenuSearchService;
-import com.kh.recipe.recipeBoard.model.vo.Menu;
+import com.kh.jsp.board.model.service.BoardService;
+import com.kh.jsp.board.model.vo.Board;
 
 /**
- * Servlet implementation class MenuSearchServlet
+ * Servlet implementation class UpdateViewBoardServlet
  */
-@WebServlet("/menuPage.do")
-public class MenuSearchServlet extends HttpServlet {
+@WebServlet("/bUpView.bo")
+public class UpdateViewBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MenuSearchServlet() {
+    public UpdateViewBoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,25 +29,24 @@ public class MenuSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		// TODO Auto-generated method stub
+		///response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		String keywords = request.getParameter("menu").trim();
+		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		String[] keywordArr = keywords.split(",");
+		Board b = new BoardService().updateView(bno);
 		
-		for(String menu : keywordArr) {
-			
-			System.out.println(menu);
-			
+		String page = "";
+		if(b != null) {
+			page = "views/board/boardUpdateForm.jsp";
+			request.setAttribute("board", b);
+		}else {
+			page="views/common/errorPage.jsp";
+			request.setAttribute("msg", "게시글 수정화면 조회 실패!");
 		}
 		
-		// 서비스 가서 메뉴 가져올 예정 (공사 중)
-		ArrayList<Menu> list = new ArrayList<>();
-		list = new MenuSearchService().selectList(keywordArr);
+		request.getRequestDispatcher(page).forward(request, response);
 		
-		// 결과 확인 용, 삭제할 예정
-		response.setContentType("application/json; charset=UTF-8");
-		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**
