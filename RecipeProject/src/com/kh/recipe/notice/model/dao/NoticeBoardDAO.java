@@ -88,6 +88,7 @@ public class NoticeBoardDAO {
 				n.setnContent(rset.getString("NCONTENT"));
 				n.setnDate(rset.getDate("NDATE"));
 				n.setnStatus(rset.getString("NSTATUS"));
+				n.setBnum(rset.getInt("RNUM"));
 				
 				list.add(n);
 			}

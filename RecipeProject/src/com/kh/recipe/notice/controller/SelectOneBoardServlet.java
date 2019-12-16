@@ -1,26 +1,27 @@
 package com.kh.recipe.notice.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.kh.recipe.notice.model.service.NoticeBoardService;
 import com.kh.recipe.notice.model.vo.NoticeBoard;
 
 /**
- * Servlet implementation class insertNoticeServlet
+ * Servlet implementation class SelectOneBoardServlet
  */
-@WebServlet("/ninsert.bo")
-public class insertNoticeServlet extends HttpServlet {
+@WebServlet("/selectOne.no")
+public class SelectOneBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public insertNoticeServlet() {
+    public SelectOneBoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,37 +30,29 @@ public class insertNoticeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//request.setCharacterEncoding("UTF-s8");
-		//response.setContentType("text/html; charset=UTF-8");
+		// TODO Auto-generated method stub
 		
-		NoticeBoard n = new NoticeBoard();
+		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		//n.setUno(Integer.parseInt(request.getParameter("uno"));
-		n.setUno(1);
-		n.setnType("N");
-		n.setnTitle(request.getParameter("title"));
-		n.setnContent(request.getParameter("editordata"));
-		//n.setUno(Integer.parseInt(request.getParameter("uno")));
+		NoticeBoard n = new NoticeBoardService().selectOne(bno);
 		
-		
+		System.out.println(n);
 	
+		String page="";
 		
-		
-		System.out.println("서블릿 값 전달 확인 : "+n);
-		
-		int result = new NoticeBoardService().insertBoard(n);
-		
-		
-//	
-		if(result > 0 ) {
-			System.out.println("버튼 연결 확인!");
-			//request.setAttribute(name, o);
-			response.sendRedirect("selectList.no");
+		if(n !=null) {
+			page="views/notice/noticeDetail.jsp";
+			request.setAttribute("notice", n);
+			
 		}else {
-			request.setAttribute("msg", "공지 작성 실패!");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "게시글 상세보기 에러!!");
 		}
 		
+		request.getRequestDispatcher(page).forward(request, response);
+		
+		
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

@@ -1,63 +1,66 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>회원가입창</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css"/>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/main.css" />
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <c:import url="../common/commonUtil.jsp"></c:import>
 <style>
 .outer {
-		width:700px;
-		height:500px;
-		background:rgba(250,250,250,0.7);
-		color:black;
-		margin-left:auto;
-		margin-right:auto;
-		margin-top:110px;
-	}
-	
-	#idCheck, #ckZip, #goMain, #joinBtn {
-		background:orangered;
-		border-radius:5px;
-		width:80px;
-		height:25px;
-		text-align:center;
-	}
-	
-	#idCheck:hover, #ckZip:hover, #joinBtn:hover, #goMain:hover {
-		cursor:pointer;
-	}
-	td {
-		text-align:right;
-	}
-	#ckZip, #joinBtn {
-		background:yellowgreen;
-	}
-	#joinBtn, #goMain {
-		display:inline-block;
-	}
-	#headerback {
-		display: none;
-	}
+	width: 700px;
+	height: 500px;
+	background: rgba(250, 250, 250, 0.7);
+	color: black;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 110px;
+}
+
+#idCheck, #ckZip, #goMain, #joinBtn {
+	background: orangered;
+	border-radius: 5px;
+	width: 80px;
+	height: 25px;
+	text-align: center;
+}
+
+#idCheck:hover, #ckZip:hover, #joinBtn:hover, #goMain:hover {
+	cursor: pointer;
+}
+
+td {
+	text-align: right;
+}
+
+#ckZip, #joinBtn {
+	background: yellowgreen;
+}
+
+#joinBtn, #goMain {
+	display: inline-block;
+}
 </style>
 </head>
 <body>
 
-<c:import url="../common/header.jsp" />
+	<c:import url="../common/header.jsp" />
 
-<section class="outer">
+	<section class="outer">
 
 		<br>
 		<h2 align="center">회원가입</h2>
 
-		<form id="joinForm" action="${pageContext.request.contextPath }/mJoin.me" method="post">
+		<form id="joinForm"
+			action="${pageContext.request.contextPath }/insert.me" method="post">
 
 			<table align="center">
 				<tr>
@@ -105,7 +108,7 @@
 					<td><input type="text" id="address2" name="address2"></td>
 					<td></td>
 				</tr>
-				
+
 			</table>
 			<br>
 			<div class="btns" align="center">

@@ -1,9 +1,8 @@
 package com.kh.recipe.notice.model.vo;
 
-import java.io.Serializable;
 import java.sql.Date;
 
-public class NoticeBoard  {
+public class NoticeBoard {
 	
 	 private int bno;
 	 private int uno;
@@ -12,12 +11,12 @@ public class NoticeBoard  {
 	 private String nContent;
 	 private Date nDate;
 	 private String nStatus;
-	 
+	 private String writer;
+	 private int bnum;
 	 public NoticeBoard() {}
 
 	 public NoticeBoard(int uno, String nType, String nTitle, String nContent) {
 			super();
-			
 			this.uno = uno;
 			this.nTitle = nTitle;
 			this.nContent = nContent;
@@ -99,11 +98,29 @@ public class NoticeBoard  {
 		this.nStatus = nStatus;
 	}
 
+	public String getWriter() {
+		return writer;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+	
+	public int getBnum() {
+		return bnum;
+	}
+
+	public void setBnum(int bnum) {
+		this.bnum = bnum;
+	}
+
 	@Override
 	public String toString() {
 		return "NoticeBoard [bno=" + bno + ", uno=" + uno + ", nType=" + nType + ", nTitle=" + nTitle + ", nContent="
-				+ nContent + ", nDate=" + nDate + ", nStatus=" + nStatus + "]";
+				+ nContent + ", nDate=" + nDate + ", nStatus=" + nStatus + ", writer=" + writer + "]";
 	}
+
+	
 	 
 	 
 
