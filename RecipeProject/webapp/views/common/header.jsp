@@ -1,73 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div id="headerback"></div>
 <header>
-	<div class="header-area ">
-		<div id="sticky-header" class="main-header-area">
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-xl-10 col-lg-10">
-						<div class="main-menu d-lg-block">
-							<nav>
-								<ul class="mein_menu_list" id="navigation">
-									<li>
-										<a href="${ pageContext.request.contextPath }/index.jsp">HOME</a>
-									</li>
-									<li>
+
+<div class="header-area ">
+    <div id="sticky-header" class="main-header-area">
+        <div class="container">
+             <div class="row align-items-center main-menu d-lg-block">
+                 <nav>
+                     <ul class="mein_menu_list" id="navigation">
+                        <li><a href="${ pageContext.request.contextPath }/index.jsp">HOME</a></li>
+                       <li>
 										<a href="${ pageContext.request.contextPath }/selectList.no">Services</a>
 									</li>
-									<li>
-										<a href="${ pageContext.request.contextPath}/views/test/menuList.jsp">menu</a>
-									</li>
-									<li>
-										<a href="">gallery</a>
-									</li>
-									<div class="logo-img d-none d-lg-block">
-										<a href="${ pageContext.request.contextPath }/index.jsp">
-											<img src="${ pageContext.request.contextPath }/resources/images/로고.png" width="160px" height="120px">
-										</a>
-									</div>
-									<li>
-										<a href="#">blog <i class="ti-angle-down"></i></a>
-										<ul class="submenu">
-											<li><a href="">blog</a></li>
-											<li><a href="">single-blog</a></li>
-										</ul>
-									</li>
-									
-									<ul class="submenu" >
-										<li>
-											<a href="${pageContext.request.contextPath }/views/mypage/myPageList.jsp">v마이페이지 <i class="ti-angle-down"/></a>
-										</li>
-										<li>
-											<a href="">elements</a>
-										</li>
-									</ul>
-										<li>
-											<a href="">로그인</a>
-										<ul class="submenu">
-											<li><a href="">아이디/비밀번호 찾기</a></li>
-											<li><a href="">회원가입</a></li>
-										</ul>
-										
-										</li>
-								</ul>
-							</nav>
+						<li><a href="${ pageContext.request.contextPath}/views/recipe/menuList.jsp">레시피 검색하기</a></li>
+						<li><a href="${ pageContext.request.contextPath}/views/goods/goods.jsp">주방용품 검색하기</a></li>
+						
+						<div>
+							<a href="${ pageContext.request.contextPath }/index.jsp">
+								<img src="${ pageContext.request.contextPath }/resources/images/로고.png" width="160px" height="120px">
+						    </a>
 						</div>
-					</div>
-					<div class="col-12">
-						<div class="mobile_menu "></div>
-					</div>
-					<div class="logo-img-small d-sm-block d-md-block ">
-						<a href="">
-							 <img src="" alt="">
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+						
+						<li><a href="#">v마이페이지 <i class="ti-angle-down"></i></a>
+						    <ul class="submenu">
+						        <li><a href="${pageContext.request.contextPath }/views/mypage/myPageList.jsp">마이페이지</a></li>
+						        <li><a href="${pageContext.request.contextPath }/views/recipe/recipeWrite.jsp">레시피 작성하기</a></li>
+						    </ul>
+						</li>
+						<li><a href="#">게시판 <i class="ti-angle-down"></i></a>
+						    <ul class="submenu">
+						        <li><a href="${pageContext.request.contextPath }/views/">공지사항</a></li>
+						        <li><a href="${pageContext.request.contextPath }/views/">자유 게시판</a></li>
+						        <li><a href="${pageContext.request.contextPath }/views/">건의 게시판</a></li>
+						    </ul>
+						</li>
+					<c:if test="${ empty member }">
+                        <li><a href="${pageContext.request.contextPath }/views/member/login.jsp">로그인</a>
+                    </c:if><c:if test="${ !empty member }">
+                        <li><a href="${pageContext.request.contextPath }/logout.me">로그아웃</a>
+                    </c:if>
+							<ul class="submenu">
+						        <li><a href="${pageContext.request.contextPath }/views/member/memberJoin.jsp">회원가입</a></li>
+                            </ul>
+                        </li>
+                     </ul>
+                 </nav>
+             </div>
+        </div>
+    </div>
+</div>
 </header>
