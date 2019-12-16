@@ -51,6 +51,7 @@
 </div>
 <!-- ------------------------------form------------------------------------------- -->
 <form action="${ pageContext.request.contextPath }/insert.rcp" method="post" enctype="multipart/form-data">
+<input type="hidden" name="uno" value="${member.uno}" />
 <div class="row">
 <div class="col-lg-2 col-md-1 d-md-block d-none"></div>
 	<div class="back_div col-lg-8 col-md-10 col-sm-12">
