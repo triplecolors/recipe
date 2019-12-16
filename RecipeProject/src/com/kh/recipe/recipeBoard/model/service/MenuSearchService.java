@@ -2,6 +2,7 @@ package com.kh.recipe.recipeBoard.model.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.recipe.recipeBoard.model.dao.MenuDAO;
 import com.kh.recipe.recipeBoard.model.vo.Menu;
@@ -12,9 +13,9 @@ public class MenuSearchService {
 	private Connection con;
 	private MenuDAO mdao = new MenuDAO();
 	
-	public ArrayList<Menu> selectList(String[] keywordArr) {
+	public ArrayList<HashMap<String, Object>> selectList(String[] keywordArr) {
 		con = getConnection();
-		ArrayList<Menu> list = mdao.selectSearchList(con, keywordArr);
+		ArrayList<HashMap<String, Object>> list = mdao.selectSearchList(con, keywordArr);
 		
 		close(con);
 		

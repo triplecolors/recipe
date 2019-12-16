@@ -2,6 +2,7 @@ package com.kh.recipe.recipeBoard.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,7 +46,7 @@ public class MenuSearchServlet extends HttpServlet {
 		}
 		
 		// 서비스 가서 메뉴 가져올 예정 (공사 중)
-		ArrayList<Menu> list = new ArrayList<>();
+		ArrayList<HashMap<String, Object>> list = new ArrayList<>();
 		list = new MenuSearchService().selectList(keywordArr);
 		
 		System.out.println("keywordArr (MenuSearchServlet 도착 했음): " + keywordArr); // 확인용.
