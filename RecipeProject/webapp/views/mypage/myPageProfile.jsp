@@ -1,28 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>프로필</title>
 <c:import url="../common/commonUtil.jsp"></c:import>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="../../resources/js/jquery-3.4.1.min.js"></script>
-<link rel="stylesheet" href="../../resources/css/myProfile.css"/>
-<link rel="stylesheet" href="../../resources/css/mypageheader.css" />
-<style>
-body{margin-top:8em;}
-</style>
+<link rel="stylesheet" href="../../resources/css/myProfile.css" />
 </head>
 <body>
 <c:import url="../common/header.jsp"/>
 <c:import url="myPageHeader.jsp"/>
 <div class="container emp-profile">
-            <form action="${pageContext.request.contextPath}/profile.me" method="post">
+            <form action="${pageContext.request.contextPath}/update.my" method="post">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
@@ -36,22 +35,19 @@ body{margin-top:8em;}
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                        사용자 이름
+                                        
                                     </h5>
 
-                                    <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                                    <p class="proile-rating">RANKINGS :</p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                        <input type="submit" class="profile-edit-btn"  onclick="changeInfo();" value="정보수정"/>
                     </div>
                 </div>
                 <div class="row">
@@ -166,7 +162,14 @@ body{margin-top:8em;}
                 </div>
             </form>           
         </div>
+        
+        <script>
+        	function changeInfo(){
+        		location.href="${pageContext.request.contextPath}/views/myPage/myPageUpdate.jsp";
+        	}
+        </script>
 
-<c:import url="../common/footer.jsp"/>
+
+	<c:import url="../common/footer.jsp" />
 </body>
 </html>

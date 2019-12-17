@@ -13,6 +13,9 @@
                  <nav>
                      <ul class="mein_menu_list" id="navigation">
                         <li><a href="${ pageContext.request.contextPath }/index.jsp">HOME</a></li>
+                       <li>
+										<a href="${ pageContext.request.contextPath }/selectList.no">Services</a>
+									</li>
 						<li><a href="${ pageContext.request.contextPath}/views/recipe/menuList.jsp">레시피 검색하기</a></li>
 						<li><a href="${ pageContext.request.contextPath}/views/goods/goods.jsp">주방용품 검색하기</a></li>
 						
@@ -53,4 +56,3 @@
     </div>
 </div>
 </header>
-

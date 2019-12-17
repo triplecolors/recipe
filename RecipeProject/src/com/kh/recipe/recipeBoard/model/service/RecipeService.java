@@ -71,11 +71,5 @@ public class RecipeService {
 		return result;
 	}
 	
-	public int selectCurrentBno() {
-		con = getConnection();
-		int result = 0;
-		result = fDao.selectCurrentBno(con);
-		return result;
-	}
 
 }

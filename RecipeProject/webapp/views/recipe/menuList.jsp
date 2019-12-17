@@ -304,5 +304,4 @@ table-layout: 1px solde ;
 <br />
 <c:import url="../common/footer.jsp"/>
 </body>
-
 </html>
