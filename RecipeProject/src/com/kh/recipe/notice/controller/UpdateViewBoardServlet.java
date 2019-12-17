@@ -1,27 +1,26 @@
-package com.kh.recipe.recipeBoard.controller;
+package com.kh.jsp.board.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.recipe.recipeBoard.model.service.RecipeService;
+import com.kh.jsp.board.model.service.BoardService;
+import com.kh.jsp.board.model.vo.Board;
 
 /**
- * Servlet implementation class UpdateView
+ * Servlet implementation class UpdateViewBoardServlet
  */
-@WebServlet("/selectOneRecipe.rcp")
-public class SelectOneRecipe2 extends HttpServlet {
+@WebServlet("/bUpView.bo")
+public class UpdateViewBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectOneRecipe2() {
+    public UpdateViewBoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,24 +29,24 @@ public class SelectOneRecipe2 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		///response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		HashMap<String, Object> hmap = new RecipeService().selectOne(bno);
+		Board b = new BoardService().updateView(bno);
 		
 		String page = "";
-		
-		if(hmap != null) {
-			page = "views/recipe/details2.jsp?bno="+bno;
-			request.setAttribute("Recipe", hmap.get("Recipe"));
-			request.setAttribute("fileList", hmap.get("Bfile"));
-			System.out.println(hmap.get("Recipe"));
-			System.out.println(hmap.get("Bfile"));
+		if(b != null) {
+			page = "views/board/boardUpdateForm.jsp";
+			request.setAttribute("board", b);
 		}else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "사진 게시판 수정 화면 오류");
+			page="views/common/errorPage.jsp";
+			request.setAttribute("msg", "게시글 수정화면 조회 실패!");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
+		
 	}
 
 	/**

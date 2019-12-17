@@ -48,5 +48,16 @@ public class MemberService {
 	 	return result;
 	}
 
-   
+   public int updateMember(Member m) {
+	   con = getConnection();
+	   
+	   int result = mDao.updateMember(con, m);
+	   
+	   if(result >0) commit(con);
+	   else rollback(con);
+	   
+	   close(con);
+	   
+	   return result;
+   }
 }
