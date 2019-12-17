@@ -206,7 +206,7 @@ public class NoticeBoardDAO {
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("listCount");
+		String sql = prop.getProperty("listCount_S");
 		
 		try {
 			stmt = con.createStatement();
@@ -226,6 +226,50 @@ public class NoticeBoardDAO {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<NoticeBoard> selectList_S(Connection con, int startRow, int endRow) {
+		ArrayList<NoticeBoard> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectList_S");
+		
+		try {
+			pstmt=con.prepareStatement(sql);
+			
+			pstmt.setInt(1, endRow);
+			pstmt.setInt(2, startRow);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<>();
+			
+			while(rset.next()) {
+				NoticeBoard n = new NoticeBoard();
+				
+				n.setBno(rset.getInt("BNO"));
+				n.setUno(rset.getInt("UNO"));
+				n.setnType(rset.getString("NTYPE"));
+				n.setnTitle(rset.getString("NTITLE"));
+				n.setnContent(rset.getString("NCONTENT"));
+				n.setnDate(rset.getDate("NDATE"));
+				n.setnStatus(rset.getString("NSTATUS"));
+				n.setBnum(rset.getInt("RNUM"));
+				
+				list.add(n);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		
+		return list;
 	}
 	
 	

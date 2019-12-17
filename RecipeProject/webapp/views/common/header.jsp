@@ -35,9 +35,9 @@
 						</li>
 						<li><a href="#">게시판 <i class="ti-angle-down"></i></a>
 						    <ul class="submenu">
-						        <li><a href="${pageContext.request.contextPath }/views/">공지사항</a></li>
+						        <li><a href="${pageContext.request.contextPath }/selectList.no">공지사항</a></li>
 						        <li><a href="${pageContext.request.contextPath }/views/">자유 게시판</a></li>
-						        <li><a href="${pageContext.request.contextPath }/views/">건의 게시판</a></li>
+						        <li><a href="${pageContext.request.contextPath }/selectList.su">건의 게시판</a></li>
 						    </ul>
 						</li>
 					<c:if test="${ empty member }">

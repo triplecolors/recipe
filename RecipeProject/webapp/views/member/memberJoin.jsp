@@ -60,7 +60,7 @@ td {
 		<h2 align="center">회원가입</h2>
 
 		<form id="joinForm"
-			action="${pageContext.request.contextPath }/insert.me" method="post">
+			action="${pageContext.request.contextPath }/mJoin.me" method="post">
 
 			<table align="center">
 				<tr>

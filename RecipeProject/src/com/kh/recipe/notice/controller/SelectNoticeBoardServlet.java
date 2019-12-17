@@ -33,8 +33,6 @@ public class SelectNoticeBoardServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
 		ArrayList<NoticeBoard> list = null;
 		NoticeBoardService nbs = new NoticeBoardService();
 		PageInfo pi = new PageInfo();

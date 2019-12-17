@@ -1,4 +1,4 @@
-package com.kh.jsp.board.controller;
+package com.kh.recipe.notice.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.jsp.board.model.service.BoardService;
-import com.kh.jsp.board.model.vo.Board;
+import com.kh.recipe.notice.model.service.NoticeBoardService;
+import com.kh.recipe.notice.model.vo.NoticeBoard;
 
 /**
  * Servlet implementation class UpdateViewBoardServlet
  */
-@WebServlet("/bUpView.bo")
-public class UpdateViewBoardServlet extends HttpServlet {
+@WebServlet("/nUpView.no")
+public class UpdateViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateViewBoardServlet() {
+    public UpdateViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,12 +34,12 @@ public class UpdateViewBoardServlet extends HttpServlet {
 		
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		Board b = new BoardService().updateView(bno);
+		NoticeBoard n = new NoticeBoardService().updateView(bno);
 		
 		String page = "";
-		if(b != null) {
-			page = "views/board/boardUpdateForm.jsp";
-			request.setAttribute("board", b);
+		if(n != null) {
+			page = "views/notice/noticeUpdateForm.jsp";
+			request.setAttribute("notice", n);
 		}else {
 			page="views/common/errorPage.jsp";
 			request.setAttribute("msg", "게시글 수정화면 조회 실패!");
