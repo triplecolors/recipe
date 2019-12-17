@@ -5,7 +5,6 @@ import static com.kh.recipe.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.kh.recipe.common.GetUserNameDAO;
 import com.kh.recipe.common.PageInfo;
 import com.kh.recipe.notice.model.dao.NoticeBoardDAO;
 import com.kh.recipe.notice.model.vo.NoticeBoard;
@@ -36,9 +35,8 @@ public class NoticeBoardService {
 		
 		NoticeBoard n = nbdao.selectOne(con, bno);
 		
-		n.setWriter(new GetUserNameDAO().getOneName(con, n.getUno()));
-		
-		
+		if(n != null) commit(con);
+		else rollback(con);
 		
 		close(con);
 		
@@ -50,17 +48,12 @@ public class NoticeBoardService {
 	public ArrayList<NoticeBoard> selectList(PageInfo pi) {
 		con = getConnection();
 		
+		int rowNum[] = pi.getRowNum();
 		
-		ArrayList<NoticeBoard> list = nbdao.selectList(con,pi.getStartRow(), pi.getEndRow());
-		
-		for(int i = 0;i<list.size();i++) {
-			list.get(i).setWriter(new GetUserNameDAO().getOneName(con, list.get(i).getUno()));
-		}
-		
-		
+		ArrayList<NoticeBoard> list = nbdao.selectList(con, rowNum[0], rowNum[1]);
 		
 		close(con);
-		//System.out.println(list.get(1).getWriter());
+		
 		
 		return list;
 	}

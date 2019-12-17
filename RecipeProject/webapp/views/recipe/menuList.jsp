@@ -8,8 +8,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="/resources/js/jquery-3.4.1.min.js"></script>
+<script src="/recipe/resources/js/jquery-3.4.1.min.js"></script>
 <c:import url="../common/commonUtil.jsp"></c:import>
+
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
 <style> 
 	.top {
 		margin-top: 110px;
@@ -59,20 +63,74 @@
 		margin-top: 200px;
 		height: 450px;
 	}
-table-layout: 1px solde ;
+	 on{
+	 border:1px solid #000;
+        background: skyblue;
+        margin: 2px 0 0 0;
+	}
+
+	
+	/* 숨기기 처리 높이 지정해주기  */
+	 btn_hide.on{
+		backgrpund:hotpink;
+		margin-top:5%;
+	} 
+	.BtnTog {
+		border: 1px solid;
+		height:100%;
+	}
+	data-off{
+	data-off-color:danger;
+	}
+	.liname{
+	width:80px;
+	height:40px;
+	color:#6FAD9C;
+	}
+	.listsel {
+	width:80px;
+	height:40px;
+	}
+}
 </style>
+
 </head>
 <body>
 <c:import url="../common/header.jsp"/>
 
-	
+<div class="BtnTog">  <!-- 숨기기 기능 묶음 시작 --> 
+
 <div class="row top">
    <div class="col-xl-3 col-lg-2 col-md-1 d-sm-block d-none"></div>
    <div class="col-xl-6 col-lg-8 col-md-10">
    
    <form>
-        <input type="search" /><button>검색</button>
-        <fieldset>
+   <br />
+   <br />
+   <br />
+       
+       <!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark blue lighten-2 mb-4">
+
+  <!-- Collapsible content -->
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+    <form class="form-inline mr-auto">
+      <input class="form-control" type="text" placeholder="조회하고자 하시는 레시피를 입력하세요 " aria-label="Search" >
+      <button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="submit" style="background: #6F7EAD;">검색</button>
+    </form>
+
+  </div>
+  <!-- Collapsible content -->
+
+  <!-- Navbar brand -->
+  <a class="navbar-brand"><d class="liname">레시피를 부탁해 </d></a> 
+  </nav>
+
+
+
+        
+        <fieldset  class="myCategory">
         <legend><strong>카테고리를 선택해보세요!</strong></legend>
     <div class="row">
    <div class="card col-3" >
@@ -114,34 +172,27 @@ table-layout: 1px solde ;
          </select>
       </ul>
    </div>
-   </div>
+</div> 
+   
    
    <div align="center">
       <button type="button" class="btn btn-outline-warning btn-lg selectedBtn" onclick="selectedBtn();"><strong>검색하기</strong></button>
     </div>
         </fieldset>
    </form>
-   </div>
-   <div class="col-xl-3 col-lg-2 col-md-1 d-sm-block d-none"></div>
-</div>
 
+  </div>
+  
+  </div>  <!-- 숨기기 기능 묶음 끝 -->
+  
+	</div>
+	
+<div align="center">
+	<input  class="stat" type="checkbox" data-toggle="toggle" data-on="불러오기" data-off="숨기기">
+</div>	
 
-<div id="searchResult">
-</div>
-</div>
-<script>
-	$( document.body).click(function(){
-		  if($('<form>').addClass().is(':hidden')) {
-			  $('<form>').show('slow');
-		  } else {
-			  $('<form>').slideup();
-		  }
-	});
-	</script>
-
-
-<script>
-
+	<script>
+	/* 각각의 해당 레시피 선택 표시 방식 구현 */
 	$(document).on('click', 'option', function() {
 		if($(this).hasClass('select')){
 			$(this).removeClass('select').removeAttr('selected').find('strong').remove();      			
@@ -150,7 +201,13 @@ table-layout: 1px solde ;
 		}
 	});
 	
+	/* 숨김처리 기능 구현 */
 	$(function() {
+		$('div.toggle').on('click', function(){
+	    	$('.myCategory').slideToggle();
+	    	$(".stat").prop("checked",$(".BtnTog").prop("checked"));
+	    });
+		/* 선택한 레시피 를 보내는 기능 구현 */
 		$.ajax({
 			url : "${pageContext.request.contextPath}/selectCate.do",
 			type : "post",
@@ -186,7 +243,7 @@ table-layout: 1px solde ;
 							$select.append($option);
 						}
 					});
-					
+
 			},
 			error : function() {
 				console.log("실패했지만~~~~ \n그대는 실 패 해앴지마아안~\n"
@@ -196,6 +253,7 @@ table-layout: 1px solde ;
 	});
 	
 	
+
 	// 검색하기를 누르면 카테고리를 전달해서 리스트를 뽑아준다.
 	
 	function selectedBtn(){
@@ -221,8 +279,6 @@ table-layout: 1px solde ;
 				$('#searchResult div').remove();
 				// ArrayList<HashMap<String, Object>>
 				console.log(menulist);
-				
-				
 				
 				
 				// ArrayList<Recipe> : menulist
@@ -276,6 +332,7 @@ table-layout: 1px solde ;
 	}
 	
 
+
 	// 상세페이지 이동.
 	$(document).on('click', '.moving', function() {
        var bno = $(this).find('input').val();
@@ -304,4 +361,5 @@ table-layout: 1px solde ;
 <br />
 <c:import url="../common/footer.jsp"/>
 </body>
+
 </html>

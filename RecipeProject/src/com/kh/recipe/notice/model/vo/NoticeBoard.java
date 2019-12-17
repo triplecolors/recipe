@@ -1,8 +1,9 @@
 package com.kh.recipe.notice.model.vo;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class NoticeBoard {
+public class NoticeBoard  {
 	
 	 private int bno;
 	 private int uno;
@@ -119,8 +120,6 @@ public class NoticeBoard {
 		return "NoticeBoard [bno=" + bno + ", uno=" + uno + ", nType=" + nType + ", nTitle=" + nTitle + ", nContent="
 				+ nContent + ", nDate=" + nDate + ", nStatus=" + nStatus + ", writer=" + writer + "]";
 	}
-
-	
 	 
 	 
 

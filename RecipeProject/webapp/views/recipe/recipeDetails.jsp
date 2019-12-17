@@ -13,7 +13,7 @@
 <body>
 <c:import url="../common/header.jsp"></c:import>
 <img src="" id="fVisible0"/>
-${Recipe.bno}
+<button onclick="location.href='${pageContext.request.contextPath}/updateView.rcp?bno='+${Recipe.bno}">수정하기</button>
 ${Recipe.uno}
 ${Recipe.unick}
 ${Recipe.rtitle}

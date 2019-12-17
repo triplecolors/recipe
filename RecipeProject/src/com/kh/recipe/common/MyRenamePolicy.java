@@ -47,7 +47,6 @@ public class MyRenamePolicy implements FileRenamePolicy {
 	      // 새로 변경될 파일 이름
 	      String fileName = sdf.format(new Date(currentTime))
 	            + "_" + randomNumber + ext;
-	      
 	      File newFile 
 	              = new File(oldFile.getParentFile(), fileName);
 	      

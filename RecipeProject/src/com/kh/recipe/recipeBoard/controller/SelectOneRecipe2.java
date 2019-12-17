@@ -17,7 +17,7 @@ import com.kh.recipe.recipeBoard.model.service.RecipeService;
 @WebServlet("/selectOneRecipe.rcp")
 public class SelectOneRecipe2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -25,7 +25,7 @@ public class SelectOneRecipe2 extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -40,6 +40,8 @@ public class SelectOneRecipe2 extends HttpServlet {
 			page = "views/recipe/details2.jsp?bno="+bno;
 			request.setAttribute("Recipe", hmap.get("Recipe"));
 			request.setAttribute("fileList", hmap.get("Bfile"));
+			System.out.println(hmap.get("Recipe"));
+			System.out.println(hmap.get("Bfile"));
 		}else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "사진 게시판 수정 화면 오류");
@@ -47,7 +49,7 @@ public class SelectOneRecipe2 extends HttpServlet {
 		
 		request.getRequestDispatcher(page).forward(request, response);
 	}
-
+		
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

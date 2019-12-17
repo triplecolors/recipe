@@ -29,7 +29,7 @@ public class insertNoticeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//request.setCharacterEncoding("UTF-s8");
+		//request.setCharacterEncoding("UTF-8");
 		//response.setContentType("text/html; charset=UTF-8");
 		
 		NoticeBoard n = new NoticeBoard();
