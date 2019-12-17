@@ -20,7 +20,6 @@ body{margin-top:8em;}
 </head>
 <body>
 <c:import url="../common/header.jsp"/>
-<c:import url="myPageHeader.jsp"/>
 <div class="container emp-profile">
             <form action="${pageContext.request.contextPath}/update.my" method="post">
                 <div class="row">
@@ -48,7 +47,8 @@ body{margin-top:8em;}
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn"  onclick="changeInfo();" value="정보수정"/>
+                        
+                        <input type="button" class="profile-edit-btn" onclick="changeInfo();"  value="정보수정"/>
                     </div>
                 </div>
                 <div class="row">
@@ -74,7 +74,7 @@ body{margin-top:8em;}
                                                 <label>User Id</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Kshiti123</p>
+                                                <p>a</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -166,7 +166,7 @@ body{margin-top:8em;}
         
         <script>
         	function changeInfo(){
-        		location.href="${pageContext.request.contextPath}/views/myPage/myPageUpdate.jsp";
+        		location.href="myPageUpdate.jsp";
         	}
         </script>
 

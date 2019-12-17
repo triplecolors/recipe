@@ -22,7 +22,6 @@ margin-top:8em;
 </head>
 <body>
 <c:import url="../common/header.jsp"/>
-<c:import url="myPageHeader.jsp"/>
 <div class="container">
     <div class="row">
         <div class="col-sm-3 col-md-2">

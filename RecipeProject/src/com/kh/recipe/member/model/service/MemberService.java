@@ -60,4 +60,19 @@ public class MemberService {
 	   
 	   return result;
    }
+   
+	
+public Member myPageMember(String userid) {
+	con = getConnection();
+	Member m = null;
+
+	m = mDao.myPageMember(con,userid);
+	
+
+	close(con);
+	
+	return m;
+}
+   
+   
 }

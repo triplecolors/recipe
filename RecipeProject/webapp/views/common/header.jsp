@@ -46,7 +46,7 @@
 						    </ul>
 						</li>
 						<c:if test="${!empty member }">
-						<li><a href="${pageContext.request.contextPath }/views/mypage/myPageList.jsp">마이페이지</a>
+						<li><a href="${pageContext.request.contextPath }/myPageList.me">마이페이지</a>
 						    <ul class="submenu">
 						        <li><a href="${pageContext.request.contextPath }/views/recipe/recipeWrite.jsp">레시피 작성하기</a></li>
 						    </ul>

@@ -131,8 +131,7 @@ public class MemberDAO {
 public int updateMember(Connection con, Member m) {
 	int result = 0;
 	PreparedStatement pstmt = null;
-	
-	
+
 	try {
 		
 		String sql = prop.getProperty("updateMember");
@@ -159,6 +158,59 @@ public int updateMember(Connection con, Member m) {
 	
 	return result;
 }
+
+
+// 마이페이지에 들어갈 회원 정보 조회
+public Member myPageMember(Connection con, String userid) {
+	  Member m = null;
+    PreparedStatement pstmt = null;
+    ResultSet rset = null;
+    // 실행
+    try {
+       
+       String sql  = prop.getProperty("myPageMember");
+       
+       pstmt = con.prepareStatement(sql);
+       
+       pstmt.setString(1, userid);
+ 
+       rset = pstmt.executeQuery();
+       
+       if(rset.next()) {
+      	 m = new Member();
+      	 
+      	 
+      	 System.out.println(m);
+          
+      	 m.setMrank(rset.getInt("MRANK"));
+      	 m.setUno(rset.getInt("UNO"));
+      	 m.setUtype(rset.getString("UTYPE"));
+          m.setUserid(m.getUserid());
+          m.setUpwd(rset.getString("UPWD"));
+          m.setUnick(rset.getString("UNICK"));
+          m.setUadrs(rset.getString("UADRS"));
+          m.setUphone(rset.getString("UPHONE"));
+          m.setUdate(rset.getDate("UDATE"));
+          m.setMstatus(rset.getString("MSTATUS"));
+          m.setMrname(rset.getString("MRNAME"));
+          
+       
+       }
+       
+    } catch(SQLException e) {
+       
+       e.printStackTrace();
+       
+    } finally {
+       close(rset);
+       close(pstmt);
+    }
+    
+    System.out.println(m);
+    return m;
+}
+
+
 
    
    
