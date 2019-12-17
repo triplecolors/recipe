@@ -37,9 +37,11 @@ public class SelectOneRecipe2 extends HttpServlet {
 		String page = "";
 		
 		if(hmap != null) {
-			page = "views/recipe/details2.jsp?bno="+bno;
+			page = "views/recipe/test2.jsp?bno="+bno;
 			request.setAttribute("Recipe", hmap.get("Recipe"));
 			request.setAttribute("fileList", hmap.get("Bfile"));
+			System.out.println(hmap.get("Recipe"));
+			System.out.println(hmap.get("Bfile"));
 		}else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "사진 게시판 수정 화면 오류");

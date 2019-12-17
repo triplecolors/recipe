@@ -31,12 +31,12 @@ public class MemberUpdateServlet extends HttpServlet {
 			String upwd = request.getParameter("password");
 			String unick = request.getParameter("userName");
 			String uphone = 
-							request.getParameter("tel1")+"-"
+						 request.getParameter("tel1")+"-"
 						+request.getParameter("tel2")+"-"
 						+request.getParameter("tel3");
 			
 			String uadrs =
-					request.getParameter("zipCode")+", "
+						   	request.getParameter("zipCode")+", "
 							+request.getParameter("address1")+", "
 							+request.getParameter("address2");
 			

@@ -235,7 +235,7 @@
 	<script>
 	// 요리 재료 
 	$(function() {
-		var str = $.trim(${recipe.rsource});
+		var str = $.trim("${Recipe.rsource}");
 	       if(str.indexOf('[') > str.indexOf(']') || str.lastIndexOf('[') > str.lastIndexOf(']')
 	       || str.indexOf('[') == -1 || str.indexOf(']') == -1){
 	           alert('형식을 확인해주세요!');
@@ -316,7 +316,7 @@
 	
 	// 요리 순서
 	$(function() {
-		var str = $.trim(${recipe.rprocess});
+		var str = $.trim("${Recipe.rprocess}");
 	       if(str.indexOf('[') > str.indexOf(']') || str.lastIndexOf('[') > str.lastIndexOf(']')
 	       || str.indexOf('[') == -1 || str.indexOf(']') == -1){
 	           alert('형식을 확인해주세요!');
@@ -343,10 +343,22 @@
 	       }
 		
 		// 사진 로드 시키기
-		$('[name*=fpath]').each(function(j) {
-			$(this).load('${tUpFolder}${fileList['+j+'].fname}');
-			LoadImg($(this), j);
-		})
+		console.log($('[id*=fVisible]'));
+		var text = '';
+		<c:forEach var="i" items="${fileList}">
+			text += '${i.fname}, ';
+		</c:forEach>
+		
+		$('[id*=fVisible]').each(function(j) {
+			console.log($(this));
+			var imgArr = text.split(', ');
+			$(this).attr('src', '${pageContext.request.contextPath}/resources/RecipeBoardImages/' + imgArr[j]);
+			if(j==0){
+	       	 $(this).css('width','300px');
+	        } else {
+	       	 $(this).css('width','190px');
+	        }
+		});
 	});
 	
 	$('form').on('submit', function(event){
