@@ -112,7 +112,7 @@ public class MemberDAO {
 			result	= pstmt.executeUpdate();
 			
 			stmt = con.createStatement();
-			result += stmt.executeUpdate("INSERT INTO MEMBER VALUES(SEQ_UNO.CURRVAL, 1, DEFAULT)");
+			result += stmt.executeUpdate("INSERT INTO MEMBER VALUES(SEQ_UNO.CURRVAL, 0, DEFAULT)");
 			
 		} catch (SQLException e) {
 			System.out.println("DAO에러!");
@@ -161,7 +161,7 @@ public int updateMember(Connection con, Member m) {
 
 
 // 마이페이지에 들어갈 회원 정보 조회
-public Member myPageMember(Connection con, String userid) {
+public Member myPageMember(Connection con, int uno) {
 	  Member m = null;
     PreparedStatement pstmt = null;
     ResultSet rset = null;
@@ -172,7 +172,7 @@ public Member myPageMember(Connection con, String userid) {
        
        pstmt = con.prepareStatement(sql);
        
-       pstmt.setString(1, userid);
+       pstmt.setInt(1, uno);
  
        rset = pstmt.executeQuery();
        
@@ -181,11 +181,10 @@ public Member myPageMember(Connection con, String userid) {
       	 
       	 
       	 System.out.println(m);
-          
       	 m.setMrank(rset.getInt("MRANK"));
       	 m.setUno(rset.getInt("UNO"));
       	 m.setUtype(rset.getString("UTYPE"));
-          m.setUserid(m.getUserid());
+          m.setUserid(rset.getString("USERID"));
           m.setUpwd(rset.getString("UPWD"));
           m.setUnick(rset.getString("UNICK"));
           m.setUadrs(rset.getString("UADRS"));
@@ -208,6 +207,32 @@ public Member myPageMember(Connection con, String userid) {
     
     System.out.println(m);
     return m;
+}
+
+public int deleteMember(Connection con, String userid) {
+	int result = 0;
+	PreparedStatement pstmt = null;
+	
+	
+	
+	try {
+		String sql = prop.getProperty("deleteMember");
+		
+		pstmt = con.prepareStatement(sql);
+		
+		pstmt.setString(1, userid);
+		
+		result=pstmt.executeUpdate();
+		
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+		
+	} finally {
+		close(pstmt);
+	}
+	
+	return result;
 }
 
 

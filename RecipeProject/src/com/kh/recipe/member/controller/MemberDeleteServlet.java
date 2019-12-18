@@ -12,16 +12,16 @@ import com.kh.recipe.member.model.service.MemberService;
 import com.kh.recipe.member.model.vo.Member;
 
 /**
- * Servlet implementation class MyPageListServlet
+ * Servlet implementation class MemberDeleteServlet
  */
-@WebServlet("/myPageList.me")
-public class MyPageListServlet extends HttpServlet {
+@WebServlet("/delete.vi")
+public class MemberDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPageListServlet() {
+    public MemberDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,27 +30,26 @@ public class MyPageListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		HttpSession session = request.getSession(false);
-		Member m = (Member)session.getAttribute("member");
-		m = new MemberService().myPageMember(m.getUserid());
-		
-		String page = "";
-		
-		if(m != null) {
-			page = "views/mypage/myPageList.jsp";
-			request.setAttribute("m",m);
-			System.out.println("마이페이지 성공!");
-		} else {
-			page = "views/common/errorPage.jsp";
-		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
-		
-		
-		
-		
-		
+			MemberService ms = new MemberService();
+			HttpSession session = request.getSession(false);
+			
+			
+			Member m = (Member)session.getAttribute("member");
+			
+			System.out.println("회원 기존 정보 : " +session.getAttribute("member"));
+			
+			if(ms.deleteMember(m.getUserid()) > 0) {
+				System.out.println("회원 탈퇴 완료! : " +m);
+				
+				session.invalidate();
+			
+				response.sendRedirect("index.jsp");
+			} else {
+				request.setAttribute("msg", "회원 탈퇴 중 에러가 발생하였습니다.");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+				
+			}
+			
 		
 		
 	}

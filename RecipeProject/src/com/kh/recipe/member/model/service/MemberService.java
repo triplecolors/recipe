@@ -62,16 +62,29 @@ public class MemberService {
    }
    
 	
-public Member myPageMember(String userid) {
+public Member myPageMember(int uno) {
 	con = getConnection();
 	Member m = null;
 
-	m = mDao.myPageMember(con,userid);
+	m = mDao.myPageMember(con,uno);
 	
 
 	close(con);
 	
 	return m;
+}
+
+public int deleteMember(String userid) {
+	con = getConnection();
+	
+	int result = mDao.deleteMember(con, userid);
+	
+	if(result > 0) commit(con);
+	else rollback(con);
+	
+	close(con);
+
+	return result;
 }
    
    
