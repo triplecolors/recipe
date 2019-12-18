@@ -3,6 +3,8 @@ package com.kh.recipe.member.model.vo;
 import java.sql.Date;
 
 public class Member {
+	
+   private int mrank;
    private int uno;
    private String utype;
    private String userid;
@@ -48,9 +50,14 @@ public Member(String userid, String upwd, String unick, String uadrs, String uph
     this.mrname = mrname;
     this.mstatus = mstatus;
  }
-
-
-   public int getUno() {
+ 
+	public int getMrank() {
+		return mrank;
+	}
+	public void setMrank(int mrank) {
+		this.mrank = mrank;
+	}
+	public int getUno() {
       return uno;
    }
 

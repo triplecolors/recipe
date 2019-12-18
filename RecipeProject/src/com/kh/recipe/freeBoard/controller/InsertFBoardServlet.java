@@ -1,4 +1,4 @@
-package com.kh.jsp.board.controller;
+package com.kh.recipe.freeBoard.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.jsp.board.model.service.BoardService;
-import com.kh.jsp.board.model.vo.Board;
+import com.kh.recipe.freeBoard.model.service.FreeBoardService;
+import com.kh.recipe.freeBoard.model.vo.FreeBoard;
 
 /**
- * Servlet implementation class UpdateViewBoardServlet
+ * Servlet implementation class InsertFBoardServlet
  */
-@WebServlet("/bUpView.bo")
-public class UpdateViewBoardServlet extends HttpServlet {
+@WebServlet("/finsert.fb")
+public class InsertFBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateViewBoardServlet() {
+    public InsertFBoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,23 +29,27 @@ public class UpdateViewBoardServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		///response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		int bno = Integer.parseInt(request.getParameter("bno"));
+		FreeBoard f = new FreeBoard();
 		
-		Board b = new BoardService().updateView(bno);
+		System.out.println("uno 확인 : " + request.getParameter("uno"));
 		
-		String page = "";
-		if(b != null) {
-			page = "views/board/boardUpdateForm.jsp";
-			request.setAttribute("board", b);
+		f.setUno(Integer.parseInt(request.getParameter("uno")));
+		f.setpType("P");
+		f.setpTitle(request.getParameter("title"));
+		f.setpContent(request.getParameter("editordata"));
+		
+		System.out.println("서블릿 입력값 확인  : " + f);
+		
+		int result = new FreeBoardService().insertBoard(f);
+		
+		if(result > 0) {
+			response.sendRedirect("selectList.fb");
 		}else {
-			page="views/common/errorPage.jsp";
-			request.setAttribute("msg", "게시글 수정화면 조회 실패!");
+			request.setAttribute("msg", "게시글 작성 실패!");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		
-		request.getRequestDispatcher(page).forward(request, response);
 		
 	}
 

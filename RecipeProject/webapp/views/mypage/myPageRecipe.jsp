@@ -26,7 +26,7 @@ body{margin-top:8em;}
 <body>
 
 <c:import url="../common/header.jsp"/>
-<c:import url="myPageHeader.jsp"/>
+
 
 
 <div class="container">
