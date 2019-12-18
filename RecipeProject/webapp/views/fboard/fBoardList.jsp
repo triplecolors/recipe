@@ -8,27 +8,49 @@
 <head>
 <meta charset="UTF-8">
 <title>자유게시판</title>
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
-<!--===============================================================================================-->
+
 	<!-- <link rel="stylesheet" type="text/css" href="css/util.css"> -->
-	<link rel="stylesheet" type="text/css" href="css/fBoard.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/fBoard.css">
 <!--===============================================================================================-->
+	<!--===============================================================================================-->	
+	<script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.min.js"></script>
+<!--===============================================================================================-->
+	<c:import url="../common/commonUtil.jsp"></c:import>
+	<script src="${pageContext.request.contextPath }/resources/js/f_Board.js"></script>	
+	<style>
+		.container-table100{
+			display : block;
+			margin : auto;
+		}
+		.pagingArea{
+			margin : auto;
+			display : block;
+		}
+		.wrap-table100{
+			margin : auto;
+		}
+		
+	</style>
 </head>
 <body>
+	
 	<div class="limiter">
+		<c:import url="../common/header.jsp"/>
+		<br />
+		
+	
 		<div class="container-table100">
+		<br />
+		<br />
+		<br />
+		<br />
 			<div class="wrap-table100">
+			<br />
+			<br />
+			<br />
+		<c:if test="${!empty member}">
+	<input type="button" class="write" value="글작성" onclick="insert();"/>
+		</c:if>
 					<div class="table">
 
 						<div class="row header">
@@ -51,166 +73,106 @@
 								파일여부
 							</div>
 						</div>
-
-						<div class="row">
-							<div class="cell" data-title="Full Name">
-								1
+						<c:forEach var="fBoard" items="${list }">
+								<div class="row">
+							<div class="cell bnum" id="num" data-title="Full Name">
+								${fBoard.bnum }
 							</div>
-							<div class="cell" data-title="Age">
-								고구마 맛탕 요리 성공!
+							<div class="cell" id="title" data-title="Age">
+								${fBoard.pTitle }
 							</div>
-							<div class="cell" data-title="Job Title">
-								일요일 요리사
+							<div class="cell" id="writer" data-title="Job Title">
+								${fBoard.writer }
 							</div>
-							<div class="cell" >
-								2019-12-14
+							<div class="cell" id="date" >
+								${fBoard.pDate }
 							</div>
-							<div class="cell" >
-								15
+							<div class="cell" id="count" >
+								${fBoard.pCount }
 							</div>
-							<div class="cell" >
+							<div class="cell" id="file" >
 								X
 							</div>
+						<input type="hidden" class="bno" name="uno" value="${fBoard.bno }"/>
 						</div>
-
-						<div class="row">
-							<div class="cell" data-title="Full Name">
-								1	
-							</div>
-							<div class="cell" data-title="Age">
-								2
-							</div>
-							<div class="cell" data-title="Job Title">
-								3
-							</div>
-							<div class="cell" data-title="Location">
-								4
-							</div>
-							<div class="cell" data-title="Location">
-								5
-							</div>
-							<div class="cell" data-title="Location">
-								6
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="cell" data-title="Full Name">
-								3
-							</div>
-							<div class="cell" data-title="Age">
-								26
-							</div>
-							<div class="cell" data-title="Job Title">
-								Front-End Developer
-							</div>
-							<div class="cell" data-title="Location">
-								Los Angeles
-							</div>
-							<div class="cell" data-title="Location">
-								15
-							</div>
-							<div class="cell" data-title="Location">
-								X
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="cell" data-title="Full Name">
-								4
-							</div>
-							<div class="cell" data-title="Age">
-								25
-							</div>
-							<div class="cell" data-title="Job Title">
-								Web Designer
-							</div>
-							<div class="cell" data-title="Location">
-								San Francisco
-							</div>
-							<div class="cell" data-title="Location">
-								15
-							</div>
-							<div class="cell" data-title="Location">
-								X
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="cell" data-title="Full Name">
-								5
-							</div>
-							<div class="cell" data-title="Age">
-								20
-							</div>
-							<div class="cell" data-title="Job Title">
-								Graphic Designer
-							</div>
-							<div class="cell" data-title="Location">
-								New York, NY
-							</div>
-							<div class="cell" data-title="Location">
-								15
-							</div>
-							<div class="cell" data-title="Location">
-								X
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="cell" data-title="Full Name">
-								6
-							</div>
-							<div class="cell" data-title="Age">
-								32
-							</div>
-							<div class="cell" data-title="Job Title">
-								Photographer
-							</div>
-							<div class="cell" data-title="Location">
-								New York
-							</div>
-							<div class="cell" data-title="Location">
-								15
-							</div>
-							<div class="cell" data-title="Location">
-								X
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="cell" data-title="Full Name">
-								100
-							</div>
-							<div class="cell" data-title="Age">
-								31
-							</div>
-							<div class="cell" data-title="Job Title">
-								iOS Developer
-							</div>
-							<div class="cell" data-title="Location">
-								Washington
-							</div>
-							<div class="cell" data-title="Location">
-								15
-							</div>
-						
-						</div>
-
-					
-
+						</c:forEach>
+		
 					</div>
+			</div>
+		<br />
+
+		<div class="pagingArea" align="center">
+			<c:url var="selectList" value="selectList.fb"/>
+			
+			<!-- 처음 페이지 버튼 -->
+			<button onclick="location.href='${selectList}?currentPage=1'">
+				&lt;&lt;
+			</button>
+			
+			<!-- 이전 페이지 버튼 -->
+			<c:if test="${ pi.currentPage le 1 }">
+				<button disabled>&lt;</button>
+			</c:if>
+			<c:if test="${ pi.currentPage gt 1 }">
+				<button onclick="location.href='${selectList}?currentPage=${pi.currentPage - 1}'">
+					&lt;
+				</button>
+			</c:if>
+			
+			<!-- 상세 페이지 구현을 위한 반복문 -->
+			<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+				<c:if test="${p eq pi.currentPage }">
+					<button disabled>
+					<b>${p}</b>
+					</button>
+				</c:if>
+				<c:if test="${p ne pi.currentPage }">
+					<button onclick="location.href='${selectList }?currentPage=${p }'">${p}</button>
+				</c:if>
+			</c:forEach>
+			
+			
+			<!-- 다음 페이지 버튼 -->
+			<c:if test="${ pi.currentPage ge pi.maxPage }">
+				<button disabled>&gt;</button>
+			</c:if>
+			<c:if test="${ pi.currentPage lt pi.maxPage }">
+				<button onclick="location.href='${selectList}?currentPage=${pi.currentPage + 1}'">
+					&gt;
+				</button>
+			</c:if>
+			
+			<!-- 마지막 페이지 버튼 -->
+			<button onclick="location.href='${selectList}?currentPage=${pi.maxPage}'">
+				&gt;&gt;
+			</button>
 			</div>
 		</div>
 	</div>
-	<!--===============================================================================================-->	
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script src="js/main.js"></script>
+	
+
+		<br />
+		<script>
+			$(function(){
+				
+				$('.row').click(function(){
+					 var bno = $(this).find('.bno').val()
+			          var bnum = $(this).find('.bnum').text();
+			     
+			           location.href="${pageContext.request.contextPath}/selectOne.fb?bno=" + bno+"&bnum="+bnum;
+				});
+				$('.row').mouseenter(function(){
+				
+				});
+			});
+			
+			function insert(){
+					location.href="${pageContext.request.contextPath}/views/fboard/fboardInsertForm.jsp";
+			}
+			
+		</script>
+	
+	
+	<c:import url="../common/footer.jsp"/>
 </body>
 </html>

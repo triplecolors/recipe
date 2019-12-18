@@ -55,30 +55,32 @@
             <hr>
             <p>&nbsp;</p>
             <div class="table table-responsive" style="overflow-x:hidden;">
-                	<input type="hidden" class="type" name="type" value="${notice.bno }"/>
+                	<input type="hidden" class="type" name="type" value="${fboard.bno }"/>
                 <table class="table">
                     <tr>
                         <th class="success" style="background: #ff666f;">글번호</th>
-                        <td>${notice.bnum }</td>
+                        <td>${fboard.bnum }</td>
                         <th class="success" style="background: #ff666f;">작성일</th>
-                        <td>${notice.nDate }</td>
+                        <td>${fboard.pDate }</td>
                       
                     </tr>
 				
 
                     <tr>
                         <th class="success" style="background: #ff666f;">작성자</th>
-                        <td>${notice.writer }</td>
+                        <td>${fboard.writer }</td>
+                          <th class="success" style="background: #ff666f;">조회수</th>
+                        <td>${fboard.pCount }</td>
                     </tr>
                         
                     <tr>
                         <th class="success" style="background: #ff666f;">제목</th>
-                        <td colspan="3">${notice.nTitle }</td>
+                        <td colspan="3">${fboard.pTitle }</td>
                     </tr>
 
                     <tr>
                         <th class="success"  style="background: #ff666f;">글 내용</th>
-                        <td colspan="3" id="content">${notice.nContent }</td>
+                        <td colspan="3" id="content">${fboard.pContent }</td>
                     </tr>
                     
                     
@@ -90,7 +92,7 @@
                     <tr>          
                                     
                         <td colspan="3" class="text-center">
-                        <c:set var="unum" value="${notice.uno }"/>
+                        <c:set var="unum" value="${fboard.uno }"/>
                         <c:if test="${member.uno eq unum}">
                             <input type="button" id="btnup" class="btn btn-warning" value="수정"
                                 onclick="updateN();">                        
@@ -114,16 +116,15 @@
 		<script>
 			function updateN(){
 				var bno = $('.type').val();
-				location.href="${pageContext.request.contextPath}/nUpView.no?bno="+bno;
+				location.href="${pageContext.request.contextPath}/fUpView.fb?bno="+bno;
 			}
 			function deleteN(){
-
 				var bno = $('.type').val();
-				location.href="${pageContext.request.contextPath}/delete.no?bno="+bno;
+				location.href="${pageContext.request.contextPath}/delete.fb?bno="+bno;
 
 			}
 			function goList(){
-				location.href="${pageContext.request.contextPath}/selectList.no";
+				location.href="${pageContext.request.contextPath}/selectList.fb";
 			}
 		</script>
 	<c:import url="../common/footer.jsp"/>
