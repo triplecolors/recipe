@@ -5263,7 +5263,7 @@ tbody.collapse.show {
 
 .alert-warning {
     color: #856404;
-    background-color: #fff3cd !important;
+    background-color: #fff3cd;
     border-color: #ffeeba
 }
 
