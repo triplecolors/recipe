@@ -1,5 +1,6 @@
-package com.kh.recipe.freeBoard.controller;
+package com.kh.recipe.notice.controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -8,20 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.recipe.freeBoard.model.service.FreeBoardService;
-import com.kh.recipe.freeBoard.model.vo.FreeBoard;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
+import com.kh.recipe.notice.model.service.NoticeBoardService;
+import com.kh.recipe.notice.model.vo.NoticeBoard;
+import com.oreilly.servlet.MultipartRequest;
 
 /**
- * Servlet implementation class UpdateViewServlet
+ * Servlet implementation class DeleteBoardServlet
  */
-@WebServlet("/fUpView.fb")
-public class UpdateViewServlet extends HttpServlet {
+@WebServlet("/delete.no")
+public class DeletenoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateViewServlet() {
+    public DeletenoticeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,20 +35,26 @@ public class UpdateViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
+		
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		FreeBoard f = new FreeBoardService().updateView(bno);
-		String page = "";
-		if(f != null) {
-			page = "views/fboard/fboardUpdateForm2.jsp";
-			request.setAttribute("fboard", f);
-		}else {
-			page="views/common/errorPage.jsp";
-			request.setAttribute("msg", "게시글 수정화면 조회 실패!");
+		NoticeBoardService nbs = new NoticeBoardService();
+		
+		int result = nbs.deleteBoard(bno);
+		
+		
+		if(result > 0) {
+			
+			response.sendRedirect("selectList.no");
+			
+		} else {
+			
+			request.setAttribute("msg", "게시글 삭제 실패!");
+			request.getRequestDispatcher("views/common/errorPage.jsp")
+				   .forward(request, response);
+			
 		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
-		
 	}
 
 	/**

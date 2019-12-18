@@ -1,6 +1,7 @@
 package com.kh.recipe.freeBoard.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import javax.servlet.ServletException;
@@ -13,19 +14,20 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.google.gson.Gson;
 import com.kh.recipe.common.MyRenamePolicy;
+import com.kh.recipe.freeBoard.model.vo.FreeBoard;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
- * Servlet implementation class UpdateFileServlet
+ * Servlet implementation class InsertFileServlet
  */
-@WebServlet("/UpdateFileServlet")
-public class UpdateFileServlet extends HttpServlet {
+@WebServlet("/fiinsert.fb")
+public class InsertFileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateFileServlet() {
+    public InsertFileServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,6 +36,7 @@ public class UpdateFileServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		if(!ServletFileUpload.isMultipartContent(request)) {
 			request.setAttribute("msg", "멀티파트 전송이 아닙니다.");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
@@ -41,7 +44,7 @@ public class UpdateFileServlet extends HttpServlet {
 		
 		int maxSize = 1024 * 1024 * 10;
 		
-		String savePath = request.getServletContext().getRealPath("/resources/FreeBoardFiless/");
+		String savePath = request.getServletContext().getRealPath("/resources/FreeBoardFiles/");
 		
 		MultipartRequest mr = new MultipartRequest(
 													request, 
@@ -57,7 +60,7 @@ public class UpdateFileServlet extends HttpServlet {
 		String name = files.nextElement();
 		String fileName = mr.getFilesystemName(name);
 		
-		String serverPath = "http://localhost:8088/tflex/resources/FreeBoardFiles/"; 
+		String serverPath = "http://localhost:8088/recipe/resources/FreeBoardFiles/"; 
 		
 		System.out.println(serverPath);
 		
@@ -65,6 +68,8 @@ public class UpdateFileServlet extends HttpServlet {
 		
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(uploadPath, response.getWriter());
+		
+		
 	}
 
 	/**

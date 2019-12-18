@@ -1,7 +1,6 @@
 package com.kh.recipe.freeBoard.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,16 +11,16 @@ import com.kh.recipe.freeBoard.model.service.FreeBoardService;
 import com.kh.recipe.freeBoard.model.vo.FreeBoard;
 
 /**
- * Servlet implementation class UpdateViewServlet
+ * Servlet implementation class InsertFBoardServlet
  */
-@WebServlet("/fUpView.fb")
-public class UpdateViewServlet extends HttpServlet {
+@WebServlet("/finsert.fb")
+public class InsertFBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateViewServlet() {
+    public InsertFBoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,19 +30,26 @@ public class UpdateViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int bno = Integer.parseInt(request.getParameter("bno"));
+		FreeBoard f = new FreeBoard();
 		
-		FreeBoard f = new FreeBoardService().updateView(bno);
-		String page = "";
-		if(f != null) {
-			page = "views/fboard/fboardUpdateForm2.jsp";
-			request.setAttribute("fboard", f);
+		System.out.println("uno 확인 : " + request.getParameter("uno"));
+		
+		f.setUno(Integer.parseInt(request.getParameter("uno")));
+		f.setpType("P");
+		f.setpTitle(request.getParameter("title"));
+		f.setpContent(request.getParameter("editordata"));
+		
+		System.out.println("서블릿 입력값 확인  : " + f);
+		
+		int result = new FreeBoardService().insertBoard(f);
+		
+		if(result > 0) {
+			response.sendRedirect("selectList.fb");
 		}else {
-			page="views/common/errorPage.jsp";
-			request.setAttribute("msg", "게시글 수정화면 조회 실패!");
+			request.setAttribute("msg", "게시글 작성 실패!");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		
-		request.getRequestDispatcher(page).forward(request, response);
 		
 	}
 

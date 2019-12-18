@@ -23,51 +23,21 @@
 
 <!-- 썸머노트 css, js 설정 -->
 
-<c:import url="../common/commonUtil.jsp" />
-<script src="${ pageContext.request.contextPath }/resources/summernote/summernote.js"></script>
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
 
 <!-- include summernote css/js -->
-<link href="${ pageContext.request.contextPath }/resources/summernote/summernote.css" rel="stylesheet">
-
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
 </head>
 <body>
-<c:import url="../common/header.jsp" />
-<br />
-<br />
-<br />
-
-<section>
-<br />
-<br />
-<br />
-<div class="mb-2" align="center">
-<form id="insertForm" action="${ pageContext.request.contextPath }/finsert.fb?uno=${member.uno}"  method="post"  >
-      <div class="input-group mb-3" style="width:900px;">
-
-         <br />
-              <input type="text" class="form-control" aria-label="Text input with dropdown button" 
-              name="title" placeholder="제목을 입력하세요." value="${fboard.pTitle }">
-             
-      </div>
 
       <div class="editorArea"  style="margin-top:20px;">
               <textarea id="summernote" name="editordata">${fboard.pContent }</textarea>
       </div>
-      <input type="hidden" name="uno"  value="${member.uno}"/>
-
-<div align="center">
-<button type="reset" class="btn btn-primary" onclick="cancelbtn();">취소</button>
-<button type="submit" class="btn btn-primary" onclick="insertbtn();">확인</button>
-</div>
-</form>
-            
-</div>
-</section>
-<br ><br ><br ><br ><br >
-
-
-<c:import url="../common/footer.jsp" />
-
+     
 
 <script>
 $(function(){
