@@ -34,20 +34,29 @@ public class MenuSearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
+		int part = 0;
 		String keywords = request.getParameter("menu").trim();
-		
+		String word = request.getParameter("word").trim();
+		System.out.println(word);
 		String[] keywordArr = keywords.split(",");
 		
-		for(String menu : keywordArr) {
-			
-			System.out.println(menu);
-			
+		if(word.length() == 0 && keywordArr[0].length() == 0) {
+			part = 0;
+			System.out.println("전체 검색");
+		} else if (word.length() == 0) {
+			part = 1;
+			System.out.println("카테 검색");
+		} else if (keywordArr[0].length() == 0) {
+			part = 2;
+			System.out.println("단어 검색");
+		} else {
+			part = 3;
+			System.out.println("단어 + 카테 검색");
 		}
 		
 		// 서비스 가서 메뉴 가져올 예정 (공사 중)
 		ArrayList<HashMap<String, Object>> list = new ArrayList<>();
-		list = new MenuSearchService().selectList(keywordArr);
+		list = new MenuSearchService().selectList(keywordArr, word, part);
 		
 		System.out.println("keywordArr (MenuSearchServlet 도착 했음): " + keywordArr); // 확인용.
 		

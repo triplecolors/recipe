@@ -77,24 +77,22 @@
 $(function() {
 	$('.breadcam_text').find('h3').text('레시피를 부탁해');
 	$('.breadcam_text').find('p').text('메인 페이지입니다.');
+	var str = '';
+	var word = '';
 	
 	$.ajax({
-		url : "${pageContext.request.contextPath}/likeRank.rcp",
-		type : "post",
+		url : "${pageContext.request.contextPath}/menuPage.do",
+		data : {menu : str, word : word},
 		success : function(catelist) {
-			var text = '';
-			<c:forEach var="i" items="${fileList}">
-				text += '${i.fname}, ';
-			</c:forEach>
-			
-			$('.single_gallery').each(function(j) {
-				var imgArr = text.split(', ');
+			for(var j in catelist) {
+				console.log(menulist[i].Recipe.bno);
+				console.log(menulist[i].Bfile.fname);
 				// $(this).css('background-image', 'url(/recipe/images/RecipeBoardImages/'+ catelist[i].Bfile.fname +')');
-				$(this).css('background-image', 'url(/recipe/images/RecipeBoardImages/'+ imgArr[j] +')');
-				$(this).find('a').attr('href','/recipe/selectOneRecipe.rcp?bno='+bno);
+				$('.single_gallery').css('background-image', 'url(/recipe/images/RecipeBoardImages/'+ catelist[j].Bfile.fname +')');
+				$('.single_gallery').find('a').attr('href','/recipe/selectOneRecipe.rcp?bno='+catelist[j].Recipe.bno);
 				// $(this).find('a').attr('href','/recipe/selectOneRecipe.rcp?bno='+catelist[i].Recipe.bno);
 				
-			});
+			}
 				
 		},
 		error : function() {

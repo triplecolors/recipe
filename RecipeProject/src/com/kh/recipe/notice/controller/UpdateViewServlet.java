@@ -1,30 +1,26 @@
 package com.kh.recipe.notice.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-import com.kh.recipe.common.PageInfo;
 import com.kh.recipe.notice.model.service.NoticeBoardService;
 import com.kh.recipe.notice.model.vo.NoticeBoard;
 
 /**
- * Servlet implementation class SelectListBoardServlet
+ * Servlet implementation class UpdateViewBoardServlet
  */
-@WebServlet("/selectList.no")
-public class SelectNoticeBoardServlet extends HttpServlet {
+@WebServlet("/nUpView.no")
+public class UpdateViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectNoticeBoardServlet() {
+    public UpdateViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,35 +29,25 @@ public class SelectNoticeBoardServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<NoticeBoard> list = null;
-		NoticeBoardService nbs = new NoticeBoardService();
-		PageInfo pi = new PageInfo();
+		// TODO Auto-generated method stub
+		///response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		if(request.getParameter("currentPage") != null) {
-			pi.setCurrentPage(Integer.parseInt(request.getParameter("currentPage")));
-		}
+		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		pi.calcPage(nbs.getListCount());
-		System.out.println(nbs.getListCount());
-		System.out.println(pi);
-		list = nbs.selectList(pi);
-		System.out.println(list);
-		String page= "";
+		NoticeBoard n = new NoticeBoardService().updateView(bno);
 		
-		if(list != null) {
-			page = "views/notice/noticeListForm.jsp";
-			request.setAttribute("list", list);
-			request.setAttribute("pi", pi);
-		
+		String page = "";
+		if(n != null) {
+			page = "views/notice/noticeUpdateForm.jsp";
+			request.setAttribute("notice", n);
 		}else {
 			page="views/common/errorPage.jsp";
-			request.setAttribute("msg", "게시글 목록 조회 에러");
+			request.setAttribute("msg", "게시글 수정화면 조회 실패!");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

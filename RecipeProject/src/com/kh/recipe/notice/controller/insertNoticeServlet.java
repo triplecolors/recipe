@@ -29,23 +29,31 @@ public class insertNoticeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//request.setCharacterEncoding("UTF-s8");
+		request.setCharacterEncoding("UTF-8");
 		//response.setContentType("text/html; charset=UTF-8");
 		
 		NoticeBoard n = new NoticeBoard();
 		
-		//n.setUno(Integer.parseInt(request.getParameter("uno"));
-		n.setUno(1);
+//		String isLogin = request.getParameter("uno");
+//		System.out.println("uno 들어옴? : "+isLogin);
+//		if(isLogin == null) {
+//			request.setAttribute("msg", "로그인전 작성 불가!");
+//			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+//		}
+//		n.setnContent(request.getParameter("editordata"));
+		
+		System.out.println("uno 확인 : " + request.getParameter("uno"));
+		
+		n.setUno(Integer.parseInt(request.getParameter("uno")));
 		n.setnType("N");
 		n.setnTitle(request.getParameter("title"));
-		n.setnContent(request.getParameter("editordata"));
-		//n.setUno(Integer.parseInt(request.getParameter("uno")));
+		n.setnContent(request.getParameter("content"));
 		
 		
 	
 		
 		
-		System.out.println("서블릿 값 전달 확인 : "+n);
+		System.out.println("서블릿 값 입력 확인 : "+n);
 		
 		int result = new NoticeBoardService().insertBoard(n);
 		

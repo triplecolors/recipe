@@ -295,17 +295,14 @@
 	
 	<div class="tableA">
 	
-	<c:if test="${fn:trim(member.utype) == 'A'}">
+	<input type="hidden" class="type" name="type" value="${member.utype }"/>
+	<c:if test="${!empty member }">
 	<input type="button" class="write" value="글작성" onclick="insert();"/>
 	</c:if>
-	
-	<input type="hidden" class="type" name="type" value="${member.utype }"/>
-	
-
 	<br />
 	<br />
 	
- <div class="caption"><span>공지사항</span> </div>	
+ <div class="caption"><span>건의사항</span> </div>	
 <div id="table">
 	<div class="header-row row">
     <span class="cell primary">글 번호</span>
@@ -317,19 +314,18 @@
   <c:forEach var="notice" items="${list }">
   <div class="row rowf">
 	<input type="radio" name="expand">
-	<input type="hidden" class="bnum" name="bnum" value="${notice.bnum }"/>
-    <span class="cell primary" data-label="글번호">${notice.bnum }</span>
+    <span class="cell primary bnum" data-label="글번호">${notice.bnum }</span>
     <span class="cell title" data-label="제목">${notice.nTitle }</span>
      <span class="cell wirter" data-label="작성자">${notice.writer }</span>
     <span class="cell date" data-label="작성일">${notice.nDate }</span>
     <input type="hidden" class="bno" name="bno" value="${notice.bno }"/>
+    
    <span id="uno"> <input type="hidden" class="bno" name="uno" value="${notice.uno }"/>${notice.uno }</span>
   </div>
   </c:forEach>
  
 </div>
 	</div>	
-	
 		<br /><br /><br />
 		<div class="pagingArea" align="center">
 			<c:url var="selectList" value="selectList.su"/>
@@ -381,10 +377,8 @@
 	<c:import url="../common/footer.jsp"/>
 
 		<script>
-		
 		$(function(){
 			var type = $('.type').val();
-			
 			if(type=='A'){
 	        	$(".write").css("display" , "inline");
 	        }else{
@@ -395,16 +389,19 @@
 	           $(this).css({"background":"gray", "cursor":"pointer"});
 	           $(this).css({"background":"white", "cursor":"pointer"});
 	        }).mouseleave(function(){
-	    
-	       
+	        	
+	        	//console.log($(this).find('.bnum').val());
+	        	//console.log($(this).find('.bnum').text());
+	        	//console.log($(this).find('.bnum').text());
+	      	
+	        console.log(type);
 	        	 $(this).css({"background":"gray", "cursor":"pointer"});
 	        	// $(this).css({"background":"gray", "cursor":"pointer"});
 	           
 	        }).click(function(){
 	          var bno = $(this).find('.bno').val();
-	          var bnum = $(this).find('.bnum').val();
-	           console.log(bno);
-	           console.log(bnum);
+	          var bnum = $(this).find('.bnum').text();
+	           //console.log(bno);
 	           location.href="${pageContext.request.contextPath}/selectOne.no?bno=" + bno+"&bnum="+bnum;
 	        });
 	        	
@@ -413,7 +410,9 @@
 		
 		function insert(){
 			var type = $('.type').val();
-			console.log(type);
+			var bnum = $(this).find('.bnum').html();
+			
+			//console.log(type);
 			if(type='A'){
 				location.href="${pageContext.request.contextPath}/views/notice/noticeInsertForm5.jsp";
 			}else{
@@ -423,10 +422,7 @@
 			
 		}
 		
-		$(function() {
-			$('.breadcam_text').find('h3').text('공지사항');
-			$('.breadcam_text').find('p').text('공지사항 페이지입니다.');
-		});
+		
 		</script>
 </body>
 </html>

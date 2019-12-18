@@ -33,14 +33,14 @@ public class SelectOneBoardServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		int bno = Integer.parseInt(request.getParameter("bno"));
-		
+		int bnum = Integer.parseInt(request.getParameter("bnum"));
 		NoticeBoard n = new NoticeBoardService().selectOne(bno);
-		
+		n.setBnum(bnum);
 		System.out.println(n);
-	
+		
 		String page="";
 		
-		if(n !=null) {
+		if(n.getnDate() !=null) {
 			page="views/notice/noticeDetail.jsp";
 			request.setAttribute("notice", n);
 			

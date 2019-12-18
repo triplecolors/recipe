@@ -15,7 +15,15 @@ public class NoticeBoard {
 	 private int bnum;
 	 public NoticeBoard() {}
 
-	 public NoticeBoard(int uno, String nType, String nTitle, String nContent) {
+	 
+	 public NoticeBoard(String nTitle, String nContent) {
+		super();
+		this.nTitle = nTitle;
+		this.nContent = nContent;
+	}
+
+
+	public NoticeBoard(int uno, String nType, String nTitle, String nContent) {
 			super();
 			this.uno = uno;
 			this.nTitle = nTitle;

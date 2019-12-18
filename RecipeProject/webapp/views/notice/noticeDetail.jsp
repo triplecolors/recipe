@@ -6,112 +6,126 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>공지사항 조회</title>
-<style>
-@media only screen and (max-width: 2000px){
-	 .outer{
-      width:1000px;
-      
-      background:rgba(50, 50, 50, 0.5);
-      color:white;
-      
-      margin-left:auto;
-      margin-right:auto;
-       margin-top : 150px;
-   }
-   td {
-   	  width : 1000px;
-      border:1px solid black;
-      background : black;
-      color: white;
-   }
+    <meta charset="UTF-8">
+    <title>게시글 보기</title>
+    <c:import url="../common/commonUtil.jsp"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
-   .tableArea {
- 	 
-      border:1px solid black;
-      background : white;
-      color: black;
-      width:auto;
-      height:auto;
-      
-      
-   }
-   #content {
-      height:259px;
-   }
-  tbody{
-  	width : 1000px;
-  	align : center;
-  }
-  }
-	
-	
-	@media only screen and (max-width: 900px){
-		 .outer{
-     		  width:auto;
-		      background:rgba(50, 50, 50, 0.7);
-		      color:white;
-		      margin : auto;
-  		 }
-  	.tableArea {
-	      border:1px solid black;
-	      background : white;
-	      color: black;
-	      width:auto;
-	      height:350px;
-	      margin : auto;
-  		 }
-  		 
-   	 td {
-   	 		 width : 500px;
-		      border:1px solid black;
-		      background : black;
-		      color: white;
-		      margin : auto;
-		  }
-	table {
-		width : auto;
-	
-	}
-	.footer p{
-			font-size : 14px;
-	}
-</style>
+    <!-- 부가적인 테마 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    
+    <style>
+        #btnup{
+            background: #ff666f;
+            border:#ff666f;
+        }
+        #btnde{
+            background: #ff666f;
+            border:#ff666f;
+        }
+        #btnli{
+            background: #ff666f;
+            border:#ff666f;
+        }
+        #content{
+        	height : 350px;
+        	overflow : auto;
+        }
+        
+    </style>
 </head>
-<body>
-	
-	
-	
-		
-	<section class="outer">
-      <br>
-      <h2 align="center">게시글 내용</h2>
-      <div class="tableArea">
-            <table >
-               <tr>
-                  <td>제목 </td>
-                  <td colspan="5"><span>${notice.nTitle}</span></td>
-               </tr>
-               <tr>
-                  <td>작성자 </td>
-                  <td><span>${notice.writer}</span></td>
-                  <td>작성일</td>
-                  <td><span>${notice.nDate}</span></td>
-                
-               </tr>
+<body style="background: gray;">
+<c:import url="../common/header.jsp"/>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+    <div class="row">
+        <div class="col-xs-2 col-md-2"></div>
+        <div class="col-xs-8 col-md-8">
+            <h2 class="text-center" style="color: snow;">게시글 보기</h2>
+            <hr>
+            <p>&nbsp;</p>
+            <div class="table table-responsive" style="overflow-x:hidden;">
+                	<input type="hidden" class="type" name="type" value="${notice.bno }"/>
+                <table class="table">
+                    <tr>
+                        <th class="success" style="background: #ff666f;">글번호</th>
+                        <td>${notice.bnum }</td>
+                        <th class="success" style="background: #ff666f;">작성일</th>
+                        <td>${notice.nDate }</td>
+                      
+                    </tr>
+				
+
+                    <tr>
+                        <th class="success" style="background: #ff666f;">작성자</th>
+                        <td>${notice.writer }</td>
+                    </tr>
+                        
+                    <tr>
+                        <th class="success" style="background: #ff666f;">제목</th>
+                        <td colspan="3">${notice.nTitle }</td>
+                    </tr>
+
+                    <tr>
+                        <th class="success"  style="background: #ff666f;">글 내용</th>
+                        <td colspan="3" id="content">${notice.nContent }</td>
+                    </tr>
+                    
+                    
+                            
                
-               <tr>
-                  <td colspan="6">
-                
-                     <p id="content">${notice.nContent}
-                  </td>
-               </tr>
-            </table>
-            <br>
-      </div>
-      </section>
-	
-	<c:import url="../common/footer.jsp"/>	
+                                
+                  
+                   
+                    <tr>          
+                                    
+                        <td colspan="3" class="text-center">
+                        <c:set var="unum" value="${notice.uno }"/>
+                        <c:if test="${member.uno eq unum}">
+                            <input type="button" id="btnup" class="btn btn-warning" value="수정"
+                                onclick="updateN();">                        
+                            <input type="button" id="btnde" class="btn btn-danger" value="삭제"
+                                onclick="deleteN();">
+                        </c:if>
+                            <input type="button" id="btnli" class="btn btn-primary" value="목록"
+                                onclick="goList();">
+                        </td>
+                    </tr>
+
+                    
+
+
+                </table>
+            </div>
+            
+			
+        </div>
+    </div>
+		<script>
+			function updateN(){
+				var bno = $('.type').val();
+				location.href="${pageContext.request.contextPath}/nUpView.no?bno="+bno;
+			}
+			function deleteN(){
+
+				var bno = $('.type').val();
+				location.href="${pageContext.request.contextPath}/delete.no?bno="+bno;
+
+			}
+			function goList(){
+				location.href="${pageContext.request.contextPath}/selectList.no";
+			}
+		</script>
+	<c:import url="../common/footer.jsp"/>
 </body>
 </html>
