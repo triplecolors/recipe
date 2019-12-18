@@ -78,7 +78,7 @@
 
       <div class="tableArea">
 
-         <form action="${pageContext.request.contextPath }/insert.gs" method="post" enctype="multipart/form-data"> <!-- 사진 :enctype="multipart/form-data"  -->
+         <form action="${pageContext.request.contextPath }/update.gs" method="post" enctype="multipart/form-data"> <!-- 사진 :enctype="multipart/form-data"  -->
                <!-- encode type = 이렇게 바꾸겠따! -->
 
                
@@ -112,8 +112,9 @@
                <tr>
 
                   <td>상품명</td>
+                  <input type="hidden" name="pcid" value="${ goods.pcid }"/>
 
-                  <td colspan="3"><input type="text" size="51" name="pcname"></td>
+                  <td colspan="3"><input type="text" size="51" name="pcname">${ goods.pcname }</td>
 
                </tr>
                <tr>
@@ -147,7 +148,7 @@
 
                   <td colspan="3">
 
-                     <textarea name="pcurl" cols="52" rows="3" style="resize:none;"></textarea>
+                     <textarea name="pcurl" cols="52" rows="3" style="resize:none;">${ goods.pcurl }</textarea>
 
                   </td>
 

@@ -65,32 +65,7 @@ img {
 		<br>
 		<h2 align="center">GOODS</h2>
 
-		<div class="thumbnailArea">
-			<c:forEach var="thumb" items="${list}">
-				<div class="thumb-list" align="center">
-					<div>
-						<input type="hidden" value="${thumb.bno}"> <img
-							src="/myWeb/resources/thumbnailFiles/${thumb.bfile}"
-							width="200px" height="150px">
-					</div>
-					<p>
-						No. ${thumb.bno} ${thumb.btitle}<br> 조회수 : ${thumb.bcount}
-					</p>
-				</div>
-			</c:forEach>
-		</div>
-
-		<script>
-	  $(function(){
-		 $('.thumb-list').click(function(){
-			 var bno = $(this).children().children().eq(0).val();
-			 
-			 location.href="/myWeb/selectOne.tn?bno=" +bno;
-			 
-		 });
-	  });
-	  
-	  </script>
+		
 
 		<div class="searchArea">
 			<select id="searchCondition" name="searchCondition">
@@ -100,14 +75,59 @@ img {
 				<option value="content">내용</option>
 			</select> <input type="search">
 			<button type="submit">검색하기</button>
-			<c:if test="${ !empty member }">
-				<button
-					onclick="location.href='views/thumbnail/thumbnailInsertForm.jsp'">작성하기</button>
-			</c:if>
 		</div>
+			<c:if test="${ !empty member }">
+				<button onclick="location.href='goodsInsert.jsp'">작성하기</button>
+			</c:if>
 		<br>
 		<br>
+		
+		<div class="goodsListArea">
+		</div>
 
+		<script>
+		$(function() {
+			$.ajax({
+				url : "${pageContext.request.contextPath}/selectProduct.gs",
+				type : "post",
+				success : function(goodsList) {
+					/* <div class="goodsDiv"><a onclick="location='goodsList[i].pcurl'">
+							<div>
+								<img src="/recipe/resources/images/GoodsImages/goodsList[i].pcfname" width="200px">
+							</div>
+							<p> <b>goodsList[i].pcgname</b> <br> goodsList[i].pcname</p>
+
+							<div style="display : none;">
+								<button onclick="location.href='views/goods/goodsUpdate.jsp?pcid=goodsList[i].pcid'">수정하기</button>
+								<button onclick="location.href='/delete.gs?pcid=goodsList[i].pcid'">삭제하기</button>
+							</div>
+							
+						</a></div> */
+					for(var i in goodsList) {
+					var $div = $('<div>').append($('<img>').attr('src','/recipe/resources/GoodsImages/'+goodsList[i].pcfname).css('width','200px'));
+					var $p = $('<p>').html('<b>'+goodsList[i].pcgname+'</b> <br> '+goodsList[i].pcname);
+					
+							var $update = $('<button>').attr('onclick', "location.href='goodsUpdate.jsp?goods="+goodsList[i]+"'").text('수정하기');
+							var $delete = $('<button>').attr('onclick', "location.href='/delete.gs?pcid="+goodsList[i].pcid+"'").text('삭제하기');
+					var $bntDiv = $('<div>').append($update).append($delete);
+					
+					if(goodsList[i].uno != "${ member.uno }"){
+						$bntDiv.css('display','none');
+					}
+					
+					var $a = $('<a>').attr('onclick', "location='"+goodsList[i].pcurl+"'");
+						$a.append($div)
+					$('.goodsListArea').append($('<div>').append($a).append($p).append($bntDiv));
+					
+					}	
+
+				}, error : function() {
+					console.log("실패했어요!");
+				}
+			});
+		});
+		
+	  </script>
 
 		<%-- 페이지처리 구현하기 --%>
 		<div class="pagingArea" align="center">
