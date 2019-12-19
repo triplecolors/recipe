@@ -20,13 +20,16 @@
 												<img src="${ pageContext.request.contextPath }/resources/images/로고.png" width="160px" />
 										    </a>
                                         </div>
-                                        <li><a href="#">v마이페이지 <i class="ti-angle-down"></i></a>
-										    <ul class="submenu">
-									<c:if test="${ !empty member }">
-										        <li><a href="${pageContext.request.contextPath }/views/mypage/myPageList.jsp">마이페이지</a>
-										        <li><a href="${pageContext.request.contextPath }/views/recipe/recipeWrite.jsp">레시피 작성하기</a></li>
-									</c:if>
-										    </ul>
+                                        
+										 <c:if test="${!empty member }">
+										<li><a href="${pageContext.request.contextPath }/views/mypage/myPageList.jsp">마이페이지</a>
+						  				  <ul class="submenu">
+						   			     <li><a href="${pageContext.request.contextPath }/views/recipe/recipeWrite.jsp">레시피 작성하기</a></li>
+						  				  </ul>
+											</li></c:if>
+										<c:if test="${empty member }">
+										<a href="${pageContext.request.contextPath }/views/member/login.jsp">마이페이지</a> 
+										</c:if>
 										</li>
 										<li><a href="#">게시판 <i class="ti-angle-down"></i></a>
 										    <ul class="submenu">

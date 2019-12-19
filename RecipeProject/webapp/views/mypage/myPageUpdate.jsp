@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <c:import url="../common/commonUtil.jsp" />
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<title>회원 정보 수정</title>
+<title>회원 수정</title>
 <style>
 	.outer{
 		width:600px;
@@ -42,6 +42,7 @@
 	#updateBtn, #goMain, #deleteBtn {
 		display:inline-block;
 	}
+	
 </style>
 </head>
 <body>
@@ -49,7 +50,7 @@
 
 	<div class="outer">
 		<br>
-		<h2 align="center">회원 정보</h2>
+		<h2 align="center">회원 정보 수정</h2>
 		
 		<form role="form"  id="updateForm" action="${pageContext.request.contextPath }/update.vi" method="post">
 			

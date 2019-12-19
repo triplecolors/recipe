@@ -38,12 +38,15 @@ public class MemberDeleteServlet extends HttpServlet {
 			
 			System.out.println("회원 기존 정보 : " +session.getAttribute("member"));
 			
+			
 			if(ms.deleteMember(m.getUserid()) > 0) {
+				
 				System.out.println("회원 탈퇴 완료! : " +m);
 				
 				session.invalidate();
 			
-				response.sendRedirect("index.jsp");
+				response.sendRedirect("myPageList.jsp");
+				
 			} else {
 				request.setAttribute("msg", "회원 탈퇴 중 에러가 발생하였습니다.");
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

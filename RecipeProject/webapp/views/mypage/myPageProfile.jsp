@@ -22,7 +22,8 @@ body{
 	.portfolio{
 		padding:6%;
 		text-align:center;
-		margin-top: 8em;	
+		margin-top: 2em;
+		margin-bottom: 2em;
 	}
 	.heading{
 		background: #fff;
@@ -57,10 +58,12 @@ body{
 	}
 
 
+
 </style>
 </head>
 <body>
 <c:import url="../common/header.jsp"/>
+
 <div class="container portfolio">
 	<div class="row">
 		<div class="col-md-12">

@@ -180,6 +180,61 @@ public class RecipeDAO {
 		return result;
 	}
 
+	public static ArrayList<Recipe> myPageRecipe(Connection con, int uno) {
+		ArrayList<Recipe> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		
+		try {
+			String sql = "SELECT * FROM RECIPE WHERE UNO = ?";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, uno);
+			
+			rset= pstmt.executeQuery();
+			
+			list = new ArrayList<>();
+			
+			while(rset.next()) {
+				
+				Recipe mb = new Recipe();
+				mb.setRno(rset.getInt("RNO"));
+				mb.setBno(rset.getInt("BNO") );
+				mb.setRtitle(rset.getString("RTITLE"));
+				mb.setRsource(rset.getString("Rsource"));
+				mb.setRprocess(rset.getString("RPROCESS"));
+				mb.setRdate(rset.getDate("RDATE"));
+				mb.setRgoods(rset.getString("RGOODS"));
+				mb.setRcontent(rset.getString("RCONTENT"));
+				mb.setRvideo(rset.getString("RVIDEO"));
+				mb.setRkind(rset.getInt("RKIND"));
+				mb.setRsituation(rset.getInt("Rsituation"));
+				mb.setRway(rset.getInt("RWAY"));
+				mb.setRingred(rset.getInt("RINGRED"));
+				mb.setRtime(rset.getInt("RTIME"));
+				mb.setRlevel(rset.getInt("RLEVEL"));
+				
+				list.add(mb);
+				
+				
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		}finally {
+			close(pstmt);
+			
+		}
+		return list;
+		
+		
+		
+	}
+
 
 
 }

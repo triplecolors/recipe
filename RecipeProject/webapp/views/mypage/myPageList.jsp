@@ -20,7 +20,9 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css" />
+
 <style type="text/css">
+
 body {
 	font-family: "Open Sans", sans-serif;
 }
@@ -38,11 +40,11 @@ h2 b {
 }
 h2::after {
 	content: "";
-	width: 100px;
+	width: 200px;
 	position: absolute;
 	margin: 0 auto;
 	height: 4px;
-	background: rgba(0, 0, 0, 0.2);
+	background: rgba(255, 255, 255, 10);
 	left: 0;
 	right: 0;
 	bottom: -20px;
@@ -165,6 +167,35 @@ h2::after {
 	font-size: 14px;
 	color: #ffc000;
 }
+div #myCarousel{
+    margin-top: 16em;
+}
+nav #ne{
+    width: 20rem;
+    height: 5rem;
+    font-size: 20px;
+    text-align: center;
+    line-height: 5rem;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    transition: 0.3s;
+    margin: 3rem;
+}
+#video {
+     position: absolute;
+     top: 0px;
+     left: 0px;
+     min-width: 100%;
+     min-height: 100%;
+     width: 40%;
+     height: auto;
+     z-index: -1;
+     overflow: hidden;
+}
+
+
 </style>
 <c:import url="../common/commonUtil.jsp"></c:import>
 <script src="../../resources/js/jquery-3.4.1.min.js"></script>
@@ -172,22 +203,24 @@ h2::after {
 </head>
 
 <body>
+<video id="video" preload="auto" autoplay="true" loop="loop" muted="muted" volume="0">
+      <source src="../../resources/video/AdobeStock_104905884_Video_HD_Preview.mov">
+</video>
 
-<c:import url="../common/header.jsp"/>
-
-
-
-
+ <div class="ogo-img d-none d-lg-block"  >
+		                                    <a href="${ pageContext.request.contextPath }/index.jsp">
+												<img src="${ pageContext.request.contextPath }/resources/images/로고.png"  width="200px"  style="left: 20px;  top: 20px; position: absolute;">
+										    </a>
+                                        </div>
 <nav>
-  <ul id="ne">
-    <li><a href="${pageContext.request.contextPath }/views/recipe/recipeWrite.jsp"><b>My</b>레시피등록</a></li>
-    <li><a href=""><b>My</b>레시피조회</a></li>
-    <li><a href="${pageContext.request.contextPath }/myprofile.me"><b>My</b>프로필</a></li>
-    <li><a href="${pageContext.request.contextPath }/views/mypage/myPageUpdate.jsp"><b>My</b>정보수정</a></li>
-    <li><a href=""><b>My</b>쪽지함</a></li>
+ <ul>
+     <li id="ne"><a href="${pageContext.request.contextPath }/views/recipe/recipeWrite.jsp"><b>My</b>레시피등록</a></li>
+    <li  id="ne"><a href="${pageContext.request.contextPath }/myrecipe.se?uno=${member.uno }"><b>My</b>레시피조회</a></li>
+    <li  id="ne"><a href="${pageContext.request.contextPath }/myprofile.me"><b>My</b>프로필</a></li>
+    <li  id="ne"><a href="${pageContext.request.contextPath }/views/mypage/myPageUpdate.jsp"><b>My</b>정보수정</a></li>
+    <li  id="ne"><a href=""><b>My</b>쪽지함</a></li>
   </ul>
 </nav>
-
 
 
 
@@ -198,7 +231,7 @@ h2::after {
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<h2> <b>My</b> 찜목록</h2>
+			<h2 style="font-size:40px;"> <b>My</b> 찜목록</h2>
 			<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
 			<!-- Carousel indicators -->
 			<ol class="carousel-indicators">
@@ -228,13 +261,13 @@ h2::after {
 										</ul>
 									</div>
 									<a href="#" class="btn btn-primary">레시피보기</a>
-								</div>						
+								</div>
 							</div>
 						</div>
 						<div class="col-sm-3">
 							<div class="thumb-wrapper">
 								<div class="img-box">
-									<img src="http://blogfiles.naver.net/20101208_36/king940_1291803035606Tc4qW_JPEG/DSC_0909-1.jpg" class="img-responsive img-fluid" alt="">
+									<img src="http://blogfiles.naver.net/20110824_30/sukha83_1314171658384UBjcO_JPEG/CIMG1189.JPG" class="img-responsive img-fluid" alt="">
 								</div>
 								<div class="thumb-content">
 									<h4>된장찌개</h4>
@@ -486,6 +519,6 @@ h2::after {
 </div>
 
 
-<c:import url="../common/footer.jsp"/>
+
 </body>
 </html>
