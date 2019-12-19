@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>건의사항 조회결과</title>
 
 <script src="${pageContext.request.contextPath}/resources/js/notice_search.js"></script>
 

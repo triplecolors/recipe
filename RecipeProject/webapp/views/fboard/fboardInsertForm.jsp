@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MLB 게시글 작성</title>
+<title>게시글 작성</title>
 <style>
    .mb-3{
       display:inline-block;

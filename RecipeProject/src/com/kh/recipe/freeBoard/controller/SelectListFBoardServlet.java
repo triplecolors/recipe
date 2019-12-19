@@ -35,15 +35,14 @@ public class SelectListFBoardServlet extends HttpServlet {
 		ArrayList<FreeBoard> list = null;
 		FreeBoardService fbs = new FreeBoardService();
 		PageInfo pi = new PageInfo();
-		
-		if(request.getParameter("currentPage") != null) {
+				if(request.getParameter("currentPage") != null) {
 			pi.setCurrentPage(Integer.parseInt(request.getParameter("currentPage")));
 		}
-		
-		pi.calcPage(fbs.getListCount());
+				pi.calcPage(fbs.getListCount());
+				
 		list = fbs.selectList(pi);
-		System.out.println(list);
-		String page="";
+		
+			String page="";
 		
 		if(list !=null) {
 			page="views/fboard/fBoardList.jsp";
@@ -53,11 +52,9 @@ public class SelectListFBoardServlet extends HttpServlet {
 		}else {
 			page="views/common/errorPage.jsp";
 			request.setAttribute("msg", "자유게시판 조회 에러!");
-			
-		}
+					}
 		request.getRequestDispatcher(page).forward(request, response);
-		
-	}
+			}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
