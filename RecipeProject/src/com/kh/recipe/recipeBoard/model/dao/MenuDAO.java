@@ -184,7 +184,7 @@ public class MenuDAO {
 			}
 			
 			
-			sql += " FLEVEL = 0 ORDER BY RTITLE";
+			sql += " ORDER BY RTITLE";
 			
 			System.out.println("sql : " + sql);
 			

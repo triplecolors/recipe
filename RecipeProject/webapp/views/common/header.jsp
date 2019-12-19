@@ -62,7 +62,7 @@
         </div>
     </header>
     
-    <div class="breadcam_area breadcam_bg_1 zigzag_bg_2">
+    <div class="breadcam_area breadcam_bg_1">
             <div class="breadcam_inner">
                 <div class="breadcam_text">
                     <h3></h3>

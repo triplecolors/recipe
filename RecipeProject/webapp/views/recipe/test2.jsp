@@ -12,6 +12,8 @@
 body, h1, h2, ul, dl, dd {
     margin: 0;
     padding: 0;
+    color : black;
+    
 }
 
 li {
@@ -21,7 +23,7 @@ li {
 
 body {
 	
-    background-color: #5180BF;
+    background-color: #97DC90;
     text-align: center;
 }
 
@@ -29,11 +31,12 @@ body {
     padding: 0 20px;
     max-width: 960px;
     margin: 0 auto;
+    margin-bottom: 200px;
 }
 
 .cover {
     background-image: url(images/cover.png);
-    color: aliceblue;
+    color: black;
     background-size: cover;
     background-position: bottom;
     padding-top: 20%;
@@ -118,7 +121,13 @@ body {
     display: block;
     font-size: 0.5em;
 }
-
+#firstId{
+   	align : center; 
+   	font-size : 50px;
+   	font-style: normal;
+  		font-family: -webkit-body;
+  		color : black;
+}
 @media ( min-width: 720px ) {
     .cover {
         padding-top: 10%;
@@ -180,14 +189,14 @@ body {
         left: -60px;
         transform: translate(-50%,-50%);
     }
-    #firstId{
-    	align : center; 
-    	font-size : 50px;
-    }
+   
     .content_div1{
     	color : black;
     }
-}
+    #fVisible0{
+    	align : center;
+    }
+ }
 </style>
         <title>Responsive Timeline</title>
 		<meta charset="utf-8">
@@ -201,41 +210,28 @@ body {
         <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-
-
-
-
-
-</div>
-
-		<div class="full-second">
-			
-		</div>
-		<div class="full-first">
-			<div class="center">
-			</div>
-		</div>
+<c:import url="../common/header.jsp"></c:import>
+<div class="main" >
 	
-
+	
+	<div class="cover">
+		<img class="card-icon" id="fVisible0" style="position:inherit;"/>
+		<h1 class="cover-title"><b id="firstId">${Recipe.rtitle}</b></h1>
 		
-		</div>
-
-        <div class="main">
-			<div class="cover">
-            <h1 class="cover-title">
-                <b id="firstId">${Recipe.rtitle}</b>
-            </h1><br /><br /><br />
-            ${Recipe.rcontent}
-        </div>
-        
-        <div class="content_div1">
-			<h4><b>요리 재료</b></h4>
-		</div><br /><br /><br /><br /><br />
-        
-        <img class="card-icon" id="fVisible0"/>
-        
-        
+		<br /><br /><br />
+		
+		${Recipe.rcontent}
+	</div>
+		
+		
+	<div class="content_div1">
+		<h4><b>요리 재료</b></h4>
+	</div>
+	
+	<br /><br /><br /><br /><br />
+      
+      
+        <!-- 순서 -->
         <div class="wrapper">
             <ul class="timeline">
                 <li class="timeline-item">
@@ -245,6 +241,8 @@ body {
                         <dl class="card-definition">
                             <dt>Chapter.1</dt>
                             <dd>빵을 구워 줍니다.</dd>
+
+                            
                         </dl>
                     </div>
                 </li>
@@ -252,7 +250,7 @@ body {
         </div> 
         
         
-        </div>
+</div>
         
         <div>
 			<%-- <div class="w3-border w3-center w3-padding">
@@ -269,9 +267,90 @@ body {
 				</c:if>
 			</div> --%>
 		</div>
-		<button onclick="location.href='${pageContext.request.contextPath}/updateView.rcp?bno='+${Recipe.bno}">수정하기</button>
+		<div align="center">
+			<button onclick="location.href='${pageContext.request.contextPath }/views/recipe/menuList.jsp'">메뉴로 돌아가기</button>
+			<c:if test="${ !empty member and member.uno eq Recipe.uno }">
+				<c:url var="boardUpdate" value="bUpView.bo">
+					<c:param name="bno" value="${board.bno }" />
+				</c:url>
+				<button onclick="location.href='${pageContext.request.contextPath}/updateView.rcp?bno='+${Recipe.bno}">수정하기</button>
+			</c:if>
+		</div>
+		<div class="replyArea">
+			<div class="replyWriteArea">
+				<form action="${pageContext.request.contextPath }/insert.co" method="post">
+					<input type="hidden" name="uno" value="${ member.uno }"/>
+					<input type="hidden" name="bno" value="${Recipe.bno }" />
+					<input type="hidden" name="ref_cno" value="0" />
+					<input type="hidden" name="clevel" value="1" />
+					
+					<table align="center">
+						<tr>
+							<td>댓글 작성</td>
+							<td><textArea rows="3" cols="80" id="replyContent" name="ccontent"></textArea></td>
+							<c:if test= "${!empty member }">
+							<td><button type="submit" id="addReply">댓글 등록</button></td>
+							</c:if>
+						</tr>
+					</table>
+				</form>
+			</div>
+			<div id="replySelectArea">
+				<c:if test="${ !empty clist }">
+		   		<c:forEach var="bco" items="${ clist }">
+		   			<table id="replySelectTable"
+	      	 style="margin-left : ${(bco.clevel - 1) * 15}px;
+	      	 		width : ${800 - ((bco.clevel - 1) * 15)}px;"
+	      	 class="replyList${bco.clevel}">
+				  		<tr>
+				  			<td rowspan="2"> </td>
+							<td><b>${bco.unick}</b></td>
+							<td>${bco.cdate}</td>
+							<td align="center">
+							<c:if test="${member.uno eq bco.uno }">
+								<input type="hidden" name="cno" value="${bco.cno}"/>
+									  
+								<button type="button" class="updateBtn" 
+									onclick="updateReply(this);">수정하기</button>
+									
+								<button type="button" class="updateConfirm"
+									onclick="updateConfirm(this);"
+									style="display:none;" >수정완료</button> &nbsp;&nbsp;
+									
+								<button type="button" class="deleteBtn"
+									onclick="deleteReply(this);">삭제하기</button>
+									
+							</c:if><c:if test="${ bco.clevel lt 3 }">
+								<input type="hidden" name="uno" value="${member.uno}"/>
+								<input type="hidden" name="ref_cno" value="${bco.cno}" />
+								<input type="hidden" name="clevel" value="${bco.clevel}" />
+								<button type="button" class="insertBtn" 
+									 onclick="reComment(this);">댓글 달기</button>&nbsp;&nbsp;
+									 
+								<button type="button" class="insertConfirm"
+									onclick="reConfirm(this);"
+									style="display:none;" >댓글 추가 완료</button> 
+									
+							</c:if><c:if test="${bco.clevel ge 3}">
+								<span> 마지막 레벨입니다.</span>
+							</c:if>
+							</td>
+						</tr>
+						<tr class="comment replyList${bco.clevel}">
+							<td colspan="3" style="background : transparent;">
+							<textarea class="reply-content" cols="105" rows="3"
+							 readonly="readonly">${bco.ccontent}</textarea>
+							</td>
+						</tr>
+					</table>
+		   		</c:forEach>
+		   </c:if>
+			</div>
+		</div>
+		<div class="goods"></div>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		
-
+<c:import url="../common/footer.jsp"></c:import>
 
 		<script>
 		$(function() {
@@ -369,7 +448,7 @@ body {
 				var imgArr = text.split(', ');
 				$(this).attr('src', '${pageContext.request.contextPath}/resources/RecipeBoardImages/' + imgArr[j]);
 				if(j==0){
-		       	 $(this).css('width','400px');
+		       	 $(this).css('width','40%');
 		        } else {
 		       	 $(this).css('width','250px');
 		        }
@@ -443,7 +522,138 @@ body {
 			});
 		 */
 		</script>
+		<script>
+		// 게시글 번호를 전달할 전역 변수 생성
+		var bno = ${Recipe.bno};
 		
+		// 댓글 수정 함수
+		function updateReply(obj){
+			// 현재 위치와 가장 가까운 textarea 가져오기
+			$(obj).parent().parent().next().find('textarea')
+			.removeAttr('readonly');
+			
+			// 수정 완료 버튼 보여주기
+			$(obj).siblings('.updateConfirm').css('display', 'inline');
+			
+			// 수정 하기는 숨기기
+			$(obj).css('display', 'none');
+		}
+		
+		// 수정 완료 기능 구현 함수
+		function updateConfirm(obj) {
+			// 댓글 내용 가져오기
+			
+			var content 
+			    = $(obj).parent().parent()
+			      .next().find('textarea').val();
+			
+			// 댓글 번호 가져오기
+			var cno = $(obj).siblings('input').val();
+			
+			location.href="/recipe/update.co?cno="+cno+"&bno="+bno
+					     +"&ccontent=" + content;
+		}
+		
+		// 댓글 삭제 함수
+		function deleteReply(obj){
+			
+			var cno = $(obj).siblings('input').val();
+			
+			location.href="/recipe/delete.co?cno="+cno+"&bno="+bno;
+		}
+		
+		// 대댓글 기능 구현 함수
+		function reComment(obj){
+			if( "${empty member}" ) {
+				alrat("로그인을 해주세요~"); 
+				return;
+			}
+			// 추가 완료 기능 버튼 보이게 하기
+			$(obj).siblings('.insertConfirm').css('display', 'inline');
+			
+			// 현재 버튼은 숨기기
+			$(obj).css('display', 'none');
+			
+			// 내용 입력 공간 만들기
+			// $(obj).parents('table').append(htmlCode);
+			var htmlCode = 
+				'<tr class="comment"> <td></td>'
+			  + '<td colspan="3" style="background: transparent;">'
+			  + '<textarea class="reply-content" style="background:#ffc;"'
+			  + '  cols="100" rows="3"></textarea>'
+			  + '</td></tr>';
+			  
+			  $(obj).parents('table').append(htmlCode);
+		}
+		
+		// 대댓글 작성 완료 시 동작할 함수
+		function reConfirm(obj){
+			// 참조한 댓글의 정보 가져오기
+			
+			// 참조한 원본 댓글의 번호
+			var refcno = $(obj).siblings('input[name=ref_cno]').val();
+			// 참조한 댓글의 레벨 + 1
+			var clevel = Number($(obj).siblings('input[name=clevel]').val()) + 1;
+			
+			// console.log(refcno + " : " + clevel);
+			
+			var parent = $(obj).parent();
+			var grandParent = parent.parent();
+			var siblingsTR = grandParent.siblings().last();
+			
+			var content = siblingsTR.find("textarea").val();
+			
+			location.href='/recipe/insert.co?'
+					+ 'uno=${member.uno}'
+					+ '&ccontent=' + content
+					+ '&bno=' + bno
+					+ '&ref_cno=' + refcno
+					+ '&clevel=' + clevel;
+		}
+
+		$(function() {
+			$.ajax({
+				url : '${pageContext.request.contextPath}/good.gs',
+				data : {goodsName : "${Recipe.rgoods}"},
+				type : "post",
+				success : function(goodsList) {
+					/* <div class="goodsDiv"><a onclick="location='goodsList[i].pcurl'">
+							<div>
+								<img src="/recipe/resources/images/GoodsImages/goodsList[i].pcfname" width="200px">
+							</div>
+							<p> <b>goodsList[i].pcgname</b> <br> goodsList[i].pcname</p>
+
+							<div style="display : none;">
+								<button onclick="location.href='views/goods/goodsUpdate.jsp?pcid=goodsList[i].pcid'">수정하기</button>
+								<button onclick="location.href='/delete.gs?pcid=goodsList[i].pcid'">삭제하기</button>
+							</div>
+							
+						</a></div> */
+					for(var i in goodsList) {
+					var $div = $('<div>').append($('<img>').attr('src','/recipe/resources/GoodsImages/'+goodsList[i].pcfname).css('width','200px'));
+					var $p = $('<p>').css('width','200px').css('height','50px').html('<b>'+goodsList[i].pcgname+'</b> <br> '+goodsList[i].pcname);
+					
+							var $update = $('<button>').attr('onclick', "location.href='goodsUpdate.jsp?goods="+goodsList[i]+"'").text('수정하기');
+							var $delete = $('<button>').attr('onclick', "location.href='/delete.gs?pcid="+goodsList[i].pcid+"'").text('삭제하기');
+					var $bntDiv = $('<div>').append($update).append($delete);
+					
+					if(goodsList[i].uno != "${ member.uno }"){
+						$bntDiv.css('display','none');
+					}
+					
+					var $a = $('<a>').attr('onclick', "location='"+goodsList[i].pcurl+"'");
+						$a.append($div)
+					$('.goods').append($('<div>').css('display','inline-block').css('padding','10px').append($a).append($p).append($bntDiv));
+					
+					}	
+
+				}, error : function() {
+					console.log("실패했어요!");
+				}
+			});
+		});
+				
+		</script>
         
     </body>
 </html>
