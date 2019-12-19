@@ -24,6 +24,7 @@
 </style>
   </head>
   <body>
+  <c:import url="../common/header.jsp"/>
 <div class="row marginTop">
 <div class="col-xl-4 col-lg-3 col-md-2 col-sm-1"></div>
 <div class="loginArea col-xl-4 col-lg-6 col-md-8 col-sm-10 loginBody">

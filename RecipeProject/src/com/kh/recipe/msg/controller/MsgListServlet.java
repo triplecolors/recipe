@@ -1,27 +1,23 @@
-package com.kh.recipe.recipeBoard.controller;
+package com.kh.recipe.msg.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.recipe.recipeBoard.model.service.RecipeService;
-
 /**
- * Servlet implementation class UpdateView
+ * Servlet implementation class MsgListServlet
  */
-@WebServlet("/selectOneRecipe.rcp")
-public class SelectOneRecipe2 extends HttpServlet {
+@WebServlet("/msgList.rm")
+public class MsgListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectOneRecipe2() {
+    public MsgListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,22 +26,11 @@ public class SelectOneRecipe2 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int bno = Integer.parseInt(request.getParameter("bno"));
+		// TODO Auto-generated method stub
 		
-		HashMap<String, Object> hmap = new RecipeService().selectOne(bno);
+		System.out.println("중간 확인");
 		
-		String page = "";
-		
-		if(hmap != null) {
-			page = "views/recipe/test2.jsp?bno="+bno;
-			request.setAttribute("Recipe", hmap.get("Recipe"));
-			request.setAttribute("fileList", hmap.get("Bfile"));
-		}else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "사진 게시판 수정 화면 오류");
-		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
+		response.sendRedirect("views/mypage/myPageInbox.jsp");
 	}
 
 	/**

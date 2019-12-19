@@ -8,7 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Service ERROR</title>
+
 <c:import url="commonUtil.jsp"></c:import>
+
 <style>
 	.outer{
       padding: 20px;

@@ -60,28 +60,32 @@ public class MemberService {
 	   
 	   return result;
    }
-   public Member myPageMember(int uno) {
-		con = getConnection();
-		Member m = null;
 
-		m = mDao.myPageMember(con,uno);
-		
+   
+	
+public Member myPageMember(int uno) {
+	con = getConnection();
+	Member m = null;
 
-		close(con);
-		
-		return m;
-	}
+	m = mDao.myPageMember(con,uno);
+	
 
-	public int deleteMember(String userid) {
-		con = getConnection();
-		
-		int result = mDao.deleteMember(con, userid);
-		
-		if(result > 0) commit(con);
-		else rollback(con);
-		
-		close(con);
+	close(con);
+	
+	return m;
+}
 
-		return result;
-	}
+public int deleteMember(String userid) {
+	con = getConnection();
+	
+	int result = mDao.deleteMember(con, userid);
+	
+	if(result > 0) commit(con);
+	else rollback(con);
+	
+	close(con);
+
+	return result;
+}
+   
 }

@@ -112,7 +112,7 @@ public class MemberDAO {
 			result	= pstmt.executeUpdate();
 			
 			stmt = con.createStatement();
-			result += stmt.executeUpdate("INSERT INTO MEMBER VALUES(SEQ_UNO.CURRVAL, 1, DEFAULT)");
+			result += stmt.executeUpdate("INSERT INTO MEMBER VALUES(SEQ_UNO.CURRVAL, 0, DEFAULT)");
 			
 		} catch (SQLException e) {
 			System.out.println("DAO에러!");
@@ -131,8 +131,7 @@ public class MemberDAO {
 public int updateMember(Connection con, Member m) {
 	int result = 0;
 	PreparedStatement pstmt = null;
-	
-	
+
 	try {
 		
 		String sql = prop.getProperty("updateMember");
@@ -161,53 +160,55 @@ public int updateMember(Connection con, Member m) {
 }
 
 
-//마이페이지에 들어갈 회원 정보 조회
+
+// 마이페이지에 들어갈 회원 정보 조회
 public Member myPageMember(Connection con, int uno) {
 	  Member m = null;
- PreparedStatement pstmt = null;
- ResultSet rset = null;
- // 실행
- try {
-    
-    String sql  = prop.getProperty("myPageMember");
-    
-    pstmt = con.prepareStatement(sql);
-    
-    pstmt.setInt(1, uno);
-
-    rset = pstmt.executeQuery();
-    
-    if(rset.next()) {
-   	 m = new Member();
-   	 
-   	 
-   	 System.out.println(m);
-   	 m.setMrank(rset.getInt("MRANK"));
-   	 m.setUno(rset.getInt("UNO"));
-   	 m.setUtype(rset.getString("UTYPE"));
-       m.setUserid(rset.getString("USERID"));
-       m.setUpwd(rset.getString("UPWD"));
-       m.setUnick(rset.getString("UNICK"));
-       m.setUadrs(rset.getString("UADRS"));
-       m.setUphone(rset.getString("UPHONE"));
-       m.setUdate(rset.getDate("UDATE"));
-       m.setMstatus(rset.getString("MSTATUS"));
-       m.setMrname(rset.getString("MRNAME"));
+    PreparedStatement pstmt = null;
+    ResultSet rset = null;
+    // 실행
+    try {
        
-    
+       String sql  = prop.getProperty("myPageMember");
+       
+       pstmt = con.prepareStatement(sql);
+       
+       pstmt.setInt(1, uno);
+ 
+       rset = pstmt.executeQuery();
+       
+       if(rset.next()) {
+      	 m = new Member();
+      	 
+      	 
+      	 System.out.println(m);
+      	 m.setMrank(rset.getInt("MRANK"));
+      	 m.setUno(rset.getInt("UNO"));
+      	 m.setUtype(rset.getString("UTYPE"));
+          m.setUserid(rset.getString("USERID"));
+          m.setUpwd(rset.getString("UPWD"));
+          m.setUnick(rset.getString("UNICK"));
+          m.setUadrs(rset.getString("UADRS"));
+          m.setUphone(rset.getString("UPHONE"));
+          m.setUdate(rset.getDate("UDATE"));
+          m.setMstatus(rset.getString("MSTATUS"));
+          m.setMrname(rset.getString("MRNAME"));
+          
+       
+       }
+       
+    } catch(SQLException e) {
+       
+       e.printStackTrace();
+       
+    } finally {
+       close(rset);
+       close(pstmt);
     }
     
- } catch(SQLException e) {
-    
-    e.printStackTrace();
-    
- } finally {
-    close(rset);
-    close(pstmt);
- }
- 
- System.out.println(m);
- return m;
+    System.out.println(m);
+    return m;
+
 }
 
 public int deleteMember(Connection con, String userid) {
@@ -236,5 +237,5 @@ public int deleteMember(Connection con, String userid) {
 	return result;
 }
 
-   
+
 }

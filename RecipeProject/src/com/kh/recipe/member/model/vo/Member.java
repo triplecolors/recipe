@@ -36,7 +36,7 @@ public Member(String userid, String upwd, String unick, String uadrs, String uph
 	this.uphone = uphone;
 }
 // 전체 가져오기 용
- public Member(int uno, String utype, String userid, String upwd, String unick, String uadrs, String uphone,
+ public Member(String mrank ,int uno, String utype, String userid, String upwd, String unick, String uadrs, String uphone,
        Date udate, String mrname, String mstatus) {
     super();
     this.uno = uno;
@@ -50,14 +50,18 @@ public Member(String userid, String upwd, String unick, String uadrs, String uph
     this.mrname = mrname;
     this.mstatus = mstatus;
  }
- 
-	public int getMrank() {
-		return mrank;
-	}
-	public void setMrank(int mrank) {
-		this.mrank = mrank;
-	}
-	public int getUno() {
+
+
+
+
+public int getMrank() {
+	return mrank;
+}
+public void setMrank(int mrank) {
+	this.mrank = mrank;
+}
+public int getUno() {
+
       return uno;
    }
 
@@ -136,13 +140,14 @@ public Member(String userid, String upwd, String unick, String uadrs, String uph
    public void setMstatus(String mstatus) {
       this.mstatus = mstatus;
    }
+@Override
+public String toString() {
+	return "Member [mrank=" + mrank + ", uno=" + uno + ", utype=" + utype + ", userid=" + userid + ", upwd=" + upwd
+			+ ", unick=" + unick + ", uadrs=" + uadrs + ", uphone=" + uphone + ", udate=" + udate + ", mrname=" + mrname
+			+ ", mstatus=" + mstatus + "]";
+}
 
-   @Override
-   public String toString() {
-      return "Member [uno=" + uno + ", utype=" + utype + ", userid=" + userid + ", upwd=" + upwd + ", unick=" + unick
-            + ", uadrs=" + uadrs + ", uphone=" + uphone + ", udate=" + udate + ", mrname=" + mrname + ", mstatus="
-            + mstatus + "]";
-   }
+
    
 
 }
