@@ -35,6 +35,8 @@ public class FreeBoardService {
 		
 		FreeBoard f = fdao.selectOne(con,bno);
 		
+		f.setWriter(new GetUserNameDAO().getOneName(con, f.getUno()));
+		
 		int result = 0;
 		
 		if(f!=null) {

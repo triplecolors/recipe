@@ -23,11 +23,14 @@
 
 <!-- 썸머노트 css, js 설정 -->
 
-<c:import url="../common/commonUtil.jsp" />
-<script src="${ pageContext.request.contextPath }/resources/summernote/summernote.js"></script>
+<c:import url="../common/commonUtil.jsp"/>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
 
 <!-- include summernote css/js -->
-<link href="${ pageContext.request.contextPath }/resources/summernote/summernote.css" rel="stylesheet">
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
 
 </head>
 <body>
@@ -41,7 +44,7 @@
 <br />
 <br />
 <div class="mb-2" align="center">
-<form id="insertForm" action="${ pageContext.request.contextPath }/finsert.fb?uno=${member.uno}"  method="post"  >
+<form id="insertForm" action="${ pageContext.request.contextPath }/fupdate.fb?uno=${member.uno}"  method="post"  >
       <div class="input-group mb-3" style="width:900px;">
 
          <br />
@@ -54,6 +57,7 @@
               <textarea id="summernote" name="editordata">${fboard.pContent }</textarea>
       </div>
       <input type="hidden" name="uno"  value="${member.uno}"/>
+      <input type="hidden" name="bno"  value="${fboard.bno}"/>
 
 <div align="center">
 <button type="reset" class="btn btn-primary" onclick="cancelbtn();">취소</button>
@@ -99,7 +103,7 @@ $(function(){
 	  $.ajax({
 	       data: form_data,
 	       type: "post",
-	       url: 'insert.tn',
+	       url: 'fiinsert.fb',
 	    cache : false,
 	    contentType : false,
 	       enctype: 'multipart/form-data',

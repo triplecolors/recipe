@@ -69,7 +69,7 @@ $(function(){
 	  $.ajax({
 	       data: form_data,
 	       type: "post",
-	       url: 'insert.tn',
+	       url: 'fiupdate.fb',
 	    cache : false,
 	    contentType : false,
 	       enctype: 'multipart/form-data',
