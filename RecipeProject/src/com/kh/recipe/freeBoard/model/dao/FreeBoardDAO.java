@@ -36,7 +36,7 @@ private Properties prop = new Properties();
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("insertBoard");
+		String sql = prop.getProperty("insertfBoard");
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -84,6 +84,7 @@ private Properties prop = new Properties();
 				f.setpDate(rset.getDate("PDATE"));
 				f.setpCount(rset.getInt("PCOUNT"));
 				f.setpStatus(rset.getString("PSTATUS"));
+				f.setBnum(rset.getInt("RNUM"));
 				
 				list.add(f);
 			}
@@ -207,6 +208,33 @@ private Properties prop = new Properties();
 		}finally {
 			close(rset);
 			close(stmt);
+		}
+		
+		return result;
+	}
+
+
+
+	public int addReadCount(Connection con, int bno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("addReadCount");
+		//System.out.println("bno 확인 : " + bno);
+		//System.out.println("쿼리문 확인 : " + sql);
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, bno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			
 		}
 		
 		return result;

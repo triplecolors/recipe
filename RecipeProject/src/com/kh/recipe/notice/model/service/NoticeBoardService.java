@@ -5,6 +5,7 @@ import static com.kh.recipe.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.recipe.common.GetUserNameDAO;
 import com.kh.recipe.common.PageInfo;
 import com.kh.recipe.notice.model.dao.NoticeBoardDAO;
 import com.kh.recipe.notice.model.vo.NoticeBoard;
@@ -35,8 +36,9 @@ public class NoticeBoardService {
 		
 		NoticeBoard n = nbdao.selectOne(con, bno);
 		
-		if(n != null) commit(con);
-		else rollback(con);
+		n.setWriter(new GetUserNameDAO().getOneName(con, n.getUno()));
+		
+		
 		
 		close(con);
 		
@@ -48,12 +50,36 @@ public class NoticeBoardService {
 	public ArrayList<NoticeBoard> selectList(PageInfo pi) {
 		con = getConnection();
 		
-		int rowNum[] = pi.getRowNum();
 		
-		ArrayList<NoticeBoard> list = nbdao.selectList(con, rowNum[0], rowNum[1]);
+		ArrayList<NoticeBoard> list = nbdao.selectList(con,pi.getStartRow(), pi.getEndRow());
+		
+		for(int i = 0;i<list.size();i++) {
+			list.get(i).setWriter(new GetUserNameDAO().getOneName(con, list.get(i).getUno()));
+		}
+		
+		
+		
 		
 		close(con);
+		//System.out.println(list.get(1).getWriter());
 		
+		return list;
+	}
+	public ArrayList<NoticeBoard> selectList_S(PageInfo pi) {
+		con = getConnection();
+		
+		
+		ArrayList<NoticeBoard> list = nbdao.selectList_S(con,pi.getStartRow(), pi.getEndRow());
+		
+		for(int i = 0;i<list.size();i++) {
+			list.get(i).setWriter(new GetUserNameDAO().getOneName(con, list.get(i).getUno()));
+		}
+		
+		
+		
+		
+		close(con);
+		//System.out.println(list.get(1).getWriter());
 		
 		return list;
 	}
@@ -96,6 +122,25 @@ public class NoticeBoardService {
 		close(con);
 		
 		return result;
+	}
+	public int getListCount_S() {
+		con = getConnection();
+		
+		int result = nbdao.getListCount(con);
+		
+		close(con);
+		
+		return result;
+	}
+
+	public NoticeBoard updateView(int bno) {
+		con = getConnection();
+		
+		NoticeBoard n = nbdao.selectOne(con, bno);
+		
+		close(con);
+		
+		return n;
 	}
 	
 	

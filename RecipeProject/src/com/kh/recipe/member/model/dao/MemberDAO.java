@@ -160,6 +160,7 @@ public int updateMember(Connection con, Member m) {
 }
 
 
+
 // 마이페이지에 들어갈 회원 정보 조회
 public Member myPageMember(Connection con, int uno) {
 	  Member m = null;
@@ -207,6 +208,7 @@ public Member myPageMember(Connection con, int uno) {
     
     System.out.println(m);
     return m;
+
 }
 
 public int deleteMember(Connection con, String userid) {
@@ -236,7 +238,4 @@ public int deleteMember(Connection con, String userid) {
 }
 
 
-
-   
-   
 }

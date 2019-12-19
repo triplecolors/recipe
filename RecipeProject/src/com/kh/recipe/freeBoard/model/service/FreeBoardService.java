@@ -1,9 +1,10 @@
 package com.kh.recipe.freeBoard.model.service;
 
+import com.kh.recipe.common.GetUserNameDAO;
 import com.kh.recipe.common.PageInfo;
 import com.kh.recipe.freeBoard.model.dao.FreeBoardDAO;
 import com.kh.recipe.freeBoard.model.vo.FreeBoard;
-
+import com.kh.recipe.notice.model.vo.NoticeBoard;
 
 import static com.kh.recipe.common.JDBCTemplate.*;
 
@@ -34,7 +35,13 @@ public class FreeBoardService {
 		
 		FreeBoard f = fdao.selectOne(con,bno);
 		
-		if(f!=null) commit(con);
+		int result = 0;
+		
+		if(f!=null) {
+			result = fdao.addReadCount(con,bno);
+		}
+		
+		if(result>0)commit(con);
 		else rollback(con);
 		
 		close(con);
@@ -47,9 +54,14 @@ public class FreeBoardService {
 	public ArrayList<FreeBoard> selectList(PageInfo pi ){
 	con = getConnection();
 		
-		int rowNum[] = pi.getRowNum();
 		
-		ArrayList<FreeBoard> list = fdao.selectList(con, rowNum[0], rowNum[1]);
+		
+		ArrayList<FreeBoard> list = fdao.selectList(con, pi.getStartRow(), pi.getEndRow());
+		
+		for(int i = 0;i<list.size();i++) {
+			list.get(i).setWriter(new GetUserNameDAO().getOneName(con, list.get(i).getUno()));
+		}
+		
 		
 		close(con);
 		
@@ -99,6 +111,15 @@ public class FreeBoardService {
 		return result;
 	}
 	
+	public FreeBoard updateView(int bno) {
+		con = getConnection();
+		
+		FreeBoard f = fdao.selectOne(con, bno);
+		
+		close(con);
+		
+		return f;
+	}
 	
 
 }

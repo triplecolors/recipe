@@ -60,6 +60,7 @@ public class MemberService {
 	   
 	   return result;
    }
+
    
 	
 public Member myPageMember(int uno) {
@@ -86,6 +87,5 @@ public int deleteMember(String userid) {
 
 	return result;
 }
-   
    
 }

@@ -82,6 +82,7 @@ public class InsertRecipe extends HttpServlet {
 		// Thumbnail 객체 만들기
 		Recipe rcp = new Recipe();
 		
+		rcp.setUno(Integer.parseInt(mre.getParameter("uno")));
 		rcp.setRtitle(mre.getParameter("rtitle"));
 		rcp.setRcontent(mre.getParameter("rcontent"));
 		rcp.setRvideo(mre.getParameter("rvideo"));

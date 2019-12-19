@@ -9,7 +9,8 @@ public class PageInfo implements Serializable{
 	 private int currentPage=1;
 	 private int limit=10;
 	 private int listCount;
-	 
+	 private int startRow;
+	 private int endRow;
 	 
 	 public PageInfo(){}
 	 
@@ -75,28 +76,43 @@ public class PageInfo implements Serializable{
 	}
 	
 	
-	public void maxPage(int listCount) {
+	public int getStartRow() {
+		return startRow;
+	}
+
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+
+	public int getEndRow() {
+		return endRow;
+	}
+
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
+	}
+
+
+	public void calcPage(int listCount) {
+		this.listCount = listCount;
 		this.maxPage = (int)((double)listCount/this.limit+0.9);
-	}
-	
-	public void startPage (int currentPage) {
-		this.startPage = (int)((double)currentPage/this.limit+0.9)*limit-9;
-	}
-	
-	public void endPage() {
+		this.startPage = (int)((double)this.currentPage/this.limit+0.9)*limit-9;
+		this.endPage=this.startPage + this.limit -1;
 		if(this.maxPage < this.endPage) {
 			this.endPage = this.maxPage;
-		}else {
-			this.endPage = this.startPage+ this.limit -1;
 		}
+		this.startRow = (this.currentPage-1)*this.limit;
+		this.endRow = this.startRow + 10;
+		
 	}
-	public  int[] getRowNum() {
-		int startRow = (this.currentPage-1)*this.limit;
-		int endRow = startRow + this.limit;
-		
-		int rowNum[] = {startRow, endRow};
-		
-		return rowNum;
+
+
+
+
+	@Override
+	public String toString() {
+		return "PageInfo [startPage=" + startPage + ", endPage=" + endPage + ", maxPage=" + maxPage + ", currentPage="
+				+ currentPage + ", limit=" + limit + ", listCount=" + listCount + "]";
 	}
 	
 	

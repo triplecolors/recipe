@@ -1,8 +1,10 @@
 eclipse.preferences.version=1
 encoding//src/com/kh/recipe/notice/controller=UTF-8
 encoding//src/mappers/bFile.properties=UTF-8
+encoding//src/mappers/fBoard.properties=UTF-8
 encoding//src/mappers/member.properties=UTF-8
 encoding//src/mappers/menuPage.properties=UTF-8
+encoding//src/mappers/msg.properties=UTF-8
 encoding//src/mappers/nBoard.properties=UTF-8
 encoding//src/mappers/recipe.properties=UTF-8
 encoding//src/mappers/recipeCommon.properties=UTF-8

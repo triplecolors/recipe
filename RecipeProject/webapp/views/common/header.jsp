@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<div id="headerback"></div>
 <header>
 
 <div class="header-area ">
@@ -67,8 +66,15 @@
                      </ul>
                  </nav>
              </div>
-        </div>
-    </div>
-</div>
-</header>
 
+        </div>
+    </header>
+    
+    <div class="breadcam_area breadcam_bg_1 zigzag_bg_2">
+            <div class="breadcam_inner">
+                <div class="breadcam_text">
+                    <h3></h3>
+                    <p></p>
+                </div>
+            </div>
+    </div>

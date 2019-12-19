@@ -44,7 +44,7 @@ public class RecipeDAO {
 			commit(con);
 			pstmt = con.prepareStatement("INSERT INTO recipe VALUES(SEQ_RNO.nextval, SEQ_BNO.currval, ?, ?, ?, ?, DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'N')");
 						
-			pstmt.setInt(1, 1);
+			pstmt.setInt(1, rcp.getUno());
 			pstmt.setString(2, rcp.getRtitle());
 			pstmt.setString(3, rcp.getRsource());
 			pstmt.setString(4, rcp.getRprocess());
@@ -73,6 +73,7 @@ public class RecipeDAO {
 		HashMap<String, Object> hmap = null;
 		Recipe r = null;
 		ArrayList<Bfile> fList = null;
+		ArrayList<Ttitle> ttext = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -81,6 +82,7 @@ public class RecipeDAO {
 			pstmt.setInt(1, bno);
 			rset = pstmt.executeQuery();
 			fList = new ArrayList<Bfile>();
+			ttext = new ArrayList<Ttitle>();
 			
 			while(rset.next()) {
 				
@@ -113,12 +115,26 @@ public class RecipeDAO {
 				f.setFdate(rset.getDate("FDATE"));
 				f.setFlevel(rset.getInt("FLEVEL"));
 				
-				fList.add(f);				
+				fList.add(f);			
+				
+				Ttitle t = new Ttitle();
+				f.setFno(rset.getInt("FNO"));
+				f.setBno(bno);
+				f.setFname(rset.getString("FNAME"));
+				f.setFpath(rset.getString("FPATH"));
+				f.setFdate(rset.getDate("FDATE"));
+				f.setFlevel(rset.getInt("FLEVEL"));
+				
+				ttext.add(t);				
 			}
+						
+			
+			
 			hmap = new HashMap<String, Object>();
 			
-			hmap.put("Recipe", r);
-			hmap.put("Bfile", fList);
+			hmap.put("Recipe", r); // 레시피
+			hmap.put("Bfile", fList); // 마이페이지에서 추가한 레시피 조회
+			hmap.put("Ttitle",ttext ); // text 검색 조회
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

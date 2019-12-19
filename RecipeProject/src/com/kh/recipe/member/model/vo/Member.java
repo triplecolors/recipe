@@ -53,6 +53,7 @@ public Member(String userid, String upwd, String unick, String uadrs, String uph
 
 
 
+
 public int getMrank() {
 	return mrank;
 }
@@ -60,6 +61,7 @@ public void setMrank(int mrank) {
 	this.mrank = mrank;
 }
 public int getUno() {
+
       return uno;
    }
 

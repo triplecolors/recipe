@@ -29,20 +29,40 @@ public class insertNoticeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		//response.setContentType("text/html; charset=UTF-8");
 		
-		String nTitle = request.getParameter("title");
-		String nContent = request.getParameter("content");
+		NoticeBoard n = new NoticeBoard();
 		
-		System.out.println("제목 : " + nTitle + "내용 : " + nContent);
+//		String isLogin = request.getParameter("uno");
+//		System.out.println("uno 들어옴? : "+isLogin);
+//		if(isLogin == null) {
+//			request.setAttribute("msg", "로그인전 작성 불가!");
+//			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+//		}
+//		n.setnContent(request.getParameter("editordata"));
 		
-		NoticeBoard n = new NoticeBoard(nTitle,nContent);
+		System.out.println("uno 확인 : " + request.getParameter("uno"));
+		
+		n.setUno(Integer.parseInt(request.getParameter("uno")));
+		n.setnType("N");
+		n.setnTitle(request.getParameter("title"));
+		n.setnContent(request.getParameter("content"));
+		
+		
+	
+		
+		
+		System.out.println("서블릿 값 입력 확인 : "+n);
 		
 		int result = new NoticeBoardService().insertBoard(n);
-		System.out.println("뷰 > 서블릿 전달 확인  : "+n);
+		
+		
+//	
 		if(result > 0 ) {
-			response.sendRedirect("");
+			System.out.println("버튼 연결 확인!");
+			//request.setAttribute(name, o);
+			response.sendRedirect("selectList.no");
 		}else {
 			request.setAttribute("msg", "공지 작성 실패!");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
