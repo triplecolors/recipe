@@ -104,7 +104,6 @@
    <div class="col-xl-3 col-lg-2 col-md-1 d-sm-block d-none"></div>
    <div class="col-xl-6 col-lg-8 col-md-10">
    
-   <form>
    <br />
    <br />
    <br />
@@ -116,7 +115,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
     
-      <input class="form-control word" type="text" placeholder="조회하고자 하시는 레시피를 입력하세요 " aria-label="Search" >
+      <input class="form-control word" type="text" placeholder="조회하고자 하시는 레시피를 입력하세요 " aria-label="Search" onkeyup="enterKey();">
       <button class="btn btn-mdb-color btn-rounded btn-sm my-0 ml-sm-2" type="button" style="background: #6F7EAD;" onclick="selectedBtn();">검색</button>
     
 
@@ -129,7 +128,7 @@
 	<!-- <d class="liname">레시피를 부탁해 </d> -->
 
 
-        
+    <form>
         <fieldset  class="myCategory">
         <legend><strong>카테고리를 선택해보세요!</strong></legend>
     <div class="row">
@@ -196,7 +195,15 @@
 
 </div>
 	<script>
-	
+	$(function() {
+		selectedBtn();
+	});
+	// 엔터키 누를때 동작할 함수
+	function enterKey() {
+		// 13 == 엔터키
+		if (window.event.keyCode == 13) selectedBtn();
+		
+	}
 	/* 각각의 해당 레시피 선택 표시 방식 구현 */
 	$(document).on('click', 'option', function() {
 		if($(this).hasClass('select')){
@@ -262,7 +269,7 @@
 	// 검색하기를 누르면 카테고리를 전달해서 리스트를 뽑아준다.
 	
 	function selectedBtn(){
-		var word = ''
+		var word = '';
 		word = $('.word').val();
 		console.log(word);
 		var str = '';
@@ -276,8 +283,11 @@
 			}
 		});
 				console.log("str ="+str);
+		
 		if(word.length == 0 && str.length == 0){
-			$('#result').text('전체 결과입니다. 검색해주세요!')
+			$('#result').text('전체 결과입니다. 검색해주세요!');
+		} else {
+			$('#result').text('');
 		}
 		$.ajax({
 			url : '${pageContext.request.contextPath}/menuPage.do',

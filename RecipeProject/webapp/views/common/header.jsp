@@ -20,14 +20,6 @@
 												<img src="${ pageContext.request.contextPath }/resources/images/로고.png" width="160px" />
 										    </a>
                                         </div>
-                                        <li><a href="#">v마이페이지 <i class="ti-angle-down"></i></a>
-										    <ul class="submenu">
-									<c:if test="${ !empty member }">
-										        <li><a href="${pageContext.request.contextPath }/views/mypage/myPageList.jsp">마이페이지</a>
-										        <li><a href="${pageContext.request.contextPath }/views/recipe/recipeWrite.jsp">레시피 작성하기</a></li>
-									</c:if>
-										    </ul>
-										</li>
 										<li><a href="#">게시판 <i class="ti-angle-down"></i></a>
 										    <ul class="submenu">
 										        <li><a href="${ pageContext.request.contextPath }/selectList.no">공지사항</a></li>
@@ -35,6 +27,17 @@
 										        <li><a href="${pageContext.request.contextPath }/selectList.su">건의 게시판</a></li>
 										    </ul>
 										</li>
+									<c:if test="${ !empty member }">
+                                        <li><a href="#">v마이페이지 </a>
+										    <ul class="submenu">
+										        <li><a href="${pageContext.request.contextPath }/views/mypage/myPageList.jsp">마이페이지</a>
+										        <li><a href="${pageContext.request.contextPath }/views/recipe/recipeWrite.jsp">레시피 작성하기</a></li>
+										    </ul>
+										</li>
+									</c:if>
+									<c:if test="${ empty member }">
+                                        <li><a href="${pageContext.request.contextPath }/views/member/memberJoin.jsp">회원가입</a></li>
+									</c:if>
                                     </ul>
                                 </nav>
                             </div>
@@ -62,7 +65,7 @@
         </div>
     </header>
     
-    <div class="breadcam_area breadcam_bg_1 zigzag_bg_2">
+    <div class="breadcam_area breadcam_bg_1">
             <div class="breadcam_inner">
                 <div class="breadcam_text">
                     <h3></h3>

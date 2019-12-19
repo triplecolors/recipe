@@ -9,8 +9,70 @@
 <meta charset="UTF-8">
 <title>레시피 등록</title>
 <c:import url="../common/commonUtil.jsp"></c:import>
-<link rel="stylesheet" href="../../resources/css/recipeWrite.css">
-<script src="../../resources/js/recipeWrite.js"></script>
+<style>
+
+body {
+	background: rgb(250, 250, 250);
+}
+.back_div {
+	margin-top: 10%;
+	padding: 5px;
+	background: rgba(255, 255, 255, 0.9);
+}
+.title_div {
+	background: rgba(227, 154, 125, 0.2);
+	padding: 15px;
+	height: 47px;
+	margin-bottom: 20px;
+}
+h3 {
+	color: rgb(120, 120, 120);
+}
+.basic_div {
+	padding: 20px;
+}
+.desc_div {
+	margin-bottom: 15px;
+}
+div[class*=content_div] {
+	padding: 40px;
+}
+.longBtn button {
+	width: 30%;
+	margin-top: 30px;
+}
+.srcTitle button {
+	height: 40px;
+}
+
+/* 재료 - 한번에 넣기  */
+.oneClick {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+}
+.disNone {
+	display: none;
+}
+.oneClick_back {
+	background: rgba(150, 150, 150, 0.3);
+	z-index: 100;
+}
+.oneClick_card {
+	margin-top : 150px;
+	z-index: 150;
+}
+.oneClick_btn button {
+	margin: 5px;
+}
+
+/* 순서 */
+#fileArea {
+	display: none;
+}
+
+	
+</style>
 </head>
 <body>
 	<c:import url="../common/header.jsp"></c:import>
@@ -56,28 +118,28 @@
 	<div class="back_div col-lg-8 col-md-10 col-sm-12">
 
 	<div class="title_div"><h3><strong>레시피 등록</strong></h3></div>
-	
+	<input type="hidden" name="bno" value="${Recipe.bno}"/>
 	<div class="row basic_div">
 		<div class="col-md-7">
 			<div class="input-group mb-3">
 			  <div class="input-group-prepend">
 			    <span class="input-group-text" id="basic-addon3">레시피 제목</span>
 			  </div>
-			  <input type="text" name="rtitle" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+			  <input type="text" name="rtitle" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="${Recipe.rtitle}">
 			</div>
 			
 			<div class="input-group desc_div">
 			  <div class="input-group-prepend">
 			    <span class="input-group-text">레시피 소개</span>
 			  </div>
-			  <textarea name="rcontent" class="form-control" aria-label="With textarea"></textarea>
+			  <textarea name="rcontent" class="form-control" aria-label="With textarea">${Recipe.rcontent}</textarea>
 			</div>
 			
 			<div class="input-group mb-3">
 			  <div class="input-group-prepend">
 			    <span class="input-group-text" id="basic-addon3">동영상 링크</span>
 			  </div>
-			  <input type="text" name="rvideo" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+			  <input type="text" name="rvideo" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="${Recipe.rvideo}">
 			</div>
 			
 			
@@ -193,7 +255,7 @@
 		<div class="form-group row">
 			<h4  class="col-md-2"><strong>셰프의 팁</strong></h4>
 		    <div class="col-10">
-		      <textarea type="text" class="form-control" placeholder="작성" rows="5" name="rtip"></textarea>
+		      <textarea type="text" class="form-control" placeholder="작성" rows="5" name="rtip">${Recipe.rtip}</textarea>
 		    </div>
 		</div>
 	</div>
@@ -201,7 +263,7 @@
 	<div class="content_div4">
 		<h4><strong>사용된 요리도구</strong></h4>
 	    <div>
-	      <input type="text" class="form-control" placeholder="콤마(,)로 구분하여 작성해주세요!" name="rgoods" />
+	      <input type="text" class="form-control" placeholder="콤마(,)로 구분하여 작성해주세요!" name="rgoods" value="${Recipe.rgoods}"/>
 	    </div>
 	</div>
 <hr />
@@ -232,6 +294,133 @@
     
 	<c:import url="../common/footer.jsp"></c:import>
 	<script>
+	// 요리 재료 
+	$(function() {
+		var str = $.trim("${Recipe.rsource}");
+	       if(str.indexOf('[') > str.indexOf(']') || str.lastIndexOf('[') > str.lastIndexOf(']')
+	       || str.indexOf('[') == -1 || str.indexOf(']') == -1){
+	           alert('형식을 확인해주세요!');
+	           return;
+	       }
+	       for(var i=0; str.indexOf('[') != -1; i++){
+	           var ctg = $.trim(str.substring(str.indexOf('[')+1, str.indexOf(']')));
+	           var div = '<div class="row input-group">'
+	        			 + '<div class="input-group-prepend col-4 srcTitle">'
+		        			 + '<button type="button" class="btn btn-outline-warning" onclick="srcTitleRemove(this);">─</button>'
+		        			 + '<input type="text" class="form-control srcTitle" value="' + ctg + '">'
+	        			 + '</div>'
+	        			 + '<div class="col-8">'
+		        			
+	        			 + '</div>'
+	    			 + '</div>';
+				 
+			$('.srcLBtn').before(div);
+			var $div_col8 = $('.srcLBtn').prev().find('.col-8');
+			
+	           str = str.substring(str.indexOf(']'));
+	           var strArr;
+	           if(str.indexOf('[') == -1){
+	               strArr = str.substring(str.indexOf(']')+1).split(',');
+	           }else{
+	               strArr = str.substring(str.indexOf(']')+1, str.indexOf('[')).split(',');
+	           }
+	           strArr.forEach(function(item, idx, strArr){
+	               item = $.trim(item)
+	               itemArr = item.split(' ');
+	               if(itemArr.length == 1){
+	                   $div_col8.append('<div class="input-group-prepend srcContent">'
+					        			 + '<input type="text" class="form-control srcName" value="'+itemArr[0]+'">'
+					        			 + '<input type="text" class="form-control">'
+					        			 + '<button type="button" class="btn btn-outline-warning">─</button>'
+					    			 + '</div>');
+	               }else{
+	                   $div_col8.append('<div class="input-group-prepend srcContent">'
+					        			 + '<input type="text" class="form-control srcName" value="'+itemArr[0]+'">'
+					        			 + '<input type="text" class="form-control" value="'+item.substring(item.indexOf(itemArr[1]))+'">'
+					        			 + '<button type="button" class="btn btn-outline-warning">─</button>'
+					    			 + '</div>');
+	               
+	               }
+	               
+	           });
+	           $div_col8.append('<div align="center">'
+	        		+ '<button type="button" class="btn btn-outline-dark" onclick="addContent(this);"><strong>╂</strong></button>'
+	   			+ '</div>');
+	           str = str.substring(str.indexOf('['));
+	       }
+	       
+	       $('.srcTitle').parent().each(function() {
+		    	var checkStr = "";
+	    	   $(this).find('input').each(function() {
+		    	   checkStr = checkStr + $(this).val();
+				})
+		       if(checkStr.length == 0){
+		    	   srcTitleRemove();
+		       }
+			})
+			
+	});
+	
+	// 시간, 난이도
+	$(function() {
+		$('[name=rtime]').find('option').each(function() {
+			if($(this).val() == ${Recipe.rtime}){
+				$(this).attr('selected', true);
+			}
+		})
+		$('[name=rlevel]').find('option').each(function() {
+			if($(this).val() == ${Recipe.rlevel}){
+				$(this).attr('selected', true);
+			}
+		})
+	});
+	
+	// 요리 순서
+	$(function() {
+		var str = $.trim("${Recipe.rprocess}");
+	       if(str.indexOf('[') > str.indexOf(']') || str.lastIndexOf('[') > str.lastIndexOf(']')
+	       || str.indexOf('[') == -1 || str.indexOf(']') == -1){
+	           alert('형식을 확인해주세요!');
+	           return;
+	       }
+		for(var i=1; str.indexOf('[') != -1; i++){
+	           str = str.substring(str.indexOf(']'));
+	           
+	           // 요리 순서 내용 추출
+	           var text;
+	           if(str.indexOf('[') == -1){
+	        	   text = str.substring(str.indexOf(']')+1);
+	           }else{
+	               text = str.substring(str.indexOf(']')+1, str.indexOf('['));
+	           }
+	           
+	           // 내용 넣기
+	           if($.trim(text).length > 0){
+	    			if(i>1){ addPict(); }
+					var $textarea = $('.content_div2 div:last').prev().find('textarea').val($.trim(text));
+					
+	           }  
+	           str = str.substring(str.indexOf('['));
+	       }
+		
+		// 사진 로드 시키기
+		console.log($('[id*=fVisible]'));
+		var text = '';
+		<c:forEach var="i" items="${fileList}">
+			text += '${i.fname}, ';
+		</c:forEach>
+		
+		$('[id*=fVisible]').each(function(j) {
+			console.log($(this));
+			var imgArr = text.split(', ');
+			$(this).attr('src', '${pageContext.request.contextPath}/resources/RecipeBoardImages/' + imgArr[j]);
+			if(j==0){
+	       	 $(this).css('width','300px');
+	        } else {
+	       	 $(this).css('width','190px');
+	        }
+		});
+	});
 	$('form').on('submit', function(event){
 		var rprocessCheck = false;
 		$('.content_div2').find('textarea').each(function() {
@@ -419,6 +608,89 @@
 			}
 		});
 	});
+
+	// 재료-버튼        
+	function addContent(obj) {
+	     $(obj).parent().prev().clone(true).insertAfter($(obj).parent().prev()).find('input').val("");
+	 }
+
+	function addSrcTitle(obj) {
+		$(obj).parent().prev().clone(true).insertAfter($(obj).parent().prev());
+		$(obj).parent().prev().find('input').val("");
+	}
+
+	$(document).on('click', '.srcContent button', function() {
+		if($(this).parent().siblings('.srcContent').length == 0){
+			srcTitleRemove($(this).parent());
+		} else {
+			$(this).parent().remove();
+		}
+	});
+
+	function srcTitleRemove(obj) {
+		if($(obj).parent().parent().siblings().length == 2){
+			alert('재료가 하나 이상은 있어야 합니다!');
+		} else {
+			$(obj).parent().parent().remove();
+		}
+	}
+
+	var i = 2;
+	// 요리순서
+	function addPict(obj) {
+		console.log($(obj).parent());
+		$(obj).parent().before('<div class="form-group row">'
+									    + '<label for="inputPassword" class="col-md-2 col-form-label"><h2>Step'+ i +'</h2>'
+										    + '<button type="button" class="btn btn-outline-warning" onclick="srcTitleRemove(this);">─</button>'
+									    + '</label>'
+									    + '<div class="col-7">'
+										    + '<textarea class="form-control" placeholder="작성" rows="5" name="ctntText"></textarea>'
+									    + '</div>'
+									    + '<div class="col-3" align="center" onclick="clickFile('+ i +');">'
+										    + '<img src="${ pageContext.request.contextPath}/resources/images/addImg.gif" id="fVisible'+ i +'"/>'
+									    + '</div>'
+								    + '</div>');
+		$('#fileArea').append('<input type="file" id="flevel'+ i +'" name="fpath'+ i +'" onchange="LoadImg(this,'+ i +')">');
+		i++;
+		$('#i').val(i);
+	}
+
+
+
+	// 사진을 추가하였을 때, 이미지 태그와 연동하여 바로 보이도록
+	// '미리보기'기능 구현하기
+	function clickFile(num) {
+		var str = '#flevel'+num;
+			$(str).click();
+	}
+
+	function LoadImg(value, num) {
+	   if(value.files && value.files[0]) {
+	      var reader = new FileReader();
+	      
+	      reader.onload = function(e){
+	    	  var str = '#fVisible'+num;
+	         $(str).attr('src', e.target.result);
+		         if(num==0){
+		        	 $(str).css('width','300px');
+		         } else {
+		        	 $(str).css('width','190px');
+		         }
+	      }
+	      reader.readAsDataURL(value.files[0]);
+	   }
+	}
+
+	function WriteConfirm() {
+		var result = window.confirm("작성을 취소하면, 지금 작성한 글이 모두 사라집니다.");
+
+	    if(result){
+	    	location.href=document.referrer;
+	    } else {
+	        
+	    }
+	}
+
 	</script>
 </body>
 </html>

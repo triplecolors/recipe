@@ -137,13 +137,12 @@ public int updateMember(Connection con, Member m) {
 		
 		String sql = prop.getProperty("updateMember");
 		pstmt = con.prepareStatement(sql);
-		
 		pstmt.setString(1, m.getUpwd());
 		pstmt.setString(2, m.getUnick());
 		pstmt.setString(3, m.getUphone());
 		pstmt.setString(4, m.getUadrs());
-		pstmt.setString(5, m.getUserid());
-		
+		pstmt.setInt(5, m.getUno());
+		System.out.println(sql);
 		result = pstmt.executeUpdate();
 		
 	} catch (SQLException e) {

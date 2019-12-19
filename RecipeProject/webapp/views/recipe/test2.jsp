@@ -220,22 +220,26 @@ body {
 
 		
 		</div>
-
-        <div class="main">
-			<div class="cover">
-            <h1 class="cover-title">
-                <b id="firstId">${Recipe.rtitle}</b>
-            </h1><br /><br /><br />
-            ${Recipe.rcontent}
-        </div>
+		
+		
+			
+	        <div class="main">
+				<div class="cover">
+			<img class="card-icon" id="fVisible0"/>
+	            <h1 class="cover-title">
+	                <b id="firstId">${Recipe.rtitle}</b>
+	            </h1><br /><br /><br />
+	            ${Recipe.rcontent}
+	        </div>
         
-        <div class="content_div1">
-			<h4><b>요리 재료</b></h4>
-		</div><br /><br /><br /><br /><br />
+	        <div class="content_div1">
+				<h4><b>요리 재료</b></h4>
+			</div><br /><br /><br /><br /><br />
+    
         
-        <img class="card-icon" id="fVisible0"/>
         
         
+        <!-- 순서 -->
         <div class="wrapper">
             <ul class="timeline">
                 <li class="timeline-item">

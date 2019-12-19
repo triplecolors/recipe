@@ -94,6 +94,7 @@ img {
 				url : "${pageContext.request.contextPath}/selectProduct.gs",
 				type : "post",
 				success : function(goodsList) {
+					console.log(goodsList);
 					/* <div class="goodsDiv"><a onclick="location='goodsList[i].pcurl'">
 							<div>
 								<img src="/recipe/resources/images/GoodsImages/goodsList[i].pcfname" width="200px">
@@ -118,7 +119,7 @@ img {
 						$bntDiv.css('display','none');
 					}
 					
-					var $a = $('<a>').attr('onclick', "location='"+goodsList[i].pcurl+"'");
+					var $a = $('<a>').attr('onclick', "location='"+goodsList[i].pcurl+"'").attr('target','_blank').css('cursor','pointer');
 						$a.append($div)
 					$('.goodsListArea').append($('<div>').css('display','inline-block').css('padding','10px').append($a).append($p).append($bntDiv));
 					

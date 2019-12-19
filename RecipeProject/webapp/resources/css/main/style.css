@@ -463,7 +463,6 @@ h3 {
 
 /* line 48, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_section_title.scss */
 .zigzag_bg_1::before {
-  background-image: url(/recipe/images/common/zigzag.svg);
   content: "";
   position: absolute;
   left: 0;
@@ -477,7 +476,6 @@ h3 {
 
 /* line 63, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_section_title.scss */
 .zigzag_bg_2::after {
-  background-image: url(/recipe/resources/images/common/zigzag.svg);
   content: "";
   position: absolute;
   left: 0;
@@ -1665,7 +1663,6 @@ h3 {
 
 /* line 11, ../../Arafath/CL/CL August/199 Flatter Catering/199 Flatter Catering-HTML/scss/_footer.scss */
 .footer_area::before {
-  background-image: url(/recipe/resources/images/common/zigzag.svg);
   content: "";
   position: absolute;
 }
