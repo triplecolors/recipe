@@ -39,6 +39,46 @@ public class GoodsService {
 		return goodsList;
 	}
 
+	public Goods selectOne(int pcid) {
+		Goods gd = null;
+		con = getConnection();
+		
+		gd = gDao.selectOne(con, pcid);
+		
+		return gd;
+	}
+
+	public int updateProduct(Goods gd) {
+		con = getConnection();
+		int result = 0;
+		
+		result = gDao.updateProduct(con, gd);
+		
+		if(result > 1) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		return result;
+	}
+
+	public int deleteGoods(int pcid) {
+	    con = getConnection();
+	    
+	    int result = gDao.deleteGoods(con, pcid);
+	    
+	    if(result > 1) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con); 
+		return result;
+	}
+
 	
 
 }

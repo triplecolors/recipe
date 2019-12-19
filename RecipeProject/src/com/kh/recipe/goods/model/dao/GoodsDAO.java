@@ -102,6 +102,87 @@ public class GoodsDAO {
 		return goodsList;
 	}
 
+	public Goods selectOne(Connection con, int pcid) {
+		Goods gs = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			pstmt = con.prepareStatement(prop.getProperty("selectOne"));
+			pstmt.setInt(1, pcid);
+			
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				pcid = rset.getInt("pcid");      
+				int pcgtype = rset.getInt("pcgtype");   
+				int uno = rset.getInt("uno");       
+				String pcname = rset.getString("pcname"); 
+				String pcfname = rset.getString("pcfname");
+				String pcfpath = rset.getString("pcfpath");
+				String pcgname = rset.getString("pcgname");
+				String pcurl = rset.getString("pcurl");  
+				
+				gs = new Goods(pcid, pcgtype, uno, pcname, pcfname, pcfpath, pcgname, pcurl);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("DAO에러");
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return gs;
+	}
+
+	public int updateProduct(Connection con, Goods gd) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		try {
+			// UPDATE PRODUCT SET PCGTYPE = ? , PCNAME = ? , PCFNAME = ? , PCFPATH = ? WHERE PCID = ? 
+			pstmt = con.prepareStatement(prop.getProperty("updateProductPr"));
+			pstmt.setInt(1, gd.getPcgtype());
+			pstmt.setString(2, gd.getPcname());
+			pstmt.setString(3, gd.getPcfname());
+			pstmt.setString(4, gd.getPcfpath());
+			pstmt.setInt(5, gd.getPcid());
+			
+			result = pstmt.executeUpdate();
+			
+			
+			
+			// UPDATE SALE SET PCURL = ? WHERE PCID = ? 
+			pstmt = con.prepareStatement(prop.getProperty("updateProductSa"));
+			pstmt.setString(1, gd.getPcurl());
+			pstmt.setInt(2, gd.getPcid());
+			
+			result += pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("DAO에러!");
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteGoods(Connection con, int pcid) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = con.prepareStatement(prop.getProperty("deleteGoods"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
 	
 
 }

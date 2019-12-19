@@ -13,7 +13,6 @@
 <script src="../../resources/js/recipeWrite.js"></script>
 </head>
 <body>
-	<c:import url="../common/header.jsp"></c:import>
 <div class="oneClick oneClick_back disNone"></div>
 <div class="row oneClick oneClick_card disNone">
 	<div class="col-xl-3 col-lg-2 col-md-1 d-md-block d-none"></div>
@@ -49,6 +48,7 @@
 	</div>
 	<div class="col-xl-3 col-lg-2 col-md-1 d-md-block d-none"></div>
 </div>
+	<c:import url="../common/header.jsp"></c:import>
 <!-- ------------------------------form------------------------------------------- -->
 <form action="${ pageContext.request.contextPath }/insert.rcp" method="post" enctype="multipart/form-data">
 <input type="hidden" name="uno" value="${member.uno}" />
@@ -226,7 +226,8 @@
 	<input type="text" name="rsource" value="" style="display: none;"/>
     <input type="text" name="rprocess" value="" style="display: none;"/>
     <input type="text" id="i" name="i" value="2" style="display : none;"/>
-</form>    
+</form> 
+  
 <!-- ------------------------------form------------------------------------------- -->
     
     

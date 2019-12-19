@@ -37,7 +37,7 @@ public class SelectOneRecipe2 extends HttpServlet {
 		String page = "";
 		
 		if(hmap != null) {
-			page = "views/recipe/details2.jsp?bno="+bno;
+			page = "views/recipe/test2.jsp?bno="+bno;
 			request.setAttribute("Recipe", hmap.get("Recipe"));
 			request.setAttribute("fileList", hmap.get("Bfile"));
 			System.out.println(hmap.get("Recipe"));

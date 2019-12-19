@@ -18,8 +18,8 @@
 .outer {
 	width: 1000px;
 	height: auto;
-	background: rgb(50, 50, 150, 0.4);
-	color: white;
+	background: rgb(209, 209, 255, 0.4);
+	color: black;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 50px;
@@ -67,7 +67,7 @@ img {
 
 		
 
-		<div class="searchArea">
+		<div class="searchArea" >
 			<select id="searchCondition" name="searchCondition">
 				<option>---</option>
 				<option value="writer">작성자</option>
@@ -77,7 +77,9 @@ img {
 			<button type="submit">검색하기</button>
 		</div>
 			<c:if test="${ !empty member }">
+			<div align="right">
 				<button onclick="location.href='goodsInsert.jsp'">작성하기</button>
+			</div>
 			</c:if>
 		<br>
 		<br>
@@ -86,6 +88,7 @@ img {
 		</div>
 
 		<script>
+		
 		$(function() {
 			$.ajax({
 				url : "${pageContext.request.contextPath}/selectProduct.gs",
@@ -98,16 +101,16 @@ img {
 							<p> <b>goodsList[i].pcgname</b> <br> goodsList[i].pcname</p>
 
 							<div style="display : none;">
-								<button onclick="location.href='views/goods/goodsUpdate.jsp?pcid=goodsList[i].pcid'">수정하기</button>
+								<button onclick="location.href='views/goods/selectOne.gs?pcid=goodsList[i].pcid'">수정하기</button>
 								<button onclick="location.href='/delete.gs?pcid=goodsList[i].pcid'">삭제하기</button>
 							</div>
 							
 						</a></div> */
 					for(var i in goodsList) {
 					var $div = $('<div>').append($('<img>').attr('src','/recipe/resources/GoodsImages/'+goodsList[i].pcfname).css('width','200px'));
-					var $p = $('<p>').html('<b>'+goodsList[i].pcgname+'</b> <br> '+goodsList[i].pcname);
+					var $p = $('<p>').css('width','200px').css('height','50px').html('<b>'+goodsList[i].pcgname+'</b> <br> '+goodsList[i].pcname);
 					
-							var $update = $('<button>').attr('onclick', "location.href='goodsUpdate.jsp?goods="+goodsList[i]+"'").text('수정하기');
+							var $update = $('<button>').attr('onclick', "location.href='/recipe/selectOne.gs?pcid="+goodsList[i].pcid+"'").text('수정하기');
 							var $delete = $('<button>').attr('onclick', "location.href='/delete.gs?pcid="+goodsList[i].pcid+"'").text('삭제하기');
 					var $bntDiv = $('<div>').append($update).append($delete);
 					
@@ -117,7 +120,7 @@ img {
 					
 					var $a = $('<a>').attr('onclick', "location='"+goodsList[i].pcurl+"'");
 						$a.append($div)
-					$('.goodsListArea').append($('<div>').append($a).append($p).append($bntDiv));
+					$('.goodsListArea').append($('<div>').css('display','inline-block').css('padding','10px').append($a).append($p).append($bntDiv));
 					
 					}	
 
@@ -190,7 +193,10 @@ $(function(){
        location.href="${pageContext.request.contextPath}/selectOne.bo?bno=" + bno;
     });
  });
-
+$(function() {
+	$('.breadcam_text').find('h3').text('주방용품 검색하기');
+	$('.breadcam_text').find('p').text('레시피와 관련된 용품을 검색해보세요.');
+});
 </script>
 
 

@@ -9,5 +9,3 @@ encoding//src/mappers/msg.properties=UTF-8
 encoding//src/mappers/nBoard.properties=UTF-8
 encoding//src/mappers/recipe.properties=UTF-8
 encoding//src/mappers/recipeCommon.properties=UTF-8
-encoding//webapp/WEB-INF/classes/mappers=UTF-8
-encoding//webapp/WEB-INF/classes/mappers/bFile.properties=UTF-8

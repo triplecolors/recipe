@@ -33,8 +33,6 @@ public class SelectNoticeBoardServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
 		ArrayList<NoticeBoard> list = null;
 		NoticeBoardService nbs = new NoticeBoardService();
 		PageInfo pi = new PageInfo();
@@ -44,8 +42,10 @@ public class SelectNoticeBoardServlet extends HttpServlet {
 		}
 		
 		pi.calcPage(nbs.getListCount());
+		System.out.println(nbs.getListCount());
+		System.out.println(pi);
 		list = nbs.selectList(pi);
-		//System.out.println(list);
+		System.out.println(list);
 		String page= "";
 		
 		if(list != null) {

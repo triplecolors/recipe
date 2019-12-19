@@ -278,17 +278,30 @@
 	margin-left : 20%;
 	
 	}
-</style>
+	#uno{
+	display : none;
+	}
+	</style>
+	
 </head>
 <body>
 
+	<c:import url="../common/header.jsp"></c:import>
 	
+		
 	
 	<br /><br /><br /><br /> <br />
 	
 	
 	<div class="tableA">
-	<button class="write" onclick="insert();">글작성</button>
+	
+	<c:if test="${fn:trim(member.utype) == 'A'}">
+	<input type="button" class="write" value="글작성" onclick="insert();"/>
+	</c:if>
+	
+	<input type="hidden" class="type" name="type" value="${member.utype }"/>
+	
+
 	<br />
 	<br />
 	
@@ -296,7 +309,7 @@
 <div id="table">
 	<div class="header-row row">
     <span class="cell primary">글 번호</span>
-     <span class="cell">글 유형</span>
+     
     <span class="cell">글제목</span>
     <span class="cell">작성자</span>
     <span class="cell">작성일</span>
@@ -304,19 +317,22 @@
   <c:forEach var="notice" items="${list }">
   <div class="row rowf">
 	<input type="radio" name="expand">
+	<input type="hidden" class="bnum" name="bnum" value="${notice.bnum }"/>
     <span class="cell primary" data-label="글번호">${notice.bnum }</span>
-     <span class="cell type" data-label="타입">${notice.nType }</span>
     <span class="cell title" data-label="제목">${notice.nTitle }</span>
      <span class="cell wirter" data-label="작성자">${notice.writer }</span>
     <span class="cell date" data-label="작성일">${notice.nDate }</span>
-    <input type="hidden" class="bno" value="${notice.bno }"/>
+    <input type="hidden" class="bno" name="bno" value="${notice.bno }"/>
+   <span id="uno"> <input type="hidden" class="bno" name="uno" value="${notice.uno }"/>${notice.uno }</span>
   </div>
   </c:forEach>
+ 
 </div>
 	</div>	
+	
 		<br /><br /><br />
 		<div class="pagingArea" align="center">
-			<c:url var="selectList" value="selectList.no"/>
+			<c:url var="selectList" value="selectList.su"/>
 			
 			<!-- 처음 페이지 버튼 -->
 			<button onclick="location.href='${selectList}?currentPage=1'">
@@ -361,30 +377,56 @@
 				&gt;&gt;
 			</button>
 		</div>
+		
+	<c:import url="../common/footer.jsp"/>
+
 		<script>
+		
 		$(function(){
+			var type = $('.type').val();
+			
+			if(type=='A'){
+	        	$(".write").css("display" , "inline");
+	        }else{
+	        	$(".write").css("display" , "inline");
+	        }
+			
 	        $(".rowf").mouseenter(function(){
-	           $(".rowf:odd").css({"background":"gray", "cursor":"pointer"});
-	           $(".rowf:even").css({"background":"white", "cursor":"pointer"});
+	           $(this).css({"background":"gray", "cursor":"pointer"});
+	           $(this).css({"background":"white", "cursor":"pointer"});
 	        }).mouseleave(function(){
-	        	
-	        	 $(".rowf :odd").css({"background":"white", "cursor":"pointer"});
-	        	 $(".rowf :even").css({"background":"gray", "cursor":"pointer"});
+	    
+	       
+	        	 $(this).css({"background":"gray", "cursor":"pointer"});
+	        	// $(this).css({"background":"gray", "cursor":"pointer"});
 	           
 	        }).click(function(){
-	           var bno = $(this).parent().find('.bno').val();
+	          var bno = $(this).find('.bno').val();
+	          var bnum = $(this).find('.bnum').val();
 	           console.log(bno);
-	           location.href="${pageContext.request.contextPath}/selectOne.no?bno=" + bno;
+	           console.log(bnum);
+	           location.href="${pageContext.request.contextPath}/selectOne.no?bno=" + bno+"&bnum="+bnum;
 	        });
+	        	
+	        
 	     });
 		
 		function insert(){
-			location.href="${pageContext.request.contextPath}/views/notice/noticeInsertForm4.jsp";
+			var type = $('.type').val();
+			console.log(type);
+			if(type='A'){
+				location.href="${pageContext.request.contextPath}/views/notice/noticeInsertForm5.jsp";
+			}else{
+				alert("관리자만 작성 가능합니다!");
+			}
+			
+			
 		}
 		
-		
+		$(function() {
+			$('.breadcam_text').find('h3').text('공지사항');
+			$('.breadcam_text').find('p').text('공지사항 페이지입니다.');
+		});
 		</script>
-		
-	<c:import url="../common/footer.jsp"/>
 </body>
 </html>

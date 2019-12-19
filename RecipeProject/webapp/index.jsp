@@ -8,234 +8,98 @@
 <head>
 <meta charset="UTF-8">
 <title>레시피를 부탁해</title>
-<script src="resources/js/fullpage.min.js"></script>
-<link rel="stylesheet" href="resources/css/fullpage.min.css" />
 <c:import url="views/common/commonUtil.jsp"></c:import>
-<style>
- body {
-     background: url("/recipe/resources/images/MainBackground후보1.gif") no-repeat;
-     background-size: cover;
-   }
-  a {
-  	color: black !important; 
-  }
- 
-  #back {
-  	width : 80%;
-  	height : 100%;
-  	background: rgba(255, 255, 255, 0.4);
-  	position: fixed;
-  	margin-left: 10%;
-  	margin-right: 10%;
-  }
-.section {
-  text-align:center;
-  font-size: 3em;
-	z-index : 100;
-}
-.section {
-	text-align:center;
-  	font-size: 3em;
-	z-index : 100;
-}
-
-</style>
 </head>
 <body>
-<div id="back"></div>
 <c:import url="views/common/header.jsp"></c:import>
-	<div id="fullpage">
-       <div class="section">
-					       <div class="row">
-						<div class="col-xl-4 col-lg-2 col-md-1 d-sm-block d-none"></div>
-						<div id="main_contents" class="col-xl-4 col-lg-8 col-md-10 col-sm-12">
-							<div id="carouselExampleCaptions1" class="carousel slide" data-ride="carousel">
-							  <div class="carousel-inner">
-							  <ol class="carousel-indicators"> 
-							    <li data-target="#carouselExampleCaptions1" data-slide-to="0" class="active"></li>
-							    <li data-target="#carouselExampleCaptions1" data-slide-to="1"></li>
-							    <li data-target="#carouselExampleCaptions1" data-slide-to="2"></li>
-							  </ol>
-							    <div class="carousel-item active">
-							      <img src="resources/images/r1.jpg" class="d-block w-100" alt="...">
-							      <div class="carousel-caption">
-							        <h5>First slide label</h5>
-							        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-							      </div>
-							    </div>
-							    <div class="carousel-item">
-							      <img src="resources/images/r2.jpg" class="d-block w-100" alt="...">
-							      <div class="carousel-caption">
-							        <h5>Second slide label</h5>
-							        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							      </div>
-							    </div>
-							    <div class="carousel-item">
-							      <img src="resources/images/r3.jpg" class="d-block w-100" alt="...">
-							      <div class="carousel-caption">
-							        <h5>Third slide label</h5>
-							        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-							      </div>
-							    </div>
-							  </div>
-							  <a class="carousel-control-prev" href="#carouselExampleCaptions1" role="button" data-slide="prev">
-							    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							    <span class="sr-only">Previous</span>
-							  </a>
-							  <a class="carousel-control-next" href="#carouselExampleCaptions1" role="button" data-slide="next">
-							    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-							    <span class="sr-only">Next</span>
-							  </a>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-2 col-md-1 d-sm-block d-none"></div>
-					</div>
-       </div>
-       <div class="section">
-					       <div class="row">
-						<div class="col-xl-4 col-lg-2 col-md-1 d-sm-block d-none"></div>
-						<div id="main_contents" class="col-xl-4 col-lg-8 col-md-10 col-sm-12">
-							<div id="carouselExampleCaptions2" class="carousel slide" data-ride="carousel">
-							  <div class="carousel-inner">
-							  <ol class="carousel-indicators"> 
-							    <li data-target="#carouselExampleCaptions2" data-slide-to="0" class="active"></li>
-							    <li data-target="#carouselExampleCaptions2" data-slide-to="1"></li>
-							    <li data-target="#carouselExampleCaptions2" data-slide-to="2"></li>
-							  </ol>
-							    <div class="carousel-item active">
-							      <img src="resources/images/r1.jpg" class="d-block w-100" alt="...">
-							      <div class="carousel-caption">
-							        <h5>First slide label</h5>
-							        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-							      </div>
-							    </div>
-							    <div class="carousel-item">
-							      <img src="resources/images/r2.jpg" class="d-block w-100" alt="...">
-							      <div class="carousel-caption">
-							        <h5>Second slide label</h5>
-							        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							      </div>
-							    </div>
-							    <div class="carousel-item">
-							      <img src="resources/images/r3.jpg" class="d-block w-100" alt="...">
-							      <div class="carousel-caption">
-							        <h5>Third slide label</h5>
-							        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-							      </div>
-							    </div>
-							  </div>
-							  <a class="carousel-control-prev" href="#carouselExampleCaptions2" role="button" data-slide="prev">
-							    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							    <span class="sr-only">Previous</span>
-							  </a>
-							  <a class="carousel-control-next" href="#carouselExampleCaptions2" role="button" data-slide="next">
-							    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-							    <span class="sr-only">Next</span>
-							  </a>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-2 col-md-1 d-sm-block d-none"></div>
-					</div>
-       </div>
-       <div class="section">
-					       <div class="row">
-						<div class="col-xl-4 col-lg-2 col-md-1 d-sm-block d-none"></div>
-						<div id="main_contents" class="col-xl-4 col-lg-8 col-md-10 col-sm-12">
-							<div id="carouselExampleCaptions3" class="carousel slide" data-ride="carousel">
-							  <div class="carousel-inner">
-							  <ol class="carousel-indicators"> 
-							    <li data-target="#carouselExampleCaptions3" data-slide-to="0" class="active"></li>
-							    <li data-target="#carouselExampleCaptions3" data-slide-to="1"></li>
-							    <li data-target="#carouselExampleCaptions3" data-slide-to="2"></li>
-							  </ol>
-							    <div class="carousel-item active">
-							      <img src="resources/images/r1.jpg" class="d-block w-100" alt="...">
-							      <div class="carousel-caption">
-							        <h5>First slide label</h5>
-							        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-							      </div>
-							    </div>
-							    <div class="carousel-item">
-							      <img src="resources/images/r2.jpg" class="d-block w-100" alt="...">
-							      <div class="carousel-caption">
-							        <h5>Second slide label</h5>
-							        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							      </div>
-							    </div>
-							    <div class="carousel-item">
-							      <img src="resources/images/r3.jpg" class="d-block w-100" alt="...">
-							      <div class="carousel-caption">
-							        <h5>Third slide label</h5>
-							        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-							      </div>
-							    </div>
-							  </div>
-							  <a class="carousel-control-prev" href="#carouselExampleCaptions3" role="button" data-slide="prev">
-							    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							    <span class="sr-only">Previous</span>
-							  </a>
-							  <a class="carousel-control-next" href="#carouselExampleCaptions3" role="button" data-slide="next">
-							    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-							    <span class="sr-only">Next</span>
-							  </a>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-2 col-md-1 d-sm-block d-none"></div>
-					</div>
-       </div>
-       <div class="section">
-					       <div class="row">
-						<div class="col-xl-4 col-lg-2 col-md-1 d-sm-block d-none"></div>
-						<div id="main_contents" class="col-xl-4 col-lg-8 col-md-10 col-sm-12">
-							<div id="carouselExampleCaptions4" class="carousel slide" data-ride="carousel">
-							  <div class="carousel-inner">
-							  <ol class="carousel-indicators"> 
-							    <li data-target="#carouselExampleCaptions4" data-slide-to="0" class="active"></li>
-							    <li data-target="#carouselExampleCaptions4" data-slide-to="1"></li>
-							    <li data-target="#carouselExampleCaptions4" data-slide-to="2"></li>
-							  </ol>
-							    <div class="carousel-item active">
-							      <img src="resources/images/r1.jpg" class="d-block w-100" alt="...">
-							      <div class="carousel-caption">
-							        <h5>First slide label</h5>
-							        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-							      </div>
-							    </div>
-							    <div class="carousel-item">
-							      <img src="resources/images/r2.jpg" class="d-block w-100" alt="...">
-							      <div class="carousel-caption">
-							        <h5>Second slide label</h5>
-							        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							      </div>
-							    </div>
-							    <div class="carousel-item">
-							      <img src="resources/images/r3.jpg" class="d-block w-100" alt="...">
-							      <div class="carousel-caption">
-							        <h5>Third slide label</h5>
-							        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-							      </div>
-							    </div>
-							  </div>
-							  <a class="carousel-control-prev" href="#carouselExampleCaptions4" role="button" data-slide="prev">
-							    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							    <span class="sr-only">Previous</span>
-							  </a>
-							  <a class="carousel-control-next" href="#carouselExampleCaptions4" role="button" data-slide="next">
-							    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-							    <span class="sr-only">Next</span>
-							  </a>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-2 col-md-1 d-sm-block d-none"></div>
-					</div>
-       </div>
-       
-       
-	</div>
+
+
+<div class="gallery_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="section_title mb-70">
+                        <h3>추천 레시피</h3>
+                        <p>회원들이 가장 많이 찾는 레시피 입니다.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row grid">
+                <div class="col-xl-5 col-lg-5 col-md-6 grid-item">
+                    <div class="single_gallery long_height">
+                        <a></a>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 grid-item">
+                    <div class="single_gallery mini_height">
+                        <a></a>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 grid-item ">
+                    <div class="single_gallery mini_height">
+                        <a></a>
+                    </div>
+                </div>
+                <div class="col-xl-7 col-lg-7 col-md-6 grid-item">
+                    <div class="single_gallery mid_height">
+                        <a></a>
+                    </div>
+                </div>
+                <div class="col-xl-5 col-lg-5 col-md-6 grid-item">
+                    <div class="single_gallery large_height">
+                        <a></a>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 grid-item">
+                    <div class="single_gallery mini_height">
+                        <a></a>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 grid-item">
+                    <div class="single_gallery mini_height">
+                        <a></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="load_more_button text-center">
+                        <a href="${ pageContext.request.contextPath}/views/recipe/menuList.jsp" class="load_more_btn">더 많은 레시피 보기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 <c:import url="views/common/footer.jsp"></c:import>
 <script>
-	new fullpage('#fullpage', {
+$(function() {
+	$('.breadcam_text').find('h3').text('레시피를 부탁해');
+	$('.breadcam_text').find('p').text('메인 페이지입니다.');
+	var str = '';
+	var word = '';
+	
+	$.ajax({
+		url : "${pageContext.request.contextPath}/menuPage.do",
+		data : {menu : str, word : word},
+		success : function(catelist) {
+			for(var j in catelist) {
+				console.log(menulist[i].Recipe.bno);
+				console.log(menulist[i].Bfile.fname);
+				// $(this).css('background-image', 'url(/recipe/images/RecipeBoardImages/'+ catelist[i].Bfile.fname +')');
+				$('.single_gallery').css('background-image', 'url(/recipe/images/RecipeBoardImages/'+ catelist[j].Bfile.fname +')');
+				$('.single_gallery').find('a').attr('href','/recipe/selectOneRecipe.rcp?bno='+catelist[j].Recipe.bno);
+				// $(this).find('a').attr('href','/recipe/selectOneRecipe.rcp?bno='+catelist[i].Recipe.bno);
+				
+			}
+				
+		},
+		error : function() {
+			console.log("에러!");
+			}
 	});
+});
 </script>
 </body>
 </html>

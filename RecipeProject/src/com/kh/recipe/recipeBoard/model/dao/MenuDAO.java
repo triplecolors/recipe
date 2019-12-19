@@ -25,93 +25,6 @@ public class MenuDAO {
 			e.printStackTrace();
 		}
 	}
-	
-	public ArrayList<HashMap<String, Object>> selectSearchList(Connection con, String[] keywordArr) {
-		ArrayList<HashMap<String, Object>> list = null;
-		HashMap<String, Object> hmap = null;
-		Recipe r = null;
-		Bfile f = null;
-		
-		Statement stmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectSearchList");
-		
-		// 미완성 쿼리 마저 완성하기
-		String plusSql = ""; // appender
-		String[] columArr = {"RKIND IN (", "RSITUATION IN (", "RWAY IN (", "RINGRED IN ("};
-		for (int j = 0; j < 4; j++) {
-			plusSql += columArr[j];
-			for(int i = 0 ; i < keywordArr.length; i++) {
-				if(keywordArr.length == 1 || i == keywordArr.length - 1) {
-					plusSql += keywordArr[i] + ")";
-				} else {
-					plusSql += keywordArr[i] + ", ";
-				}
-			}
-			if(j<3) {
-				plusSql += " OR ";
-			}
-		}
-		
-		sql += plusSql + " ) AND FLEVEL = 0 ORDER BY RTITLE";
-		
-		System.out.println("sql : " + sql);
-		
-		try {
-			
-			stmt = con.createStatement();
-			
-			rset = stmt.executeQuery(sql);
-			
-			list = new ArrayList<>();
-			while(rset.next()) {
-					r = new Recipe();
-					r.setRno(rset.getInt("RNO"));
-					r.setBno(rset.getInt("BNO"));
-					r.setUno(rset.getInt("UNO"));
-					r.setUnick(rset.getString("UNICK"));
-					r.setRtitle(rset.getString("RTITLE"));
-					r.setRsource(rset.getString("RSOURCE"));
-					r.setRprocess(rset.getString("RPROCESS"));
-					r.setRdate(rset.getDate("RDATE"));
-					r.setRgoods(rset.getString("RGOODS"));
-					r.setRcontent(rset.getString("RCONTENT"));
-					r.setRvideo(rset.getString("RVIDEO"));
-					r.setRkind(rset.getInt("RKIND"));
-					r.setRsituation(rset.getInt("RSITUATION"));
-					r.setRway(rset.getInt("RWAY"));
-					r.setRingred(rset.getInt("RINGRED"));
-					r.setRtime(rset.getInt("RTIME"));
-					r.setRlevel(rset.getInt("RLEVEL"));
-					r.setRtip(rset.getString("RTIP"));
-					r.setRstatus(rset.getString("RSTATUS"));
-					
-					f = new Bfile();
-					f.setFno(rset.getInt("FNO"));
-					f.setBno(rset.getInt("BNO"));
-					f.setFname(rset.getString("FNAME"));
-					f.setFpath(rset.getString("FPATH"));
-					f.setFdate(rset.getDate("FDATE"));
-					f.setFlevel(rset.getInt("FLEVEL"));
-					
-									
-				hmap = new HashMap<String, Object>();
-				
-				hmap.put("Recipe", r);
-				hmap.put("Bfile", f);
-				
-				list.add(hmap);
-				System.out.println(hmap);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(stmt);
-		}
-		return list;		
-	}
 
 		public int insertMenu(Connection con, Menu m) {
 			int result = 0;
@@ -239,6 +152,124 @@ public class MenuDAO {
 				close(stmt);
 			}
 			return result;
+		}
+
+		public ArrayList<HashMap<String, Object>> selectSearchList(Connection con, String[] keywordArr, String word, int part) {
+			ArrayList<HashMap<String, Object>> list = null;
+			HashMap<String, Object> hmap = null;
+			Recipe r = null;
+			Bfile f = null;
+			
+			Statement stmt = null;
+			ResultSet rset = null;
+			
+			String sql = prop.getProperty("selectSearchList");
+			// INSql LIKESql
+			switch (part) {
+			case 0:
+				break;
+			case 1:
+				sql += INSql(keywordArr) + " AND ";
+				break;
+			case 2:
+				sql += LIKESql(word) + " AND ";
+				break;
+			case 3:
+				sql += " ( " + INSql(keywordArr) + " AND " + LIKESql(word) + " ) AND " ;
+				break;
+
+			default:
+				System.out.println("뭐졈??");
+				break;
+			}
+			
+			
+			sql += " FLEVEL = 0 ORDER BY RTITLE";
+			
+			System.out.println("sql : " + sql);
+			
+			try {
+				
+				stmt = con.createStatement();
+				                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+				rset = stmt.executeQuery(sql);
+				
+				list = new ArrayList<>();
+				while(rset.next()) {
+						r = new Recipe();
+						r.setRno(rset.getInt("RNO"));
+						r.setBno(rset.getInt("BNO"));
+						r.setUno(rset.getInt("UNO"));
+						r.setUnick(rset.getString("UNICK"));
+						r.setRtitle(rset.getString("RTITLE"));
+						r.setRsource(rset.getString("RSOURCE"));
+						r.setRprocess(rset.getString("RPROCESS"));
+						r.setRdate(rset.getDate("RDATE"));
+						r.setRgoods(rset.getString("RGOODS"));
+						r.setRcontent(rset.getString("RCONTENT"));
+						r.setRvideo(rset.getString("RVIDEO"));
+						r.setRkind(rset.getInt("RKIND"));
+						r.setRsituation(rset.getInt("RSITUATION"));
+						r.setRway(rset.getInt("RWAY"));
+						r.setRingred(rset.getInt("RINGRED"));
+						r.setRtime(rset.getInt("RTIME"));
+						r.setRlevel(rset.getInt("RLEVEL"));
+						r.setRtip(rset.getString("RTIP"));
+						r.setRstatus(rset.getString("RSTATUS"));
+						
+						f = new Bfile();
+						f.setFno(rset.getInt("FNO"));
+						f.setBno(rset.getInt("BNO"));
+						f.setFname(rset.getString("FNAME"));
+						f.setFpath(rset.getString("FPATH"));
+						f.setFdate(rset.getDate("FDATE"));
+						f.setFlevel(rset.getInt("FLEVEL"));
+						
+										
+					hmap = new HashMap<String, Object>();
+					
+					hmap.put("Recipe", r);
+					hmap.put("Bfile", f);
+					
+					list.add(hmap);
+					System.out.println(hmap);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(stmt);
+			}
+			return list;		
+		}
+		
+		public String INSql(String[] keywordArr) {
+			// 미완성 쿼리 마저 완성하기
+			String plusSql = "("; // appender
+			String[] columArr = {"RKIND IN (", "RSITUATION IN (", "RWAY IN (", "RINGRED IN ("};
+			for (int j = 0; j < 4; j++) {
+				plusSql += columArr[j];
+				for(int i = 0 ; i < keywordArr.length; i++) {
+					if(keywordArr.length == 1 || i == keywordArr.length - 1) {
+						plusSql += keywordArr[i] + ")";
+					} else {
+						plusSql += keywordArr[i] + ", ";
+					}
+				}
+				if(j<3) {
+					plusSql += " OR ";
+				}
+			}
+			
+			plusSql += " ) ";
+			
+			return plusSql;
+		}
+		
+		public String LIKESql(String word) {
+			// (RTITLE LIKE '%제목%' OR RSOURCE LIKE '%제목%')
+			String plusSql = "(RTITLE LIKE '%"+word+"%' OR RSOURCE LIKE '%"+word+"%')";
+			return plusSql;
 		}
 		
 		

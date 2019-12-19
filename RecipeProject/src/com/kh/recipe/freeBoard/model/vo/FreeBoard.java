@@ -12,12 +12,22 @@ public class FreeBoard {
 	private Date pDate;
 	private int pCount;
 	private String pStatus;
-	
+	private String writer;
+	private int bnum;
 	
 	
 	
 	public FreeBoard() {
 		super();
+	}
+
+	
+
+
+	public FreeBoard(String pTitle, String pContent) {
+		super();
+		this.pTitle = pTitle;
+		this.pContent = pContent;
 	}
 
 
@@ -163,7 +173,30 @@ public class FreeBoard {
 
 
 
+	public String getWriter() {
+		return writer;
+	}
 
+
+
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+
+
+
+
+	public int getBnum() {
+		return bnum;
+	}
+
+
+
+
+	public void setBnum(int bnum) {
+		this.bnum = bnum;
+	}
 
 
 
@@ -171,9 +204,18 @@ public class FreeBoard {
 	@Override
 	public String toString() {
 		return "FreeBoard [bno=" + bno + ", uno=" + uno + ", pType=" + pType + ", pTitle=" + pTitle + ", pContent="
-				+ pContent + ", pDate=" + pDate + ", pCount=" + pCount + ", pStatus=" + pStatus + "]";
+				+ pContent + ", pDate=" + pDate + ", pCount=" + pCount + ", pStatus=" + pStatus + ", writer=" + writer
+				+ ", bnum=" + bnum + "]";
 	}
+
+
 	
+
+
+
+
+
+
 	
 	
 	

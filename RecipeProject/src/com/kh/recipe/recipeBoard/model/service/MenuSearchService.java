@@ -13,14 +13,6 @@ public class MenuSearchService {
 	private Connection con;
 	private MenuDAO mdao = new MenuDAO();
 	
-	public ArrayList<HashMap<String, Object>> selectList(String[] keywordArr) {
-		con = getConnection();
-		ArrayList<HashMap<String, Object>> list = mdao.selectSearchList(con, keywordArr);
-		
-		close(con);
-		
-		return list;
-	}
 
 	public ArrayList<Menu> selectList(int currentPage, int limit) {
 		con = getConnection();
@@ -43,6 +35,18 @@ public class MenuSearchService {
 	close(con);
 	
 		return result;
+	}
+
+	public ArrayList<HashMap<String, Object>> selectList(String[] keywordArr, String word, int part) {
+		con = getConnection();
+		System.out.println("keywordArr"+keywordArr);
+		System.out.println("word"+word);
+		System.out.println("part"+part);
+		ArrayList<HashMap<String, Object>> list = mdao.selectSearchList(con, keywordArr, word, part);
+		
+		close(con);
+		
+		return list;
 	}
 
 	
