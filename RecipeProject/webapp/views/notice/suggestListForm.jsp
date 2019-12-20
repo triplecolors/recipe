@@ -408,7 +408,7 @@
 			
 			//console.log(type);
 			if(type='A'){
-				location.href="${pageContext.request.contextPath}/views/notice/noticeInsertForm5.jsp";
+				location.href="${pageContext.request.contextPath}/views/notice/suggestInsertForm.jsp";
 			}else{
 				alert("관리자만 작성 가능합니다!");
 			}
