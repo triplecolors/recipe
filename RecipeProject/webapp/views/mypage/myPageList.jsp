@@ -80,14 +80,14 @@ h2::after {
 .carousel .item .btn {
 	color: #333;
     border-radius: 0;
-    font-size: 11px;
+    font-size: 20px;
     text-transform: uppercase;
     font-weight: bold;
     background: none;
     border: 1px solid #ccc;
     padding: 5px 10px;
     margin-top: 5px;
-    line-height: 16px;
+    line-height: 25px;
 }
 .carousel .item .btn:hover, .carousel .item .btn:focus {
 	color: #fff;
@@ -168,7 +168,8 @@ h2::after {
 	color: #ffc000;
 }
 div #myCarousel{
-    margin-top: 16em;
+    margin-left: -10em;
+    margin-top: 22em;
 }
 nav #ne{
     width: 20rem;
@@ -209,7 +210,7 @@ nav #ne{
 
  <div class="ogo-img d-none d-lg-block"  >
 		                                    <a href="${ pageContext.request.contextPath }/index.jsp">
-												<img src="${ pageContext.request.contextPath }/resources/images/로고.png"  width="200px"  style="left: 20px;  top: 20px; position: absolute;">
+												<img src="${ pageContext.request.contextPath }/resources/images/로고.png"  width="250px"  style="left: 0px;  top: 20px; position: absolute;">
 										    </a>
                                         </div>
 <nav>
@@ -218,7 +219,7 @@ nav #ne{
     <li  id="ne"><a href="${pageContext.request.contextPath }/myrecipe.se?uno=${member.uno }"><b>My</b>레시피조회</a></li>
     <li  id="ne"><a href="${pageContext.request.contextPath }/myprofile.me"><b>My</b>프로필</a></li>
     <li  id="ne"><a href="${pageContext.request.contextPath }/views/mypage/myPageUpdate.jsp"><b>My</b>정보수정</a></li>
-    <li  id="ne"><a href=""><b>My</b>쪽지함</a></li>
+    <li  id="ne"><a href="${pageContext.request.contextPath }/views/mypage/myPageInbox.jsp"><b>My</b>쪽지함</a></li>
   </ul>
 </nav>
 
@@ -246,17 +247,17 @@ nav #ne{
 						<div class="col-sm-3">
 							<div class="thumb-wrapper">
 								<div class="img-box">
-									<img src="http://blogfiles.naver.net/20120126_81/kshee04_1327567379622zcSWr_JPEG/%C2%FC%C4%A1%B1%E8%C4%A1%C2%EE%B0%B3-%B1%E8%C4%A1%C2%EE%B0%B3%B2%FA%C0%CC%B4%C2%B9%FD-%B1%E8%C4%A1%C2%EE%B0%B39.jpg" class="img-responsive img-fluid" alt="">
+									<img src="http://ldb.phinf.naver.net/20180622_234/1529675477632Jxtqe_JPEG/Oo98UHfe0wkA7suT_h00jmuf.jpg" class="img-responsive img-fluid" alt="">
 								</div>
 								<div class="thumb-content">
-									<h4>김치찌개</h4>
-									<p class="item-price"><span>작성자 : </span><b>작성자</b> </p>
+									<h4 style="font-size:30px; color:white">수제 햄버거</h4>
+									<p class="item-price" style="font-size:20px; color:white">작성자 : 작성자</p>
 									<div class="star-rating">
 										<ul class="list-inline">
 											<li class="list-inline-item"><i class="fa fa-star"></i></li>
 											<li class="list-inline-item"><i class="fa fa-star"></i></li>
 											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
 											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
 										</ul>
 									</div>
@@ -267,39 +268,39 @@ nav #ne{
 						<div class="col-sm-3">
 							<div class="thumb-wrapper">
 								<div class="img-box">
-									<img src="http://blogfiles.naver.net/20110824_30/sukha83_1314171658384UBjcO_JPEG/CIMG1189.JPG" class="img-responsive img-fluid" alt="">
+									<img src="http://recipe1.ezmember.co.kr/cache/recipe/2018/01/08/8ae1b5468ae886aeb17ca81d0f18fc4a1.jpg" class="img-responsive img-fluid" alt="">
 								</div>
 								<div class="thumb-content">
-									<h4>된장찌개</h4>
-									<p class="item-price"><span>작성자 : </span><b>작성자</b></p>
+									<h4 style="font-size:30px; color:white">김치 볶음밥</h4>
+									<p class="item-price" style="font-size:20px; color:white">작성자 : 작성자</p>
 									<div class="star-rating">
 										<ul class="list-inline">
 											<li class="list-inline-item"><i class="fa fa-star"></i></li>
 											<li class="list-inline-item"><i class="fa fa-star"></i></li>
 											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
 											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
 										</ul>
 									</div>
 									<a href="#" class="btn btn-primary">레시피보기</a>
-								</div>						
+								</div>
 							</div>
 						</div>		
 						<div class="col-sm-3">
 							<div class="thumb-wrapper">
 								<div class="img-box">
-									<img src="http://blogfiles.naver.net/MjAxOTA5MjJfNTMg/MDAxNTY5MTEzOTYwMDUy.YFvLbaz2bwwF5hexYKrjP73CIPyjkWGTywzrPzlPDZcg.CJXvV5LbDxJtRKqsWizt3cyeSK0ItGeMcpb_aSimmggg.JPEG.noreakajoa/IMG_3220.jpg" class="img-responsive img-fluid" alt="">
+									<img src="http://archivenew.vop.co.kr/images/0fb21a8fd79e1a4123b04ea608301c08/2012-07/01011541_jangs.jpg" class="img-responsive img-fluid" alt="">
 								</div>
 								<div class="thumb-content">
-									<h4>순두부찌개</h4>
-									<p class="item-price"><span>작성자 : </span><b>작성자</b></p>
+									<h4 style="font-size:30px; color:white">라면스프밥</h4>
+									<p class="item-price" style="font-size:20px; color:white">작성자 : 작성자</p>
 									<div class="star-rating">
 										<ul class="list-inline">
 											<li class="list-inline-item"><i class="fa fa-star"></i></li>
 											<li class="list-inline-item"><i class="fa fa-star"></i></li>
 											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star"></i></li>
-											<li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
 										</ul>
 									</div>
 									<a href="#" class="btn btn-primary">레시피보기</a>
@@ -309,11 +310,11 @@ nav #ne{
 						<div class="col-sm-3">
 							<div class="thumb-wrapper">
 								<div class="img-box">
-									<img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTA3MTBfMjI2%2FMDAxNTYyNzUyODU4MTkz.TI8poeSy8_9myBq9hcKgOhomFaHCnQf18lxCx8_QylEg.p-MPScl9NQlxrdj73sCSl1wiRqvF8SQ3LZPUEH7oSPsg.JPEG.kstencil%2F%25BF%25C0%25C2%25A1%25BE%25EE%25B9%25B5%25B1%25B9_%25BF%25C0%25C2%25A1%25BE%25EE%25B0%25ED%25C3%25DF%25C0%25E5%25C2%25EE%25B0%25B3_%25BF%25C0%25C2%25A1%25BE%25EE%25B0%25ED%25C3%25DF%25C0%25E5%25BC%25F6%25C1%25A6%25BA%25F13_7.JPG&type=b400" class="img-responsive img-fluid" alt="">
+									<img src="http://item.ssgcdn.com/87/06/76/item/1000026760687_i1_1200.jpg" class="img-responsive img-fluid" alt="">
 								</div>
 								<div class="thumb-content">
-									<h4>고추장 찌개</h4>
-									<p class="item-price"><span>작성자 : </span><b>작성자</b></p>
+									<h4 style="font-size:30px; color:white">묵은지김치찌개</h4>
+									<p class="item-price" style="font-size:20px; color:white">작성자 : 작성자</p>
 									<div class="star-rating">
 										<ul class="list-inline">
 											<li class="list-inline-item"><i class="fa fa-star"></i></li>
@@ -334,7 +335,7 @@ nav #ne{
 						<div class="col-sm-3">
 							<div class="thumb-wrapper">
 								<div class="img-box">
-									<img src="https://image.ibb.co/g0CAPp/ipad.jpg" class="img-responsive img-fluid" alt="">
+									<img src="" class="img-responsive img-fluid" alt="">
 								</div>
 								<div class="thumb-content">
 									<h4>Sony Play Station</h4>
@@ -355,7 +356,7 @@ nav #ne{
 						<div class="col-sm-3">
 							<div class="thumb-wrapper">
 								<div class="img-box">
-									<img src="https://image.ibb.co/g0CAPp/ipad.jpg" class="img-responsive img-fluid" alt="">
+									<img src="" class="img-responsive img-fluid" alt="">
 								</div>
 								<div class="thumb-content">
 									<h4>Macbook Pro</h4>
@@ -376,7 +377,7 @@ nav #ne{
 						<div class="col-sm-3">
 							<div class="thumb-wrapper">
 								<div class="img-box">
-									<img src="https://image.ibb.co/g0CAPp/ipad.jpg" class="img-responsive img-fluid" alt="">
+									<img src="" class="img-responsive img-fluid" alt="">
 								</div>
 								<div class="thumb-content">
 									<h4>Bose Speaker</h4>
@@ -397,7 +398,7 @@ nav #ne{
 						<div class="col-sm-3">
 							<div class="thumb-wrapper">
 								<div class="img-box">
-									<img src="https://image.ibb.co/g0CAPp/ipad.jpg" class="img-responsive img-fluid" alt="">
+									<img src="" class="img-responsive img-fluid" alt="">
 								</div>
 								<div class="thumb-content">
 									<h4>Samsung Galaxy S8</h4>

@@ -110,7 +110,7 @@ public class InsertRecipe extends HttpServlet {
 			
 			bf.setFpath(savePath);
 			bf.setFname(saveFiles.get(j));
-			bf.setFlevel(j);
+			bf.setFlevel(saveFiles.size() - 1 - j);
 			
 			System.out.println("bf 확인 : "+ bf);
 			fList.add(bf);

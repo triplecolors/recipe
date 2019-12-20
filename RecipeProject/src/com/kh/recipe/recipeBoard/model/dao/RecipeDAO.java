@@ -202,6 +202,7 @@ public class RecipeDAO {
 				Recipe mb = new Recipe();
 				mb.setRno(rset.getInt("RNO"));
 				mb.setBno(rset.getInt("BNO") );
+				mb.setUno(rset.getInt("UNO"));
 				mb.setRtitle(rset.getString("RTITLE"));
 				mb.setRsource(rset.getString("Rsource"));
 				mb.setRprocess(rset.getString("RPROCESS"));

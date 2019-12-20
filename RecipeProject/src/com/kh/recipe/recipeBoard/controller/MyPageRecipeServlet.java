@@ -38,8 +38,9 @@ public class MyPageRecipeServlet extends HttpServlet {
 		String page = "";
 		if(list != null) {
 			request.setAttribute("list", list);
-			
 			page="views/mypage/myPageRecipe.jsp";
+			request.getRequestDispatcher(page).forward(request, response);
+			System.out.println("my레시피조회: " +list );
 		}else {
 			request.setAttribute("msg", "회원 정보 수정 중 에러가 발생하였습니다.");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

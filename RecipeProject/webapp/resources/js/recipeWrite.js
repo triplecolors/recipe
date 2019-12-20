@@ -41,7 +41,7 @@ function addPict(obj) {
 									    + '<textarea class="form-control" placeholder="작성" rows="5" name="ctntText"></textarea>'
 								    + '</div>'
 								    + '<div class="col-3" align="center" onclick="clickFile('+ i +');">'
-									    + '<img src="${ pageContext.request.contextPath}/resources/images/addImg.gif" id="fVisible'+ i +'"/>'
+									    + '<img src="/recipe/resources/images/addImg.gif" id="fVisible'+ i +'"/>'
 								    + '</div>'
 							    + '</div>');
 	$('#fileArea').append('<input type="file" id="flevel'+ i +'" name="fpath'+ i +'" onchange="LoadImg(this,'+ i +')">');

@@ -196,7 +196,9 @@
 
 </div>
 	<script>
-	
+	$(function() {
+		selectedBtn();
+	});
 	/* 각각의 해당 레시피 선택 표시 방식 구현 */
 	$(document).on('click', 'option', function() {
 		if($(this).hasClass('select')){
