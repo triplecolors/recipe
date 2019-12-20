@@ -13,7 +13,7 @@ import com.kh.recipe.freeBoard.model.vo.FreeBoard;
 /**
  * Servlet implementation class UpdateFBoardServlet
  */
-@WebServlet("/UpdateFBoardServlet")
+@WebServlet("/fupdate.fb")
 public class UpdateFBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,7 +35,7 @@ public class UpdateFBoardServlet extends HttpServlet {
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		//String ptype = request.getParameter("ptype");
 		String title = request.getParameter("title");
-		String content = request.getParameter("editdata");
+		String content = request.getParameter("editordata");
 		
 		FreeBoard f = new FreeBoard(title,content);
 		f.setBno(bno);

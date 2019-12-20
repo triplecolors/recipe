@@ -36,7 +36,7 @@ public class UpdateViewServlet extends HttpServlet {
 		FreeBoard f = new FreeBoardService().updateView(bno);
 		String page = "";
 		if(f != null) {
-			page = "views/fboard/fboardUpdateForm2.jsp";
+			page = "views/fboard/fboardUpdateForm.jsp";
 			request.setAttribute("fboard", f);
 		}else {
 			page="views/common/errorPage.jsp";

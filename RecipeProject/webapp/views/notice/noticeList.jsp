@@ -12,8 +12,10 @@
 <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
 <script src="../resources/js/jquery-3.4.1.min.js"></script>
+<c:import url="../common/commonUtil.jsp"/>
 </head>
 <body>
+<c:import url="../common/header.jsp"/>
 <div class="container-fluid mt-100">
     <div class="row">
         <div class="col-md-12">

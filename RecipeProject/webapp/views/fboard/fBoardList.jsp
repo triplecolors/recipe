@@ -15,8 +15,8 @@
 	<!--===============================================================================================-->	
 	<script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.min.js"></script>
 <!--===============================================================================================-->
-	<c:import url="../common/commonUtil.jsp"></c:import>
 	<script src="${pageContext.request.contextPath }/resources/js/f_Board.js"></script>	
+	<c:import url="../common/commonUtil.jsp"></c:import>
 	<style>
 		.container-table100{
 			display : block;
@@ -48,12 +48,13 @@
 			<br />
 			<br />
 			<br />
+			<input type="button" class="write" value="???" onclick="go();"/>
 		<c:if test="${!empty member}">
 	<input type="button" class="write" value="글작성" onclick="insert();"/>
 		</c:if>
 					<div class="table">
 
-						<div class="row header">
+						<div class="row2 header">
 							<div class="cell">
 								번호
 							</div>
@@ -74,7 +75,7 @@
 							</div>
 						</div>
 						<c:forEach var="fBoard" items="${list }">
-								<div class="row">
+								<div class="row2">
 							<div class="cell bnum" id="num" data-title="Full Name">
 								${fBoard.bnum }
 							</div>
@@ -155,13 +156,13 @@
 		<script>
 			$(function(){
 				
-				$('.row').click(function(){
+				$('.row2').click(function(){
 					 var bno = $(this).find('.bno').val()
 			          var bnum = $(this).find('.bnum').text();
 			     
 			           location.href="${pageContext.request.contextPath}/selectOne.fb?bno=" + bno+"&bnum="+bnum;
 				});
-				$('.row').mouseenter(function(){
+				$('.row2').mouseenter(function(){
 				
 				});
 			});
@@ -170,6 +171,9 @@
 					location.href="${pageContext.request.contextPath}/views/fboard/fboardInsertForm.jsp";
 			}
 			
+			function go(){
+				location.href="${pageContext.request.contextPath}/views/fboard/SecretPage.jsp";
+			}
 		</script>
 	
 	
