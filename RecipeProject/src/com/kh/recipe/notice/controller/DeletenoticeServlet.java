@@ -38,16 +38,21 @@ public class DeletenoticeServlet extends HttpServlet {
 		
 		
 		int bno = Integer.parseInt(request.getParameter("bno"));
-		
+		String ntype = request.getParameter("ntype");
 		NoticeBoardService nbs = new NoticeBoardService();
 		
 		int result = nbs.deleteBoard(bno);
-		
+		//System.out.println(ntype);
 		
 		if(result > 0) {
 			
-			response.sendRedirect("selectList.no");
-			
+			if(ntype.contains("N")) {
+				//System.out.println("공지사항으로 갑니다~");
+				response.sendRedirect("selectList.no");
+			}else {
+				//System.out.println("건의사항으로 갑니다~");
+				response.sendRedirect("selectList.su");
+			}
 		} else {
 			
 			request.setAttribute("msg", "게시글 삭제 실패!");

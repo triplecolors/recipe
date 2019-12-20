@@ -62,6 +62,7 @@
             <p>&nbsp;</p>
             <div class="table table-responsive" style="overflow-x:hidden;">
                 	<input type="hidden" class="type" name="type" value="${notice.bno }"/>
+                	<input type="hidden" class="nType" name="ntype" value="${notice.nType }"/>
                 <table class="table">
                     <tr>
                         <th class="success">글번호</th>
@@ -125,11 +126,21 @@
 			function deleteN(){
 
 				var bno = $('.type').val();
-				location.href="${pageContext.request.contextPath}/delete.no?bno="+bno;
+				var ntype = $('.nType').val();
+				location.href="${pageContext.request.contextPath}/delete.no?bno="+bno + "&ntype="+ntype;
 
 			}
 			function goList(){
-				location.href="${pageContext.request.contextPath}/selectList.no";
+				var ntype = $('.nType').val();
+				var type = "N ";
+				console.log(ntype);
+				console.log(type==ntype);
+				if(type==ntype){
+					location.href="${pageContext.request.contextPath}/selectList.no";
+				}else{
+					location.href="${pageContext.request.contextPath}/selectList.su";
+				}
+				
 			}
 		</script>
 	<c:import url="../common/footer.jsp"/>
