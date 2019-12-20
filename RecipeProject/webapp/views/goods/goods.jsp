@@ -18,8 +18,8 @@
 .outer {
 	width: 1000px;
 	height: auto;
-	background: rgb(50, 50, 150, 0.4);
-	color: white;
+	background: rgb(209, 209, 255, 0.4);
+	color: black;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 50px;
@@ -94,7 +94,6 @@ img {
 				url : "${pageContext.request.contextPath}/selectProduct.gs",
 				type : "post",
 				success : function(goodsList) {
-					console.log(goodsList);
 					/* <div class="goodsDiv"><a onclick="location='goodsList[i].pcurl'">
 							<div>
 								<img src="/recipe/resources/images/GoodsImages/goodsList[i].pcfname" width="200px">
@@ -102,7 +101,7 @@ img {
 							<p> <b>goodsList[i].pcgname</b> <br> goodsList[i].pcname</p>
 
 							<div style="display : none;">
-								<button onclick="location.href='views/goods/goodsUpdate.jsp?pcid=goodsList[i].pcid'">수정하기</button>
+								<button onclick="location.href='views/goods/selectOne.gs?pcid=goodsList[i].pcid'">수정하기</button>
 								<button onclick="location.href='/delete.gs?pcid=goodsList[i].pcid'">삭제하기</button>
 							</div>
 							
@@ -111,15 +110,15 @@ img {
 					var $div = $('<div>').append($('<img>').attr('src','/recipe/resources/GoodsImages/'+goodsList[i].pcfname).css('width','200px'));
 					var $p = $('<p>').css('width','200px').css('height','50px').html('<b>'+goodsList[i].pcgname+'</b> <br> '+goodsList[i].pcname);
 					
-							var $update = $('<button>').attr('onclick', "location.href='goodsUpdate.jsp?goods="+goodsList[i]+"'").text('수정하기');
-							var $delete = $('<button>').attr('onclick', "location.href='/delete.gs?pcid="+goodsList[i].pcid+"'").text('삭제하기');
+							var $update = $('<button>').attr('onclick', "location.href='/recipe/selectOne.gs?pcid="+goodsList[i].pcid+"'").text('수정하기');
+							var $delete = $('<button>').attr('onclick', "location.href='/recipe/delete.gs?pcid="+goodsList[i].pcid+"'").text('삭제하기');
 					var $bntDiv = $('<div>').append($update).append($delete);
 					
 					if(goodsList[i].uno != "${ member.uno }"){
 						$bntDiv.css('display','none');
 					}
 					
-					var $a = $('<a>').attr('onclick', "location='"+goodsList[i].pcurl+"'").attr('target','_blank').css('cursor','pointer');
+					var $a = $('<a>').attr('onclick', "location='"+goodsList[i].pcurl+"'");
 						$a.append($div)
 					$('.goodsListArea').append($('<div>').css('display','inline-block').css('padding','10px').append($a).append($p).append($bntDiv));
 					

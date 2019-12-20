@@ -114,14 +114,14 @@
                   <td>상품명</td>
                   <input type="hidden" name="pcid" value="${ goods.pcid }"/>
 
-                  <td colspan="3"><input type="text" size="51" name="pcname">${ goods.pcname }</td>
+                  <td colspan="3"><input type="text" size="51" name="pcname" value="${ goods.pcname }" /></td>
 
                </tr>
                <tr>
 
                   <td>작성자</td>
 
-                  <td colspan="3"><input type="hidden" name="uno" value=${ member.uno }></td>
+                  <td colspan="3"><input type="hidden" name="uno" value=${ goods.uno }>${ member.unick }</td>
 
                </tr>
 
@@ -132,7 +132,7 @@
                   <td colspan="3">
 
                   <div class="col-md-5" align="center" onclick="clickFile(0);">
-			<img src="${ pageContext.request.contextPath}/resources/images/요리대표_레시피등록_준비화면.jpg" id="fVisible0"/>
+			<img src="${ pageContext.request.contextPath}/resources/GoodsImages/${ goods.pcfname }" id="fVisible0" width="400px"/>
 		</div>
 		
 		<div id="fileArea" style="display: none;">

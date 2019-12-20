@@ -120,7 +120,7 @@
 
                   <td>작성자</td>
 
-                  <td colspan="3"><input type="hidden" name="uno" value=${ member.uno }>${ member.unick }</td>
+                  <td colspan="3"><input type="hidden" name="uno" value=${ member.uno }></td>
 
                </tr>
 
