@@ -1,6 +1,7 @@
 package com.kh.recipe.member.model.service;
 
 import java.sql.Connection;
+
 import static com.kh.recipe.common.JDBCTemplate.*;
 
 import com.kh.recipe.member.model.dao.MemberDAO;
@@ -82,6 +83,19 @@ public class MemberService {
 		
 		close(con);
 
+		return result;
+	}
+
+	public int idDupCheck(String userId) {
+		con = getConnection();
+		int result = mDao.idDupCheck(con, userId);
+		close(con);
+		return result;
+	}
+	public int UNICKDupCheck(String unick) {
+		con = getConnection();
+		int result = mDao.UNICKDupCheck(con, unick);
+		close(con);
 		return result;
 	}
 }

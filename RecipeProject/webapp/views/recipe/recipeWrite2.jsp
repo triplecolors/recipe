@@ -112,7 +112,7 @@ div[class*=content_div] {
 	<div class="col-xl-3 col-lg-2 col-md-1 d-md-block d-none"></div>
 </div>
 <!-- ------------------------------form------------------------------------------- -->
-<form action="${ pageContext.request.contextPath }/insert.rcp" method="post" enctype="multipart/form-data">
+<form action="${ pageContext.request.contextPath }/update.rcp" method="post" enctype="multipart/form-data">
 <div class="row">
 <div class="col-lg-2 col-md-1 d-md-block d-none"></div>
 	<div class="back_div col-lg-8 col-md-10 col-sm-12">
@@ -348,7 +348,8 @@ div[class*=content_div] {
 	   			+ '</div>');
 	           str = str.substring(str.indexOf('['));
 	       }
-	       
+
+			
 	       $('.srcTitle').parent().each(function() {
 		    	var checkStr = "";
 	    	   $(this).find('input').each(function() {
@@ -358,7 +359,7 @@ div[class*=content_div] {
 		    	   srcTitleRemove();
 		       }
 			})
-			
+			srcTitleRemove($('.content_div1 div:first+div button'));
 	});
 	
 	// 시간, 난이도
@@ -396,12 +397,13 @@ div[class*=content_div] {
 	           
 	           // 내용 넣기
 	           if($.trim(text).length > 0){
-	    			if(i>1){ addPict(); }
+	    			if(i>1){ addPict($('.content_div2 div:last').find('button')); }
 					var $textarea = $('.content_div2 div:last').prev().find('textarea').val($.trim(text));
 					
 	           }  
 	           str = str.substring(str.indexOf('['));
 	       }
+		
 		
 		// 사진 로드 시키기
 		console.log($('[id*=fVisible]'));
@@ -421,6 +423,7 @@ div[class*=content_div] {
 	        }
 		});
 	});
+	
 	$('form').on('submit', function(event){
 		var rprocessCheck = false;
 		$('.content_div2').find('textarea').each(function() {

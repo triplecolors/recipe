@@ -59,7 +59,12 @@ public class RecipeService {
 		int result = 0;
 		
 		int result1 = rDao.updateRecipe(con, rcp);
-		int result2 = fDao.insertBfile(con, fList);
+		int result2 = 0;
+		if(fList.size() == 0 ) {
+			result2 = 1;
+		} else {
+			result2 = fDao.insertBfile(con, fList);
+		}
 		int result3 = fDao.deleteBfile(con, rcp.getBno());
 		if(result1>0 && result2>0 && result3>0) {
 			commit(con);

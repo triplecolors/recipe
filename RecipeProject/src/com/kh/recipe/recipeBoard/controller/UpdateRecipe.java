@@ -98,7 +98,7 @@ public class UpdateRecipe extends HttpServlet {
 			
 			bf.setFpath(savePath);
 			bf.setFname(saveFiles.get(j));
-			bf.setFlevel(j);
+			bf.setFlevel(saveFiles.size() - 1 - j);
 			
 			System.out.println("bf 확인 : "+ bf);
 			fList.add(bf);
@@ -107,12 +107,8 @@ public class UpdateRecipe extends HttpServlet {
 		int result = rs.updateRecipe(rcp, fList);
 		
 		if(result>0) {
-			response.sendRedirect("selectOne.rcp");
+			response.sendRedirect("selectOneRecipe.rcp?bno="+bno);
 			// 성공했다면 [이전 파일] 모두 삭제하기
-			for (int j = 0; j < list.size(); j++) {
-				File f = new File(savePath + list.get(j).getFname());
-				System.out.println("파일 삭제 확인 : "+ f.delete());
-			}
 		}else {
 			request.setAttribute("msg", "파일 전송 및 수정 실패");
 			// 실패했다면 [새로 등록한 파일] 모두 삭제하기

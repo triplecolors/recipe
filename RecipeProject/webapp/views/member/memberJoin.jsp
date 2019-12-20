@@ -23,7 +23,7 @@
 		margin-top:110px;
 	}
 	
-	#idCheck, #ckZip, #goMain, #joinBtn {
+	#idCheck, #unickCheck, #ckZip, #goMain, #joinBtn {
 		background:orangered;
 		border-radius:5px;
 		width:80px;
@@ -31,7 +31,7 @@
 		text-align:center;
 	}
 	
-	#idCheck:hover, #ckZip:hover, #joinBtn:hover, #goMain:hover {
+	#idCheck:hover, #unickCheck:hover, #ckZip:hover, #joinBtn:hover, #goMain:hover {
 		cursor:pointer;
 	}
 	td {
@@ -79,9 +79,9 @@
 				</tr>
 				<tr>
 					<td>* 이름</td>
-					<td><input type="text" maxlength="5" name="userName"
+					<td><input type="text" maxlength="5" name="userName" id="userName"
 						required="required"></td>
-					<td></td>
+					<td width="200px"><div id="unickCheck">중복확인</div></td>
 				</tr>
 				<tr>
 					<td>연락처</td>
@@ -177,7 +177,7 @@
 			};
 
 			function goMain() {
-				location.href = '/myWeb/index.jsp';
+				location.href = '/recipe/index.jsp';
 			};
 			
 			$('#idCheck').click(function(){
@@ -191,6 +191,27 @@
 						} else {
 							alert("사용 불가~!");
 							$('#userId').val('');
+						}
+					}, error : function(request, status, error){
+						console.log(request);
+						console.log(status);
+						console.log(error);
+						
+						console.log("에러 발생!!!!");
+					}					
+				});
+			});
+			$('#unickCheck').click(function(){
+				$.ajax({
+					url : "${pageContext.request.contextPath}/unickDup.me",
+					type: "post",
+					data : { userName : $('#userName').val()},
+					success : function(data){
+						if(data == 'true') {
+							alert("사용 가능한 아이디입니다.");
+						} else {
+							alert("사용 불가~!");
+							$('#userName').val('');
 						}
 					}, error : function(request, status, error){
 						console.log(request);

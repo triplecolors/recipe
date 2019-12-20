@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>레시피를 부탁해</title>
 <c:import url="views/common/commonUtil.jsp"></c:import>
+<script src="${ pageContext.request.contextPath }/resources/js/jquery-3.4.1.min.js"></script>
 </head>
 <body>
 <c:import url="views/common/header.jsp"></c:import>
@@ -84,16 +85,10 @@ $(function() {
 		url : "${pageContext.request.contextPath}/menuPage.do",
 		data : {menu : str, word : word},
 		success : function(catelist) {
-			for(var j in catelist) {
-				console.log(menulist[i].Recipe.bno);
-				console.log(menulist[i].Bfile.fname);
-				// $(this).css('background-image', 'url(/recipe/images/RecipeBoardImages/'+ catelist[i].Bfile.fname +')');
-				$('.single_gallery').css('background-image', 'url(/recipe/images/RecipeBoardImages/'+ catelist[j].Bfile.fname +')');
-				$('.single_gallery').find('a').attr('href','/recipe/selectOneRecipe.rcp?bno='+catelist[j].Recipe.bno);
-				// $(this).find('a').attr('href','/recipe/selectOneRecipe.rcp?bno='+catelist[i].Recipe.bno);
-				
-			}
-				
+			$('.single_gallery').each(function(j) {
+				$(this).css('background-image', 'url(resources/RecipeBoardImages/'+ catelist[j].Bfile.fname +')');
+				$(this).find('a').attr('href','/recipe/selectOneRecipe.rcp?bno='+catelist[j].Recipe.bno);
+			})
 		},
 		error : function() {
 			console.log("에러!");

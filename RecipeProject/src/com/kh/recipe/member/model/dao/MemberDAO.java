@@ -235,5 +235,46 @@ public int deleteMember(Connection con, String userid) {
 	return result;
 }
 
+public int idDupCheck(Connection con, String userId) {
+	int result = 0;
+	PreparedStatement pstmt = null;
+	ResultSet rset = null;
+	try {
+		pstmt = con.prepareStatement(prop.getProperty("idDupCheck"));
+		pstmt.setString(1, userId);
+		rset = pstmt.executeQuery();
+		if(rset.next()) {
+			result = rset.getInt(1);
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+		System.out.println("DAO에서 에러발생!");
+	} finally {
+		close(rset);
+		close(pstmt);
+	}
+	return result;
+}
+public int UNICKDupCheck(Connection con, String unick) {
+	int result = 0;
+	PreparedStatement pstmt = null;
+	ResultSet rset = null;
+	try {
+		pstmt = con.prepareStatement(prop.getProperty("UNICKDupCheck"));
+		pstmt.setString(1, unick);
+		rset = pstmt.executeQuery();
+		if(rset.next()) {
+			result = rset.getInt(1);
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+		System.out.println("DAO에서 에러발생!");
+	} finally {
+		close(rset);
+		close(pstmt);
+	}
+	return result;
+}
+
    
 }

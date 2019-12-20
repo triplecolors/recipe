@@ -56,6 +56,8 @@ public class BFileDAO {
 	public int insertBfile(Connection con, ArrayList<Bfile> fList) {
 		int result = 0;
 		PreparedStatement pstmt = null;
+		System.out.println(fList.size());
+		System.out.println(prop.getProperty("insertBfile"));
 		try {
 			for (int i = 0; i < fList.size(); i++) {
 				pstmt = con.prepareStatement(prop.getProperty("insertBfile"));
