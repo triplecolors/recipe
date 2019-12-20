@@ -271,6 +271,82 @@ public class NoticeBoardDAO {
 		
 		return list;
 	}
+
+	public int getSearchListCount(Connection con, String search) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("searchListCount");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+				
+				pstmt.setString(1, search);
+					
+					
+			rset = pstmt.executeQuery();
+				
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<NoticeBoard> getSearchList(Connection con, int startRow, int endRow, String search) {
+		ArrayList<NoticeBoard> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("searchOne");
+		
+		try {
+			pstmt=con.prepareStatement(sql);
+			
+			pstmt.setString(1, search);
+			pstmt.setInt(2, endRow);
+			pstmt.setInt(3, startRow);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<>();
+			
+			while(rset.next()) {
+				NoticeBoard n = new NoticeBoard();
+				
+				n.setBno(rset.getInt("BNO"));
+				n.setUno(rset.getInt("UNO"));
+				n.setnType(rset.getString("NTYPE"));
+				n.setnTitle(rset.getString("NTITLE"));
+				n.setnContent(rset.getString("NCONTENT"));
+				n.setnDate(rset.getDate("NDATE"));
+				n.setnStatus(rset.getString("NSTATUS"));
+				n.setBnum(rset.getInt("RNUM"));
+				
+				list.add(n);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		
+		return list;
+	}
 	
 	
 	

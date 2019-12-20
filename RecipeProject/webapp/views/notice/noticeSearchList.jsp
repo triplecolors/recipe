@@ -7,14 +7,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>건의사항 조회결과</title>
-
+<title>Insert title here</title>
+<script src="${pageContext.request.contextPath}/resources/js/notice_fullpage.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/notice_search.js"></script>
-
-<link rel="shortcut icon" type="image/x-icon" href="${ pageContext.request.contextPath }/resources/images/로고.png">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/notice_fullpage.min.css" />
 <c:import url="../common/commonUtil.jsp"></c:import>
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/fullpage.js"></script>
+
 <style>
 	body {
 		
@@ -310,12 +308,11 @@ padding:10px;
 -webkit-border-radius:5px 0 0 5px;
 -o-border-radius:5px 0 0 5px;
 border:0 none;
-width:200px;
+width:160px;
  }
- #searchbox{
+	 #searchbox{
  	margin-left : 40%;
  }
-	
 	</style>
 	
 </head>
@@ -325,7 +322,7 @@ width:200px;
 	
 		
 	
-	<br /><br /><br />
+	<br /><br /><br /><br /> <br />
 	
 	
 	<div class="tableA">
@@ -338,10 +335,10 @@ width:200px;
 	
 
 	<br />
-	
+	<br />
 	
  <div class="caption"><span>공지사항</span> </div>	
-	<div id="table">
+<div id="table">
 	<div class="header-row row2">
     <span class="cell primary">글 번호</span>
      
@@ -350,7 +347,7 @@ width:200px;
     <span class="cell">작성일</span>
   </div>
   <c:forEach var="notice" items="${list }" varStatus="status">
-  <div class="row2 rowf row-${ status.index mod 2 }">
+  <div class="row2 rowf  row-${ status.index mod 2 }">
 	<input type="radio" name="expand">
 	<input type="hidden" class="bnum" name="bnum" value="${notice.bnum }"/>
     <span class="cell primary" data-label="글번호">${notice.bnum }</span>
@@ -361,24 +358,26 @@ width:200px;
    <span id="uno"> <input type="hidden" class="bno" name="uno" value="${notice.uno }"/>${notice.uno }</span>
   </div>
   </c:forEach>
- 
+
 </div>
 	</div>	
 	
 		<br />
 		<div id="searchbox">
-			<form id="searchthis" action="${pageContext.request.contextPath}/search.no"  method="get">
-				<input id="namanyay-search-box" name="keyword" size="40" type="text" placeholder="Search"/>
-				<input id="namanyay-search-btn" value="Go" type="submit"/>
-			</form>
+		<form id="searchthis" action="${pageContext.request.contextPath}/search.no" style="display:inline;" method="get">
+			 
+			<input id="namanyay-search-box" name="keyword" size="40" type="text" placeholder="Search"/>
+			<input id="namanyay-search-btn" value="Go" type="submit"/>
+		</form>
 		</div>
 			<br />
 			<br />
+		
 		<div class="pagingArea" align="center">
-			<c:url var="selectList" value="selectList.no"/>
+			<c:url var="selectList" value="search.no?keyword=${q }"/>
 			
 			<!-- 처음 페이지 버튼 -->
-			<button onclick="location.href='${selectList}?currentPage=1'">
+			<button onclick="location.href='${selectList}&currentPage=1'">
 				&lt;&lt;
 			</button>
 			
@@ -387,7 +386,7 @@ width:200px;
 				<button disabled>&lt;</button>
 			</c:if>
 			<c:if test="${ pi.currentPage gt 1 }">
-				<button onclick="location.href='${selectList}?currentPage=${pi.currentPage - 1}'">
+				<button onclick="location.href='${selectList}&currentPage=${pi.currentPage - 1}'">
 					&lt;
 				</button>
 			</c:if>
@@ -400,7 +399,7 @@ width:200px;
 					</button>
 				</c:if>
 				<c:if test="${p ne pi.currentPage }">
-					<button onclick="location.href='${selectList }?currentPage=${p }'">${p}</button>
+					<button onclick="location.href='${selectList }&currentPage=${p }'">${p}</button>
 				</c:if>
 			</c:forEach>
 			
@@ -410,20 +409,21 @@ width:200px;
 				<button disabled>&gt;</button>
 			</c:if>
 			<c:if test="${ pi.currentPage lt pi.maxPage }">
-				<button onclick="location.href='${selectList}?currentPage=${pi.currentPage + 1}'">
+				<button onclick="location.href='${selectList}&currentPage=${pi.currentPage + 1}'">
 					&gt;
 				</button>
 			</c:if>
 			
 			<!-- 마지막 페이지 버튼 -->
-			<button onclick="location.href='${selectList}?currentPage=${pi.maxPage}'">
+			<button onclick="location.href='${selectList}&currentPage=${pi.maxPage}'">
 				&gt;&gt;
 			</button>
 		</div>
+		
 		<br />
 		<br />
 
-	
+
 
 	<c:import url="../common/footer.jsp"/>
 
@@ -432,16 +432,17 @@ width:200px;
 		$(function(){
 			var type = $('.type').val();
 			
-	        $(".rowf").mouseenter(function(){
-	           if($(this).hasClass('row-0')) $(this).css({"background":"#A9F5A9", "cursor":"pointer"});
-	           else $(this).css({"background":"#F5A9F2", "cursor":"pointer"});
-	        	/* $(this).filter(":odd").css({"background":"gray", "cursor":"pointer"});
-	           $(this).filter(":even").css({"background":"white", "cursor":"pointer"}) */;
-	        }).mouseleave(function(){
-	        	if($(this).hasClass('row-0')) $(this).css({"background":"#F5BCA9", "cursor":"pointer"});
-		           else $(this).css({"background":"#F7D358", "cursor":"pointer"});
-	        	 /* $(this).filter(":even").css({"background":"#F5BCA9", "cursor":"pointer"});
-	        	$(this).filter(":odd").css({"background":"#F7D358", "cursor":"pointer"}); */
+			
+		    $(".rowf").mouseenter(function(){
+		           if($(this).hasClass('row-0')) $(this).css({"background":"#A9F5A9", "cursor":"pointer"});
+		           else $(this).css({"background":"#F5A9F2", "cursor":"pointer"});
+		        	/* $(this).filter(":odd").css({"background":"gray", "cursor":"pointer"});
+		           $(this).filter(":even").css({"background":"white", "cursor":"pointer"}) */;
+		        }).mouseleave(function(){
+		        	if($(this).hasClass('row-0')) $(this).css({"background":"#F5BCA9", "cursor":"pointer"});
+			           else $(this).css({"background":"#F7D358", "cursor":"pointer"});
+		        	 /* $(this).filter(":even").css({"background":"#F5BCA9", "cursor":"pointer"});
+		        	$(this).filter(":odd").css({"background":"#F7D358", "cursor":"pointer"}); */
 	        }).click(function(){
 	          var bno = $(this).find('.bno').val();
 	          var bnum = $(this).find('.bnum').val();
@@ -450,6 +451,7 @@ width:200px;
 	           location.href="${pageContext.request.contextPath}/selectOne.no?bno=" + bno+"&bnum="+bnum;
 	        });
 	        	
+	        
 	     });
 		
 		function insert(){
@@ -460,6 +462,8 @@ width:200px;
 			}else{
 				alert("관리자만 작성 가능합니다!");
 			}
+			
+			
 		}
 		
 		$(function() {

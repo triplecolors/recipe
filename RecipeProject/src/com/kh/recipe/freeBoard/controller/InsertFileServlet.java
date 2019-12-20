@@ -60,7 +60,7 @@ public class InsertFileServlet extends HttpServlet {
 		String name = files.nextElement();
 		String fileName = mr.getFilesystemName(name);
 		
-		String serverPath = "http://localhost:8088/recipe/resources/FreeBoardFiles/"; 
+		String serverPath = "http://192.168.20.156:8088/recipe/resources/FreeBoardFiles/"; 
 		
 		System.out.println(serverPath);
 		

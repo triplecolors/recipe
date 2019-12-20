@@ -143,6 +143,32 @@ public class NoticeBoardService {
 		return n;
 	}
 	
+	public ArrayList<NoticeBoard> searchList(PageInfo pi, String search){
+		con = getConnection();
+
+		ArrayList<NoticeBoard> list = nbdao.getSearchList(con,pi.getStartRow(), pi.getEndRow(),search);
+		
+		for(int i = 0;i<list.size();i++) {
+			list.get(i).setWriter(new GetUserNameDAO().getOneName(con, list.get(i).getUno()));
+		}
+		
+		
+		
+		
+		close(con);
+		//System.out.println(list.get(1).getWriter());
+		
+		return list;
+	}
 	
+	public int getSearchListCount(String search) {
+		con = getConnection();
+		
+		int result = nbdao.getSearchListCount(con,search);
+		
+		close(con);
+		
+		return result;
+	}
 	
 }

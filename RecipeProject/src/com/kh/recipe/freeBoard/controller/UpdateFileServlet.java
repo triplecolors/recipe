@@ -18,7 +18,7 @@ import com.oreilly.servlet.MultipartRequest;
 /**
  * Servlet implementation class UpdateFileServlet
  */
-@WebServlet("/UpdateFileServlet")
+@WebServlet("/fiupdate.fb")
 public class UpdateFileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -57,7 +57,7 @@ public class UpdateFileServlet extends HttpServlet {
 		String name = files.nextElement();
 		String fileName = mr.getFilesystemName(name);
 		
-		String serverPath = "http://localhost:8088/tflex/resources/FreeBoardFiles/"; 
+		String serverPath = "http://192.168.20.156:8088/recipe/resources/FreeBoardFiles/"; 
 		
 		System.out.println(serverPath);
 		

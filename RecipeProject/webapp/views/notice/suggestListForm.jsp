@@ -62,7 +62,7 @@
 
 	 }
 
-	.row {
+	.row2 {
 		display: table-row;
 	}
 
@@ -108,7 +108,7 @@
 			border-bottom: 2px solid #999;
 		}
 
-		.row { 
+		.row2 { 
 			position: relative;
 			display: block;
 			border-bottom: 1px solid #ccc; 
@@ -268,10 +268,10 @@
 	
 	
 	.rowf:nth-child(odd) {
-		background : white;
+		background : #F5BCA9;
 	}
 	.rowf:first-child(even) {
-  		background: gray;
+  		background: #F7D358;
 	}
 	.write{
 	position : relative;
@@ -304,15 +304,15 @@
 	
  <div class="caption"><span>건의사항</span> </div>	
 <div id="table">
-	<div class="header-row row">
+	<div class="header-row row2">
     <span class="cell primary">글 번호</span>
      
     <span class="cell">글제목</span>
     <span class="cell">작성자</span>
     <span class="cell">작성일</span>
   </div>
-  <c:forEach var="notice" items="${list }">
-  <div class="row rowf">
+  <c:forEach var="notice" items="${list }" varStatus="status">
+  <div class="row2 rowf  row-${ status.index mod 2 }">
 	<input type="radio" name="expand">
     <span class="cell primary bnum" data-label="글번호">${notice.bnum }</span>
     <span class="cell title" data-label="제목">${notice.nTitle }</span>
@@ -378,24 +378,18 @@
 
 		<script>
 		$(function(){
-			var type = $('.type').val();
-			if(type=='A'){
-	        	$(".write").css("display" , "inline");
-	        }else{
-	        	$(".write").css("display" , "inline");
-	        }
 			
-	        $(".rowf").mouseenter(function(){
-	           $(this).css({"background":"gray", "cursor":"pointer"});
-	           $(this).css({"background":"white", "cursor":"pointer"});
-	        }).mouseleave(function(){
-	        	
-	        	//console.log($(this).find('.bnum').val());
-	        	//console.log($(this).find('.bnum').text());
-	        	//console.log($(this).find('.bnum').text());
-	      	
-	        console.log(type);
-	        	 $(this).css({"background":"gray", "cursor":"pointer"});
+		    $(".rowf").mouseenter(function(){
+		           if($(this).hasClass('row-0')) $(this).css({"background":"#A9F5A9", "cursor":"pointer"});
+		           else $(this).css({"background":"#F5A9F2", "cursor":"pointer"});
+		        	/* $(this).filter(":odd").css({"background":"gray", "cursor":"pointer"});
+		           $(this).filter(":even").css({"background":"white", "cursor":"pointer"}) */;
+		        }).mouseleave(function(){
+		        	if($(this).hasClass('row-0')) $(this).css({"background":"#F5BCA9", "cursor":"pointer"});
+			           else $(this).css({"background":"#F7D358", "cursor":"pointer"});
+		        	 /* $(this).filter(":even").css({"background":"#F5BCA9", "cursor":"pointer"});
+		        	$(this).filter(":odd").css({"background":"#F7D358", "cursor":"pointer"}); */
+	        	 //$(this).css({"background":"gray", "cursor":"pointer"});
 	        	// $(this).css({"background":"gray", "cursor":"pointer"});
 	           
 	        }).click(function(){
