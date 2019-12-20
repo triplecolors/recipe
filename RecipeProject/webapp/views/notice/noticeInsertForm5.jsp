@@ -20,20 +20,20 @@
     }
 
     #btnSubmit {
-        background: #ff666f;
+        background: #01DFA5;
         border:#ff666f;
     }
     #btnSubmit:hover,
     #btnSubmit:active,
     #btnSubmit:focus {
-            background: #ff666f;
+            background: #819FF7;
             border:#ff666f;
         }
     </style>
 </head>
 
  	<c:import url="../common/header.jsp"></c:import>
-<body body style="background: gray;">
+<body body>
 <!------ Include the above in your HEAD tag ---------->
 <c:if test="${!empty member }">
 <h1 class="text-center" style="color: white;">글 작성</h1>

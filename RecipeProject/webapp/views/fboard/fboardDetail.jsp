@@ -16,28 +16,34 @@
 
     <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fBoard.css">
     <style>
         #btnup{
-            background: #ff666f;
-            border:#ff666f;
+            background: #4B8A08;
+            border:#D8F781;
         }
         #btnde{
-            background: #ff666f;
-            border:#ff666f;
+            background: #4B8A08;
+            border:#D8F781;
         }
         #btnli{
-            background: #ff666f;
-            border:#ff666f;
+            background: #4B8A08;
+            border:#D8F781;
         }
         #content{
+        	width : 350px;
         	height : 350px;
         	overflow : auto;
         }
-        
+        .success{
+        	background : #D8F781;
+        }
+        .table th{
+        	width : 150px;
+        }
     </style>
 </head>
-<body style="background: gray;">
+<body>
 <c:import url="../common/header.jsp"/>
 <br />
 <br />
@@ -58,28 +64,28 @@
                 	<input type="hidden" class="type" name="type" value="${fboard.bno }"/>
                 <table class="table">
                     <tr>
-                        <th class="success" style="background: #ff666f;">글번호</th>
+                        <th class="success" >글번호</th>
                         <td>${fboard.bnum }</td>
-                        <th class="success" style="background: #ff666f;">작성일</th>
+                        <th class="success">작성일</th>
                         <td>${fboard.pDate }</td>
                       
                     </tr>
 				
 
                     <tr>
-                        <th class="success" style="background: #ff666f;">작성자</th>
+                        <th class="success" >작성자</th>
                         <td>${fboard.writer }</td>
-                          <th class="success" style="background: #ff666f;">조회수</th>
+                          <th class="success">조회수</th>
                         <td>${fboard.pCount }</td>
                     </tr>
                         
                     <tr>
-                        <th class="success" style="background: #ff666f;">제목</th>
+                        <th class="success" >제목</th>
                         <td colspan="3">${fboard.pTitle }</td>
                     </tr>
 
                     <tr>
-                        <th class="success"  style="background: #ff666f;">글 내용</th>
+                        <th class="success" >글 내용</th>
                         <td colspan="3" id="content">${fboard.pContent }</td>
                     </tr>
                     
@@ -91,7 +97,7 @@
                    
                     <tr>          
                                     
-                        <td colspan="3" class="text-center">
+                        <td colspan="5" class="text-center">
                         <c:set var="unum" value="${fboard.uno }"/>
                         <c:if test="${member.uno eq unum}">
                             <input type="button" id="btnup" class="btn btn-warning" value="수정"

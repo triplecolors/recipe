@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MLB 게시글 작성</title>
+<title>게시글 수정</title>
 <style>
    .mb-3{
       display:inline-block;
@@ -69,7 +69,7 @@ $(function(){
 	  $.ajax({
 	       data: form_data,
 	       type: "post",
-	       url: 'insert.tn',
+	       url: 'fiupdate.fb',
 	    cache : false,
 	    contentType : false,
 	       enctype: 'multipart/form-data',

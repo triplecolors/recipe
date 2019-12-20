@@ -630,7 +630,7 @@ body {
 							
 						</a></div> */
 					for(var i in goodsList) {
-					var $div = $('<div>').append($('<img>').attr('src','/recipe/resources/GoodsImages/'+goodsList[i].pcfname).css('width','200px'));
+					var $div = $('<div>').append($('<img>').attr('src','/recipe/resources/GoodsImages/'+goodsList[i].pcfname).css('width','200px').css('cursor', 'pointer'));
 					var $p = $('<p>').css('width','200px').css('height','50px').html('<b>'+goodsList[i].pcgname+'</b> <br> '+goodsList[i].pcname);
 					
 							var $update = $('<button>').attr('onclick', "location.href='goodsUpdate.jsp?goods="+goodsList[i]+"'").text('수정하기');

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MLB 게시글 작성</title>
+<title>게시글 작성</title>
 <style>
    .mb-3{
       display:inline-block;
@@ -22,7 +22,7 @@
 
 
 <!-- 썸머노트 css, js 설정 -->
-
+<c:import url="../common/commonUtil.jsp"/>
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 

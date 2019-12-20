@@ -91,6 +91,10 @@
 	width:80px;
 	height:40px;
 	}
+	.card-img-top{
+	height:210px;
+	margin-top:0px;
+	}
 }
 </style>
 
@@ -316,7 +320,7 @@
 					var $div = $('<div>').addClass('card'); 
 						
 						var $input = $('<input>').attr('type', 'hidden').val(menulist[i].Recipe.bno);
-						var $img = $('<img>').attr('src','/recipe/resources/RecipeBoardImages/'+menulist[i].Bfile.fname).addClass('card-img-top').addClass('moving');
+						var $img = $('<img>').attr('src','/recipe/resources/RecipeBoardImages/'+menulist[i].Bfile.fname).addClass('card-img-top').addClass('moving').css('cursor', 'pointer');
 						var $divBody = $('<div>').addClass('card-body');
 						
 							var $h5_writer = $('<h5>').addClass('card-title').text(menulist[i].Recipe.unick); 
