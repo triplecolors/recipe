@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>레시피 검색하기</title>
 <script src="/recipe/resources/js/jquery-3.4.1.min.js"></script>
 <c:import url="../common/commonUtil.jsp"></c:import>
 

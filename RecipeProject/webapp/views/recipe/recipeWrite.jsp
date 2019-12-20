@@ -143,7 +143,7 @@
 		<div class="row input-group">
 		  <div class="input-group-prepend col-4 srcTitle">
 		  <button type="button" class="btn btn-outline-warning" onclick="srcTitleRemove(this);">─</button>
-		  <input type="text" class="form-control srcTitle">
+		  <input type="text" class="form-control srcTitle" style="height: 40px;">
 		  </div>
 		  <div class="col-8">
 			  <div class="input-group-prepend srcContent">
@@ -339,7 +339,7 @@
 	           var div = '<div class="row input-group">'
 	        			 + '<div class="input-group-prepend col-4 srcTitle">'
 		        			 + '<button type="button" class="btn btn-outline-warning" onclick="srcTitleRemove(this);">─</button>'
-		        			 + '<input type="text" class="form-control srcTitle" value="' + ctg + '">'
+		        			 + '<input type="text" class="form-control srcTitle"  style="height: 40px;" value="' + ctg + '">'
 	        			 + '</div>'
 	        			 + '<div class="col-8">'
 		        			

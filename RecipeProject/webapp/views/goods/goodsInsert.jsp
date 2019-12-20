@@ -74,7 +74,7 @@
 
       <br>
 
-      <h2 align="center">게시판 작성</h2>
+      <h2 align="center">상품 등록</h2>
 
       <div class="tableArea">
 
@@ -120,7 +120,7 @@
 
                   <td>작성자</td>
 
-                  <td colspan="3"><input type="hidden" name="uno" value=${ member.uno }></td>
+                  <td colspan="3"><input type="hidden" name="uno" value=${ member.uno }>${ member.unick }</td>
 
                </tr>
 

@@ -17,20 +17,6 @@ nav ul {
     
 }
 
-nav li {
-    width: 20rem;
-    height: 7rem;
-    font-size: 20px;
-    text-align: center;
-    line-height: 7rem;
-    font-family: sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    position: relative;
-    transition: 0.3s;
-    margin: 3rem;
-}
-
 nav li::before,
 nav li::after {
     content: '';

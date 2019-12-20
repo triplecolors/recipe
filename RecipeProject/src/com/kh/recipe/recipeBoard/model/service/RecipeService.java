@@ -83,4 +83,15 @@ public class RecipeService {
 		return result;
 	}
 
+	public ArrayList<Recipe> myPageRecipe(int uno) {
+		con = getConnection();
+		
+		
+		ArrayList<Recipe> list = RecipeDAO.myPageRecipe(con, uno);
+		
+		close(con);
+		return list;
+	}
+
+	
 }

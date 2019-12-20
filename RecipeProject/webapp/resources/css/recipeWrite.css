@@ -60,5 +60,7 @@ div[class*=content_div] {
 	display: none;
 }
 
-	
+.srcTitle {
+	height: 40px;
+} 
 	

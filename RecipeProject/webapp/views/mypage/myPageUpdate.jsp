@@ -9,47 +9,79 @@
 <meta charset="UTF-8">
 <c:import url="../common/commonUtil.jsp" />
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<title>회원 정보 수정</title>
-<style>
-	.outer{
-		width:600px;
-		height:500px;
-		background:rgba(50,50,50,0.7);
-		color:white;
-		margin-left:auto;
-		margin-right:auto;
-		margin-top:150px;
-	}
-	
-	#idCheck, #ckZip, #goMain, #updateBtn, #deleteBtn {
-		background:orangered;
-		border-radius:5px;
-		width:80px;
-		height:25px;
-		text-align:center;
-	}
-	
-	#idCheck:hover, #ckZip:hover, #updateBtn:hover, #goMain:hover, , #deleteBtn:hover {
-		cursor:pointer;
-	}
-	td {
-		text-align:right;
-	}
-	#ckZip, #updateBtn {
-		background:lightgreen;
-		color:black;
-	}
-	#updateBtn, #goMain, #deleteBtn {
-		display:inline-block;
-	}
-</style>
+<title>회원 수정</title>
+    <style>
+   .outer{
+		 background:url('../../resources/images/mypage/asd.png');
+		 background-repeat:no-repeat;
+		 background-size: 100%;
+		 }
+    table {
+        width: 200;
+        border: 1px solid #333333;
+      }
+      td {
+        padding: 10px;
+        border: 1px solid #333333;
+      }
+      .a {
+        border-collapse: separate;
+      }
+      .b {
+        border-collapse: collapse;
+      }
+      
+      
+      .button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #FF8CFF;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+    
+    </style>
+
+
 </head>
 <body>
 <c:import url="../common/header.jsp"/>
 
 	<div class="outer">
 		<br>
-		<h2 align="center">회원 정보</h2>
+		<h2 align="center">회원 정보 수정</h2>
 		
 		<form role="form"  id="updateForm" action="${pageContext.request.contextPath }/update.vi" method="post">
 			
@@ -103,9 +135,9 @@
 			<br>
 			
 			<div class="btns" align="center">
-				<div id="goMain" onclick="goMain();">메인으로</div> &nbsp;
-				<div id="updateBtn" onclick="updateMember();">수정하기</div> &nbsp;
-				<div id="deleteBtn" onclick="deleteMember();">회원 탈퇴</div>
+				<div type="button" class="button" id="goMain" onclick="goMain();">메인으로</div>
+				<div type="button" class="button"  id="updateBtn" onclick="updateMember();">수정하기</div> 
+				<div type="button" class="button" id="deleteBtn" onclick="deleteMember();">회원 탈퇴</div>
 			</div>
 			</form>
 			<script>

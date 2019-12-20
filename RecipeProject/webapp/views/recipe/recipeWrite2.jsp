@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>레시피 등록</title>
+<title>레시피 수정</title>
 <c:import url="../common/commonUtil.jsp"></c:import>
 <style>
 
@@ -71,6 +71,9 @@ div[class*=content_div] {
 	display: none;
 }
 
+.srcTitle {
+	height: 40px;
+} 
 	
 </style>
 </head>
@@ -204,7 +207,7 @@ div[class*=content_div] {
 		<div class="row input-group">
 		  <div class="input-group-prepend col-4 srcTitle">
 		  <button type="button" class="btn btn-outline-warning" onclick="srcTitleRemove(this);">─</button>
-		  <input type="text" class="form-control srcTitle">
+		  <input type="text" class="form-control srcTitle"  style="height: 40px;">
 		  </div>
 		  <div class="col-8">
 			  <div class="input-group-prepend srcContent">
@@ -268,7 +271,7 @@ div[class*=content_div] {
 	</div>
 <hr />
 	  <div class="longBtn" align="center">
-			<button type="submit" class="btn btn-primary btn-lg">등록하기</button>
+			<button type="submit" class="btn btn-primary btn-lg">수정하기</button>
 			<button type="button" class="btn btn-secondary btn-lg" onclick="WriteConfirm();">취소하기</button>
 	  </div>
 
@@ -307,7 +310,7 @@ div[class*=content_div] {
 	           var div = '<div class="row input-group">'
 	        			 + '<div class="input-group-prepend col-4 srcTitle">'
 		        			 + '<button type="button" class="btn btn-outline-warning" onclick="srcTitleRemove(this);">─</button>'
-		        			 + '<input type="text" class="form-control srcTitle" value="' + ctg + '">'
+		        			 + '<input type="text" class="form-control srcTitle"  style="height: 40px;" value="' + ctg + '">'
 	        			 + '</div>'
 	        			 + '<div class="col-8">'
 		        			
