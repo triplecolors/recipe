@@ -189,6 +189,54 @@ public class GoodsDAO {
 		return result;
 	}
 
+	public ArrayList<Goods> goodsselect(Connection con, String goodsName) {
+		ArrayList<Goods> goodsList = null;
+		String sql = prop.getProperty("selectProducts");
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		try {
+			stmt = con.createStatement();
+			
+			String[] keywordArr = goodsName.split(",");
+			sql += " WHERE ";
+			for(int i = 0 ; i < keywordArr.length; i++) {
+				if(keywordArr.length == 1 || i == keywordArr.length - 1) {
+					sql += " PCNAME LIKE '%" + keywordArr[i] + "%' ";
+				} else {
+					sql += " PCNAME LIKE '%" + keywordArr[i] + "%' OR ";
+				}
+			}
+			rset = stmt.executeQuery(sql);
+			
+			goodsList = new ArrayList<>();
+			while (rset.next()) {
+				Goods g = new Goods();
+
+				g.setPcid(Integer.parseInt(rset.getString("PCID")));
+				g.setUno(Integer.parseInt(rset.getString("UNO")));
+				g.setPcgtype(Integer.parseInt(rset.getString("PCGTYPE")));
+				g.setPcname(rset.getString("PCNAME"));
+				
+				g.setPcfname(rset.getString("PCFNAME"));
+				g.setPcfpath(rset.getString("PCFPATH"));
+				
+				g.setPcgname(rset.getString("PCGNAME"));
+				
+				g.setPcurl(rset.getString("PCURL"));
+				System.out.println(g);
+				goodsList.add(g);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("DAO에러!");
+		} finally {
+			close(stmt);
+		}
+		return goodsList;
+	}
+
 	
 
 }

@@ -1,8 +1,6 @@
-package com.kh.recipe.recipeBoard.controller;
+package com.kh.recipe.BCOMMENT.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,19 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.recipe.BCOMMENT.model.service.CommentService;
 import com.kh.recipe.BCOMMENT.model.vo.comment;
-import com.kh.recipe.recipeBoard.model.service.RecipeService;
 
 /**
- * Servlet implementation class UpdateView
+ * Servlet implementation class commentInsertServlet
  */
-@WebServlet("/selectOneRecipe.rcp")
-public class SelectOneRecipe2 extends HttpServlet {
+@WebServlet("/insert.co")
+public class commentInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectOneRecipe2() {
+    public commentInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,29 +31,22 @@ public class SelectOneRecipe2 extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int bno = Integer.parseInt(request.getParameter("bno"));
+		int uno = Integer.parseInt(request.getParameter("uno"));
+		String ccontent = request.getParameter("ccontent");
+		int clevel = Integer.parseInt(request.getParameter("clevel"));
+		int ref_cno = Integer.parseInt(request.getParameter("ref_cno"));
 		
-		HashMap<String, Object> hmap = new RecipeService().selectOne(bno);
+		comment c = new comment(bno, uno, ccontent, clevel, ref_cno);
+		System.out.println("서블릿"+c);
+		int result = new CommentService().insertComment(c);
 		
-		ArrayList<comment> clist
-		 = new CommentService().selectList(bno);
-		
-		String page = "";
-		
-		if(hmap != null) {
-			page = "views/recipe/test2.jsp?bno="+bno;
-			request.setAttribute("Recipe", hmap.get("Recipe"));
-			request.setAttribute("fileList", hmap.get("Bfile"));
-			request.setAttribute("clist", clist);
-			
-			System.out.println(hmap.get("Recipe"));
-			System.out.println(hmap.get("Bfile"));
-			System.out.println(clist);
+		if(result > 0 ) {
+			response.sendRedirect("selectOneRecipe.rcp?bno="+bno);
 		}else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "사진 게시판 수정 화면 오류");
+			request.setAttribute("msg", "댓글 작성 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp")
+			   .forward(request, response);
 		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**

@@ -79,6 +79,16 @@ public class GoodsService {
 		return result;
 	}
 
+	public ArrayList<Goods> goodsselect(String goodsName) {
+		con = getConnection();
+		
+		ArrayList<Goods> list = gDao.goodsselect(con,goodsName);
+		
+		close(con);
+		
+		return list;
+	}
+
 	
 
 }

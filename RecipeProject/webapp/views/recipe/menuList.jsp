@@ -313,10 +313,10 @@
 					   												onclick="src='/recipe/resources/images/즐겨찾기 사진.PNG' "> </a>
 						</div>
 					</div> */
-					var $div = $('<div>').addClass('card').addClass('moving'); 
+					var $div = $('<div>').addClass('card'); 
 						
 						var $input = $('<input>').attr('type', 'hidden').val(menulist[i].Recipe.bno);
-						var $img = $('<img>').attr('src','/recipe/resources/RecipeBoardImages/'+menulist[i].Bfile.fname).addClass('card-img-top');
+						var $img = $('<img>').attr('src','/recipe/resources/RecipeBoardImages/'+menulist[i].Bfile.fname).addClass('card-img-top').addClass('moving');
 						var $divBody = $('<div>').addClass('card-body');
 						
 							var $h5_writer = $('<h5>').addClass('card-title').text(menulist[i].Recipe.unick); 
@@ -352,7 +352,7 @@
 
 	// 상세페이지 이동.
 	$(document).on('click', '.moving', function() {
-       var bno = $(this).find('input').val();
+       var bno = $(this).prev().val();
        // console.log(bno);
        location.href="/recipe/selectOneRecipe.rcp?bno="+bno;
     });
